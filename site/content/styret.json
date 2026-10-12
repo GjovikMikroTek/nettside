@@ -1,0 +1,25 @@
+{
+  "medlemmer": [
+    {
+      "navn": "Benjamin Danbolt",
+      "rolle": "Styreleder",
+      "rolle_en": "Chair",
+      "bilde": "",
+      "epost": ""
+    },
+    {
+      "navn": "Paulina Andzel",
+      "rolle": "Nestleder",
+      "rolle_en": "Vice chair",
+      "bilde": "",
+      "epost": ""
+    },
+    {
+      "navn": "Kenneth Liabø",
+      "rolle": "Økonomileder",
+      "rolle_en": "Head of finance",
+      "bilde": "",
+      "epost": ""
+    }
+  ]
+}

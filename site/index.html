@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="nb">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gjøvik MikroTek</title>
+  <meta name="description" content="Gjøvik MikroTek er en frivillig studentorganisasjon ved NTNU Campus Gjøvik som bygger mikrohus og andre bygningsrelaterte prosjekter.">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <meta name="theme-color" content="#2a529a">
+  <meta property="og:image" content="/assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="topp">
+    <div class="ramme topp-inner">
+      <a href="/" class="merke">
+        <picture>
+          <source srcset="/assets/logo-hvit.svg" media="(prefers-color-scheme: dark)">
+          <img src="/assets/logo.svg" alt="" width="70" height="29">
+        </picture>
+        <span data-felt="navn">Gjøvik MikroTek</span>
+      </a>
+      <button type="button" class="meny-knapp" id="meny-knapp" aria-expanded="false" aria-controls="meny">
+        <span class="strek"></span><span class="strek"></span><span class="strek"></span>
+        <span class="skjult" data-tekst="meny">Meny</span>
+      </button>
+      <nav id="meny">
+        <a href="/#om" data-tekst="nav_om">Om</a>
+        <a href="/artikler.html" data-tekst="nav_artikler">Artikler</a>
+        <a href="/#styret" data-tekst="nav_styret">Styret</a>
+        <a href="/#sponsorer" data-tekst="nav_sponsorer">Sponsorer</a>
+        <a href="/#kontakt" data-tekst="nav_kontakt">Kontakt</a>
+        <a href="/bli-medlem.html" class="nav-cta" data-tekst="nav_medlem">Bli medlem</a>
+        <button type="button" id="sprak-knapp" class="sprak-knapp">English</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="ramme">
+        <p class="slagord" data-felt="slagord"></p>
+        <h1 data-felt="navn"></h1>
+        <p class="ingress" data-felt="beskrivelse"></p>
+      </div>
+    </section>
+
+    <section id="om" class="ramme seksjon">
+      <h2 id="om-tittel" data-tekst="om_tittel">Om oss</h2>
+      <div id="om-tekst" class="brodtekst"></div>
+    </section>
+
+    <section class="ramme seksjon">
+      <div class="medlem-banner">
+        <div>
+          <h2 data-tekst="banner_tittel">Bli med og bygg!</h2>
+          <p data-tekst="banner_tekst">Medlemskap er gratis og åpent for studenter ved NTNU Campus Gjøvik.</p>
+        </div>
+        <a href="/bli-medlem.html" class="knapp knapp-oransje" data-tekst="nav_medlem">Bli medlem</a>
+      </div>
+    </section>
+
+    <section class="ramme seksjon">
+      <div class="seksjon-topp">
+        <h2 data-tekst="siste_artikler">Siste artikler</h2>
+        <a href="/artikler.html" class="lenke-pil" data-tekst="alle_artikler">Alle artikler →</a>
+      </div>
+      <div id="artikler-siste" class="kort-rutenett"></div>
+    </section>
+
+    <section id="instagram" class="ramme seksjon" hidden>
+      <div class="seksjon-topp">
+        <h2 data-tekst="fra_instagram">Fra Instagram</h2>
+        <a id="instagram-folg" class="lenke-pil" target="_blank" rel="noopener" hidden data-tekst="folg_instagram">Følg oss på Instagram →</a>
+      </div>
+      <div id="instagram-bilder" class="insta-rutenett"></div>
+    </section>
+
+    <section id="styret" class="ramme seksjon">
+      <h2 data-tekst="styret">Styret</h2>
+      <div id="styret-liste" class="personer"></div>
+    </section>
+
+    <section id="sponsorer" class="ramme seksjon">
+      <h2 data-tekst="sponsorer">Sponsorer og samarbeidspartnere</h2>
+      <div id="sponsor-liste"></div>
+    </section>
+
+    <section id="kontakt" class="ramme seksjon kontakt">
+      <h2 data-tekst="kontakt">Kontakt</h2>
+      <p id="epost-boks" hidden><span data-tekst="epost_tekst">Send oss en e-post på</span> <a id="kontakt-epost" href="#"></a>.</p>
+      <p id="skjema-boks" hidden><a id="skjema-lenke" class="knapp" target="_blank" rel="noopener" data-tekst="skjema">Fyll ut kontaktskjema</a></p>
+      <p class="sosiale" id="sosiale"></p>
+    </section>
+  </main>
+
+  <footer class="bunn">
+    <div class="ramme"><span data-felt="navn"></span> · <span data-tekst="bunn">Studentorganisasjon ved NTNU Campus Gjøvik</span></div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="/assets/app.js"></script>
+  <script>visForside();</script>
+</body>
+</html>

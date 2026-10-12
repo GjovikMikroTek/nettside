@@ -1,0 +1,144 @@
+:root {
+  --aksent: #2a529a;   /* blå fra logoen */
+  --oransje: #f39228;  /* oransje fra logoen */
+  --lenke: var(--aksent);
+  --tekst: #1a1d23;
+  --dempet: #5b6270;
+  --bakgrunn: #ffffff;
+  --flate: #f4f6f9;
+  --linje: #e2e6ec;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tekst: #e8eaee;
+    --dempet: #a3aab6;
+    --bakgrunn: #121418;
+    --flate: #1c1f25;
+    --linje: #2c3038;
+    --lenke: #8fb0ea;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--tekst);
+  background: var(--bakgrunn);
+  line-height: 1.6;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--lenke); }
+
+.ramme { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+.seksjon { padding: 56px 16px; }
+.seksjon h2 { font-size: 1.6rem; margin: 0 0 24px; }
+.seksjon-topp { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.tom { color: var(--dempet); }
+
+/* Topp */
+.topp { border-bottom: 1px solid var(--linje); background: var(--bakgrunn); position: sticky; top: 0; z-index: 10; }
+.topp-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
+.merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: var(--tekst); text-decoration: none; }
+.merke img { height: 30px; width: auto; }
+nav { display: flex; gap: 18px; flex-wrap: wrap; }
+nav a { color: var(--dempet); text-decoration: none; font-weight: 500; font-size: .95rem; }
+nav a:hover { color: var(--lenke); }
+nav { align-items: center; }
+.sprak-knapp { font: inherit; font-size: .85rem; font-weight: 600; color: var(--tekst); background: none; border: 1px solid var(--linje); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.sprak-knapp:hover { border-color: var(--oransje); }
+
+/* Hero */
+.hero { background: var(--flate); border-bottom: 4px solid var(--oransje); padding: 88px 0 72px; background-size: cover; background-position: center; }
+.hero.med-bilde { color: #fff; }
+.hero.med-bilde .ingress, .hero.med-bilde .slagord { color: rgba(255,255,255,.9); }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 8px 0 16px; }
+.slagord { color: var(--lenke); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; margin: 0; }
+.ingress { font-size: 1.15rem; color: var(--dempet); max-width: 680px; margin: 0; }
+
+.brodtekst { max-width: 720px; }
+.brodtekst img { border-radius: var(--radius); margin: 16px 0; }
+
+/* Artikler */
+.kort-rutenett { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+.kort { border: 1px solid var(--linje); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; background: var(--bakgrunn); transition: transform .15s, box-shadow .15s; }
+.kort:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
+.kort img, .bilde-tom { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--flate); }
+.kort-tekst { padding: 16px 18px 20px; }
+.kort h3 { margin: 4px 0 8px; font-size: 1.1rem; line-height: 1.3; }
+.kort p { margin: 0; color: var(--dempet); font-size: .95rem; }
+time { color: var(--dempet); font-size: .85rem; }
+.lenke-pil { text-decoration: none; font-weight: 600; }
+
+.artikkel { max-width: 720px; }
+.artikkel h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; margin: 12px 0; }
+.artikkel time { display: block; margin-top: 24px; }
+.artikkel-bilde { border-radius: var(--radius); margin: 24px 0; width: 100%; }
+
+/* Instagram */
+.insta-rutenett { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.insta { display: block; border-radius: 6px; overflow: hidden; background: var(--flate); }
+.insta img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .2s; }
+.insta:hover img { transform: scale(1.04); }
+
+/* Styret */
+.personer { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 24px; }
+.person { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; }
+.person img, .initialer { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; }
+.initialer { display: grid; place-items: center; background: var(--flate); color: var(--lenke); font-weight: 700; font-size: 1.8rem; }
+.person span { color: var(--dempet); font-size: .95rem; }
+.person a { font-size: .85rem; word-break: break-all; }
+
+/* Sponsorer */
+.niva { font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; color: var(--dempet); margin: 24px 0 12px; }
+.sponsorer { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 16px; }
+.sponsorer.stor { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.sponsor { display: grid; place-items: center; min-height: 96px; padding: 16px; border: 1px solid var(--linje); border-radius: var(--radius); background: #fff; color: #1a1d23; text-decoration: none; font-weight: 600; text-align: center; }
+.sponsor img { max-height: 64px; object-fit: contain; }
+
+/* Kontakt */
+.kontakt { border-top: 1px solid var(--linje); }
+.knapp:hover { background: var(--oransje); color: #1a1d23; }
+.knapp { display: inline-block; background: var(--aksent); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+
+.bunn { border-top: 1px solid var(--linje); padding: 24px 0; color: var(--dempet); font-size: .9rem; }
+
+/* Bli medlem */
+.nav-cta { background: var(--oransje); color: #1a1d23 !important; padding: 6px 14px; border-radius: 999px; font-weight: 600 !important; }
+.nav-cta:hover { filter: brightness(1.05); }
+.knapp-oransje { background: var(--oransje); color: #1a1d23; }
+.knapp-oransje:hover { background: var(--aksent); color: #fff; }
+.medlem-banner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; background: var(--flate); border-left: 6px solid var(--oransje); border-radius: var(--radius); padding: 28px; }
+.medlem-banner h2 { margin: 0 0 6px; }
+.medlem-banner p { margin: 0; color: var(--dempet); }
+.medlem-side h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.2; margin: 0 0 16px; }
+.medlem-side .brodtekst em { color: var(--dempet); font-size: .92rem; }
+.skjema-ramme { margin-top: 24px; max-width: 760px; border: 1px solid var(--linje); border-radius: var(--radius); overflow: hidden; background: #fff; }
+.skjema-ramme iframe { display: block; width: 100%; height: 1500px; border: 0; }
+.skjema-reserve { margin-top: 16px; }
+
+/* Menyknapp (vises bare på smale skjermer) */
+.skjult { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.meny-knapp { display: none; background: none; border: 1px solid var(--linje); border-radius: 8px; width: 44px; height: 44px; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.meny-knapp .strek { display: block; width: 20px; height: 2px; background: var(--tekst); border-radius: 2px; }
+
+@media (max-width: 760px) {
+  .topp-inner { flex-wrap: nowrap; padding-top: 10px; padding-bottom: 10px; }
+  .meny-knapp { display: flex; }
+  nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--bakgrunn); border-bottom: 1px solid var(--linje); padding: 8px 16px 16px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+  nav.apen { display: flex; }
+  nav a { padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--linje); }
+  nav .nav-cta { margin-top: 12px; text-align: center; border-bottom: 0; padding: 12px; }
+  nav .sprak-knapp { margin-top: 12px; align-self: flex-start; padding: 8px 16px; }
+  .topp { position: sticky; }
+  .seksjon { padding: 40px 16px; }
+  .hero { padding: 56px 0 48px; }
+  .medlem-banner { padding: 22px; }
+  .medlem-banner .knapp { width: 100%; text-align: center; }
+  .skjema-ramme { border-radius: 0; margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
+  .skjema-ramme iframe { height: 1700px; }
+  .personer { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
+  .person img, .initialer { width: 96px; height: 96px; }
+}

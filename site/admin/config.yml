@@ -1,0 +1,105 @@
+# Adminpanel (Decap CMS). Innlogging skjer med GitHub-kontoen som eier repoet.
+backend:
+  name: github
+  repo: GjovikMikroTek/nettside
+  branch: main
+
+locale: nb_no
+media_folder: site/images/uploads
+public_folder: /images/uploads
+site_url: https://DITTDOMENE.no         # <-- ENDRES ved oppsett
+logo_url: /assets/logo.svg
+
+collections:
+  - name: artikler
+    label: Artikler
+    files:
+      - name: artikler
+        label: Alle artikler
+        file: site/content/artikler.json
+        fields:
+          - name: artikler
+            label: Artikler
+            label_singular: Artikkel
+            widget: list
+            summary: "{{fields.dato}} – {{fields.tittel}}"
+            fields:
+              - { name: tittel, label: Tittel, widget: string }
+              - { name: tittel_en, label: "Tittel (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: dato, label: Dato, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+              - { name: bilde, label: Bilde, widget: image, required: false }
+              - { name: ingress, label: "Ingress (kort tekst i oversikten)", widget: text }
+              - { name: ingress_en, label: "Ingress (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: tekst, label: Artikkeltekst, widget: markdown }
+              - { name: tekst_en, label: "Artikkeltekst (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: publisert, label: "Vis på nettsiden", widget: boolean, default: true }
+
+  - name: innhold
+    label: Sider og innhold
+    files:
+      - name: prosjekt
+        label: Om oss
+        file: site/content/prosjekt.json
+        fields:
+          - { name: tittel, label: Overskrift, widget: string }
+          - { name: tittel_en, label: "Overskrift (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+          - { name: tekst, label: Tekst, widget: markdown }
+          - { name: tekst_en, label: "Tekst (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+
+      - name: medlem
+        label: Bli medlem (medlemsregister)
+        file: site/content/medlem.json
+        fields:
+          - { name: tittel, label: Overskrift, widget: string }
+          - { name: tittel_en, label: "Overskrift (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+          - { name: tekst, label: "Tekst over skjemaet", widget: markdown }
+          - { name: tekst_en, label: "Tekst over skjemaet (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+          - { name: skjema, label: "Microsoft Forms-skjema", widget: text, required: false, hint: "Lim inn lenken til skjemaet, eller hele koden fra «Bygg inn» i Forms. Svarene havner i Excel-filen som skjemaet er koblet til." }
+
+      - name: styret
+        label: Styret
+        file: site/content/styret.json
+        fields:
+          - name: medlemmer
+            label: Styremedlemmer
+            label_singular: Styremedlem
+            widget: list
+            summary: "{{fields.rolle}} – {{fields.navn}}"
+            fields:
+              - { name: navn, label: Navn, widget: string }
+              - { name: rolle, label: Rolle, widget: string }
+              - { name: rolle_en, label: "Rolle (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: bilde, label: Bilde, widget: image, required: false }
+              - { name: epost, label: "E-post (valgfritt)", widget: string, required: false }
+
+      - name: sponsorer
+        label: Sponsorer
+        file: site/content/sponsorer.json
+        fields:
+          - name: sponsorer
+            label: Sponsorer
+            label_singular: Sponsor
+            widget: list
+            summary: "{{fields.niva}} – {{fields.navn}}"
+            fields:
+              - { name: navn, label: Navn, widget: string }
+              - { name: niva, label: "Nivå", widget: select, options: ["Hovedsponsor", "Sponsor", "Samarbeidspartner"], default: "Sponsor" }
+              - { name: logo, label: Logo, widget: image, required: false }
+              - { name: lenke, label: "Nettside (https://...)", widget: string, required: false }
+
+      - name: innstillinger
+        label: Innstillinger
+        file: site/content/innstillinger.json
+        fields:
+          - { name: navn, label: Navn, widget: string }
+          - { name: slagord, label: Slagord, widget: string }
+          - { name: slagord_en, label: "Slagord (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+          - { name: beskrivelse, label: "Kort beskrivelse (forsiden)", widget: text }
+          - { name: beskrivelse_en, label: "Kort beskrivelse (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+          - { name: hovedbilde, label: "Hovedbilde (forsiden)", widget: image, required: false }
+          - { name: aksentfarge, label: "Profilfarge (hex, logoens blå er #2a529a)", widget: string }
+          - { name: epost, label: Kontakt-e-post, widget: string }
+          - { name: instagram, label: "Instagram-lenke", widget: string, required: false, hint: "Lenken til profilen, f.eks. https://www.instagram.com/brukernavn/" }
+          - { name: instagram_feed, label: "Instagram-bilder (Behold-feed)", widget: string, required: false, hint: "Lim inn feed-lenken fra behold.so (https://feeds.behold.so/...). Da vises de siste bildene fra Instagram automatisk på forsiden. La stå tom for å skjule bildene." }
+          - { name: linkedin, label: "LinkedIn-lenke", widget: string, required: false }
+          - { name: skjema_lenke, label: "Microsoft Forms-lenke (kontakt-/sponsorskjema)", widget: string, required: false, hint: "Svarene havner automatisk i Excel i Microsoft-kontoen som eier skjemaet." }

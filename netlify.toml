@@ -1,0 +1,8 @@
+[build]
+  publish = "site"
+
+# Innholdet skal alltid hentes ferskt etter at noen har lagret i adminpanelet
+[[headers]]
+  for = "/content/*"
+  [headers.values]
+    Cache-Control = "no-cache"
