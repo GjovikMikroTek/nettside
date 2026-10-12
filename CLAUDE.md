@@ -13,12 +13,12 @@ Vi lager en nettside for et studentprosjekt ved NTNU. Richard bygger og setter o
 Siden er en statisk nettside med et adminpanel. Det finnes ingen server eller database å drifte.
 
 ```
-Adminpanel (/admin) → lagrer i GitHub → Netlify publiserer → dittdomene.no
+Adminpanel (/admin) → lagrer i GitHub → Cloudflare Pages publiserer → gjovik-mikrotek.pages.dev
 ```
 
 1. **Innholdet** ligger som JSON-filer i `site/content/` (artikler, styret, sponsorer, innstillinger, om prosjektet).
 2. **Adminpanelet** (Decap CMS, `site/admin/`) er et skjema i nettleseren som redigerer disse filene direkte i GitHub. Innlogging skjer med GitHub.
-3. **Netlify** oppdager endringen og publiserer siden på nytt, vanligvis innen ett minutt.
+3. **Cloudflare Pages** oppdager endringen og publiserer siden på nytt, vanligvis innen ett minutt.
 4. **Sidene** (`index.html`, `artikler.html`) henter innholdet fra JSON-filene med JavaScript (`site/assets/app.js`).
 
 Alle endringer lagres som historikk i GitHub. En feil kan derfor alltid rulles tilbake.
@@ -26,27 +26,27 @@ Alle endringer lagres som historikk i GitHub. En feil kan derfor alltid rulles t
 ## Hvem eier hva
 Alle kontoer eies av Gjøvik MikroTek / Paulina, ikke av Richard:
 - **GitHub:** lagrer koden og innholdet
-- **Netlify:** hosting
+- **Cloudflare:** hosting og innlogging til adminpanelet
 - **Domene:** kjøpes av Paulina
 - **Microsoft 365 / Outlook (NTNU):** brukes til Microsoft Forms for kontakt- og sponsorskjema. Svarene havner automatisk i Excel.
 
 Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU-adressen).
 
 ## Status (12.10.2026)
-- [x] Startpakke bygget og testet lokalt (forside, artikler, styret, sponsorer, kontakt, adminpanel)
-- [x] Logo lagt inn (SVG, hvit variant for mørk modus, favicon/app-ikoner i `site/assets/`)
-- [x] Navn, slagord, beskrivelse, «Om oss» og profilfarger (blå `#2a529a`, oransje `#f39228`) fra logo, vedtekter og stiftelsesprotokoll
-- [x] Språkvalg norsk/engelsk (alt eksisterende innhold er oversatt)
-- [x] Instagram-bilder på forsiden fra @gjovik_mikrotek (Behold-feed 5LIqyMhQTSSTbr09vbVQ)
-- [x] «Bli medlem»-side (`bli-medlem.html`, `content/medlem.json`) med Microsoft Forms innebygd → Excel = medlemsregister (kode ferdig; venter på skjemalenke)
-- [x] Mobilmeny (menyknapp under 760 px) og mobiltilpasning testet på 375 px
-- [ ] Ekte innhold som mangler: nåværende styre (seks roller etter vedtekter versjon B, 08.09.2026), kontakt-e-post, forsidebilde, sosiale medier
-- [x] GitHub-repo: github.com/GjovikMikroTek/nettside (offentlig, branch main)
-- [ ] Koble repoet til Netlify
-- [ ] Sette opp GitHub-innlogging til adminpanelet (OAuth via Netlify)
-- [ ] Koble til domenet
-- [ ] Lage Microsoft Forms-skjema og lime lenken inn i adminpanelet
+- [x] Startpakke: forside, artikler, styret, sponsorer, kontakt, «Bli medlem», adminpanel (Decap CMS)
+- [x] Logo (alltid original), lys byggteknisk palett, gruppebilde som uskarp toppbakgrunn
+- [x] Norsk/engelsk, mobilmeny, Instagram-feed (Behold 5LIqyMhQTSSTbr09vbVQ, @gjovik_mikrotek)
+- [x] Styret 2026 lagt inn (fra «26.1102.A Medlemsregister.docx»); PR-ansvarlig i styret ukjent
+- [x] GitHub: github.com/GjovikMikroTek/nettside (offentlig, main). Paulina (paucz05) invitert med skrivetilgang
+- [x] Hosting: Cloudflare Pages «gjovik-mikrotek» → https://gjovik-mikrotek.pages.dev (Netlify sperret kontoen 12.10.2026)
+- [x] Innlogging til /admin: Cloudflare Worker `auth/` → https://gjovik-mikrotek-auth.gjovik-mikrotek.workers.dev, GitHub OAuth App «Gjøvik MikroTek admin» (secret i Cloudflare). Styret logger inn med GjovikMikroTek-kontoen
+- [x] Spørsmålsliste til styremøtet sendt (Word); venter på svar
+- [x] Excel-mal for medlemsregister laget lokalt («Medlemsregister Gjøvik MikroTek.xlsx», tabell «Medlemmer», Status Aktiv/Utmeldt)
+- [ ] Medlemsregister i mikrotek@ivb.ntnu.no (krever innlogging, venter på Paulina): sjekk Power Automate-lisens → last opp Excel til OneDrive → lag Forms-skjema → flyt 1 (ny innmelding → ny rad, Status=Aktiv) → flyt 2 (hver natt: Utmeldt → sett datoer, slett etter 30 dager) → lim skjemalenke inn i adminpanelet
+- [ ] Legge inn svarene fra styremøtet (kontakt-e-post, PR-ansvarlig, frivillige?, utforming, domene)
+- [ ] Eget domene (valgfritt) – legg da også til i ALLOWED_ORIGINS i `auth/wrangler.toml`
 - [ ] Gå gjennom BRUKSANVISNING.md med Paulina
+- [ ] Logge ut Wrangler (`npx wrangler logout`) når oppsettet er ferdig
 
 ## Filer
 | Fil | Til hvem |
