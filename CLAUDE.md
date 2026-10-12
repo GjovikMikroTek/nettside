@@ -1,9 +1,9 @@
 # Introduksjon: Prosjektside for Gjøvik MikroTek (studentorganisasjon ved NTNU Campus Gjøvik)
 
 ## Hva vi gjør
-Vi lager en nettside for et studentprosjekt ved NTNU. Richard bygger og setter opp siden for en venninne som er med i prosjektet.
+Vi lager en nettside for et studentprosjekt ved NTNU. Richard bygger og setter opp siden for Paulina, som er med i prosjektet.
 
-**Hovedmålet:** Når oppsettet er ferdig, skal hun og prosjektgruppen kunne drive siden selv, uten Richard og uten å kunne kode. Hun skal kunne:
+**Hovedmålet:** Når oppsettet er ferdig, skal Paulina og prosjektgruppen kunne drive siden selv, uten Richard og uten å kunne kode. Paulina skal kunne:
 - skrive og publisere artikler/innlegg
 - oppdatere informasjon om styret
 - legge til og fjerne sponsorer
@@ -24,10 +24,10 @@ Adminpanel (/admin) → lagrer i GitHub → Netlify publiserer → dittdomene.no
 Alle endringer lagres som historikk i GitHub. En feil kan derfor alltid rulles tilbake.
 
 ## Hvem eier hva
-Alle kontoer eies av prosjektet/venninnen, ikke av Richard:
+Alle kontoer eies av Gjøvik MikroTek / Paulina, ikke av Richard:
 - **GitHub:** lagrer koden og innholdet
 - **Netlify:** hosting
-- **Domene:** kjøpes av henne
+- **Domene:** kjøpes av Paulina
 - **Microsoft 365 / Outlook (NTNU):** brukes til Microsoft Forms for kontakt- og sponsorskjema. Svarene havner automatisk i Excel.
 
 Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU-adressen).
@@ -46,17 +46,18 @@ Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU
 - [ ] Sette opp GitHub-innlogging til adminpanelet (OAuth via Netlify)
 - [ ] Koble til domenet
 - [ ] Lage Microsoft Forms-skjema og lime lenken inn i adminpanelet
-- [ ] Gå gjennom BRUKSANVISNING.md med henne
+- [ ] Gå gjennom BRUKSANVISNING.md med Paulina
 
 ## Filer
 | Fil | Til hvem |
 |---|---|
 | `README.md` | Teknisk oppsett, steg for steg (Richard) |
-| `BRUKSANVISNING.md` | Hvordan hun oppdaterer siden (venninnen) |
+| `BRUKSANVISNING.md` | Hvordan Paulina oppdaterer siden |
 | `site/admin/config.yml` | Hvilke felt som finnes i adminpanelet. `repo:` og `site_url:` må endres ved oppsett. |
 
 ## Regler for endringer i koden
-- Hold det enkelt: ingen byggesteg, ingen database, ingen ekstra tjenester uten god grunn. Målet er at hun klarer seg selv.
+- Omtal alltid personen siden lages for som **Paulina**, aldri «venninne» eller lignende.
+- Hold det enkelt: ingen byggesteg, ingen database, ingen ekstra tjenester uten god grunn. Målet er at Paulina klarer seg selv.
 - Nye typer innhold legges til ved å
   1. lage en JSON-fil i `site/content/`,
   2. legge til feltene i `site/admin/config.yml`,

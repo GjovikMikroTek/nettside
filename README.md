@@ -22,17 +22,17 @@ Adminpanel (/admin) ──lagrer──▶ GitHub-repo ──varsler──▶ Net
 | `site/images/uploads/` | Bilder lastet opp i adminpanelet |
 | `netlify.toml` | Forteller Netlify at `site/` er nettsiden |
 
-## Kontoer (alle eies av prosjektet / venninnen, ikke av Richard)
+## Kontoer (alle eies av Gjøvik MikroTek / Paulina, ikke av Richard)
 
-1. **E-post til kontoene.** Bruk en e-post som ikke forsvinner når hun er ferdig på NTNU (f.eks. privat eller en felles prosjektadresse). En NTNU-adresse stenges etter studiene, og da mister man tilgang til GitHub/Netlify-gjenoppretting.
+1. **E-post til kontoene.** Bruk en e-post som ikke forsvinner når Paulina er ferdig på NTNU (f.eks. privat eller en felles prosjektadresse). En NTNU-adresse stenges etter studiene, og da mister man tilgang til GitHub/Netlify-gjenoppretting.
 2. **GitHub** (github.com) – lagrer koden og innholdet.
 3. **Netlify** (netlify.com) – hosting. Logg inn med «Sign up with GitHub».
-4. **Domene** – hun kjøper selv (f.eks. hos Domeneshop, one.com). Gratis alternativ: `prosjektnavn.netlify.app`.
+4. **Domene** – Paulina kjøper selv (f.eks. hos Domeneshop, one.com). Gratis alternativ: `prosjektnavn.netlify.app`.
 
 ## Oppsett, steg for steg (gjøres én gang, ca. 30–45 min)
 
 ### 1. Repo på GitHub
-- Logget inn på *hennes* GitHub: «New repository» → navn f.eks. `prosjektside` → Public eller Private (begge fungerer).
+- Logget inn på foreningens GitHub (GjovikMikroTek): «New repository» → navn f.eks. `prosjektside` → Public eller Private (begge fungerer).
 - Åpne denne mappen i VS Code, og i terminalen:
   ```bash
   git init
@@ -42,7 +42,7 @@ Adminpanel (/admin) ──lagrer──▶ GitHub-repo ──varsler──▶ Net
   git remote add origin https://github.com/BRUKERNAVN/prosjektside.git
   git push -u origin main
   ```
-- Hvis du (Richard) pusher fra din egen PC: hun legger deg til som *collaborator* midlertidig (Settings → Collaborators), og fjerner deg når alt virker.
+- Hvis du (Richard) pusher fra din egen PC: Paulina legger deg til som *collaborator* midlertidig (Settings → Collaborators), og fjerner deg når alt virker.
 
 ### 2. Endre to linjer i `site/admin/config.yml`
 ```yaml
@@ -57,7 +57,7 @@ Commit og push.
 - Deploy. Siden ligger nå på `noe-tilfeldig.netlify.app`.
 
 ### 4. Innlogging til adminpanelet (GitHub OAuth via Netlify)
-- GitHub (hennes konto): Settings → Developer settings → OAuth Apps → **New OAuth App**
+- GitHub (foreningens konto, GjovikMikroTek): Settings → Developer settings → OAuth Apps → **New OAuth App**
   - Homepage URL: `https://dittdomene.no` (eller netlify-adressen)
   - Authorization callback URL: `https://api.netlify.com/auth/done`
   - Kopier **Client ID** og lag en **Client secret**.
