@@ -41,7 +41,7 @@ Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU
 - [x] «Bli medlem»-side (`bli-medlem.html`, `content/medlem.json`) med Microsoft Forms innebygd → Excel = medlemsregister (kode ferdig; venter på skjemalenke)
 - [x] Mobilmeny (menyknapp under 760 px) og mobiltilpasning testet på 375 px
 - [ ] Ekte innhold som mangler: nåværende styre (seks roller etter vedtekter versjon B, 08.09.2026), kontakt-e-post, forsidebilde, sosiale medier
-- [ ] Opprette GitHub-repo og pushe koden
+- [x] GitHub-repo: github.com/GjovikMikroTek/nettside (offentlig, branch main)
 - [ ] Koble repoet til Netlify
 - [ ] Sette opp GitHub-innlogging til adminpanelet (OAuth via Netlify)
 - [ ] Koble til domenet
