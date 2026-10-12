@@ -1,6 +1,16 @@
 # Slik oppdaterer du nettsiden
 
-Gå til **https://dittdomene.no/admin** og trykk «Login with GitHub».
+## Logge inn
+1. Gå til **https://gjovik-mikrotek.pages.dev/admin/**
+2. Trykk **«Login with GitHub»**. Et lite vindu åpnes.
+3. Logg inn med foreningens GitHub-konto:
+   - Brukernavn: **GjovikMikroTek**
+   - Passord: får du av styreleder (deles aldri på e-post eller i chat)
+4. Ber GitHub om en kode, ligger den i innboksen til **mikrotek@ivb.ntnu.no**. Skriv den inn.
+5. Første gang: trykk **«Authorize»**.
+6. Vinduet lukker seg, og du er inne i adminpanelet.
+
+Husk å logge ut når du bruker en delt eller lånt PC.
 
 Etter at du har trykket **Publish / Publiser**, er endringen ute på nettsiden etter ca. ett minutt.
 
