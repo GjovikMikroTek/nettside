@@ -1,23 +1,16 @@
 :root {
+  /* Lyst, byggteknisk uttrykk: varm hvit «papir», betonggrå flater, logoens blå og oransje */
   --aksent: #2a529a;   /* blå fra logoen */
   --oransje: #f39228;  /* oransje fra logoen */
   --lenke: var(--aksent);
-  --tekst: #1a1d23;
-  --dempet: #5b6270;
-  --bakgrunn: #ffffff;
-  --flate: #f4f6f9;
-  --linje: #e2e6ec;
-  --radius: 10px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --tekst: #e8eaee;
-    --dempet: #a3aab6;
-    --bakgrunn: #121418;
-    --flate: #1c1f25;
-    --linje: #2c3038;
-    --lenke: #8fb0ea;
-  }
+  --tekst: #23262b;    /* antrasitt */
+  --dempet: #5f625f;
+  --bakgrunn: #fbfaf7; /* varm hvit */
+  --flate: #f1eee8;    /* lys betong */
+  --linje: #e1dcd2;
+  --rutenett: rgba(42, 82, 154, .07); /* «arbeidstegning»-rutenett */
+  --radius: 8px;
+  color-scheme: light;
 }
 
 * { box-sizing: border-box; }
@@ -36,6 +29,8 @@ a { color: var(--lenke); }
 .ramme { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
 .seksjon { padding: 56px 16px; }
 .seksjon h2 { font-size: 1.6rem; margin: 0 0 24px; }
+.seksjon h2::after { content: ""; display: block; width: 44px; height: 4px; margin-top: 10px; background: var(--oransje); border-radius: 2px; }
+.medlem-banner h2::after { display: none; }
 .seksjon-topp { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
 .tom { color: var(--dempet); }
 
@@ -52,10 +47,11 @@ nav { align-items: center; }
 .sprak-knapp:hover { border-color: var(--oransje); }
 
 /* Hero */
-.hero { background: var(--flate); border-bottom: 4px solid var(--oransje); padding: 88px 0 72px; background-size: cover; background-position: center; }
+.hero { background-color: var(--flate); background-image: linear-gradient(var(--rutenett) 1px, transparent 1px), linear-gradient(90deg, var(--rutenett) 1px, transparent 1px); background-size: 28px 28px; border-bottom: 4px solid var(--oransje); padding: 88px 0 72px; background-size: cover; background-position: center; }
 .hero.med-bilde { color: #fff; }
 .hero.med-bilde .ingress, .hero.med-bilde .slagord { color: rgba(255,255,255,.9); }
-.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 8px 0 16px; }
+.hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 8px 0 16px; color: var(--aksent); letter-spacing: -.01em; }
+.hero.med-bilde h1 { color: #fff; }
 .slagord { color: var(--lenke); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; margin: 0; }
 .ingress { font-size: 1.15rem; color: var(--dempet); max-width: 680px; margin: 0; }
 

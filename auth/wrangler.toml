@@ -6,6 +6,6 @@ compatibility_date = "2026-09-01"
 [vars]
 # Adressene som får lov å bruke innloggingen. Legg til eget domene her når det er kjøpt.
 ALLOWED_ORIGINS = "https://gjovik-mikrotek.pages.dev"
-GITHUB_CLIENT_ID = ""
+GITHUB_CLIENT_ID = "Ov23liblEJj7BF3G5aT1"
 
 # GITHUB_CLIENT_SECRET er hemmelig og legges inn i Cloudflare-dashbordet, ikke her.
