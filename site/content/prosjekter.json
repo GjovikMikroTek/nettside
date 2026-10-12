@@ -1,15 +1,15 @@
 {
   "prosjekter": [
     {
-      "tittel": "GMT Mikrohus",
-      "tittel_en": "GMT Micro House",
-      "status": "Pågår",
       "bilde": "/images/uploads/gmt-mikrohus-3d.png",
-      "ingress": "Vårt første prosjekt er et moderne mikrohus på ca. 30 m² med hems, gjennomtenkt planløsning og fokus på energieffektivitet.",
-      "ingress_en": "Our first project is a modern micro house of about 30 m² with a loft, a well-planned layout and a focus on energy efficiency.",
-      "tekst": "Hos Gjøvik MikroTek (GMT) tar vi nå vårt første steg mot fremtidens kompakte boligløsninger.\n\nVårt første prosjekt er et moderne mikrohus på ca. 30 m², hvor vi kombinerer funksjonalitet, arealeffektivitet og smarte løsninger. Med gjennomtenkt planløsning, hems og fokus på energieffektivitet ønsker vi å vise hvordan små arealer kan gi store muligheter.\n\nProsjektet er starten på vår reise mot å utvikle innovative, bærekraftige og praktiske boligløsninger – uten å gå på kompromiss med komfort og bokvalitet.",
+      "tittel_en": "GMT Micro House",
       "tekst_en": "At Gjøvik MikroTek (GMT), we are now taking our first step towards the compact homes of the future.\n\nOur first project is a modern micro house of about 30 m², combining functionality, efficient use of space and smart solutions. With a well-planned layout, a loft and a focus on energy efficiency, we want to show how small spaces can offer big possibilities.\n\nThe project is the start of our journey towards developing innovative, sustainable and practical housing – without compromising on comfort and quality of living.",
-      "publisert": true
+      "publisert": true,
+      "status": "Planlegges",
+      "ingress_en": "Our first project is a modern micro house of about 30 m² with a loft, a well-planned layout and a focus on energy efficiency.",
+      "ingress": "Vårt første prosjekt er et moderne mikrohus på ca. 30 m² med hems, gjennomtenkt planløsning og fokus på energieffektivitet.",
+      "tekst": "Hos Gjøvik MikroTek (GMT) tar vi nå vårt første steg mot fremtidens kompakte boligløsninger.\n\nVårt første prosjekt er et moderne mikrohus på ca. 30 m², hvor vi kombinerer funksjonalitet, arealeffektivitet og smarte løsninger. Med gjennomtenkt planløsning, hems og fokus på energieffektivitet ønsker vi å vise hvordan små arealer kan gi store muligheter.\n\nProsjektet er starten på vår reise mot å utvikle innovative, bærekraftige og praktiske boligløsninger – uten å gå på kompromiss med komfort og bokvalitet.",
+      "tittel": "GMT Mikrohus"
     }
   ]
 }
