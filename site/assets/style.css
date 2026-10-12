@@ -47,11 +47,13 @@ nav { align-items: center; }
 .sprak-knapp:hover { border-color: var(--oransje); }
 
 /* Hero */
-.hero { background-color: var(--flate); background-image: linear-gradient(var(--rutenett) 1px, transparent 1px), linear-gradient(90deg, var(--rutenett) 1px, transparent 1px); background-size: 28px 28px; border-bottom: 4px solid var(--oransje); padding: 88px 0 72px; background-size: cover; background-position: center; }
-.hero.med-bilde { color: #fff; }
-.hero.med-bilde .ingress, .hero.med-bilde .slagord { color: rgba(255,255,255,.9); }
+.hero { background-color: var(--flate); background-image: linear-gradient(var(--rutenett) 1px, transparent 1px), linear-gradient(90deg, var(--rutenett) 1px, transparent 1px); background-size: 28px 28px; border-bottom: 4px solid var(--oransje); padding: 88px 0 72px; }
+/* Forsidebilde: uskarpt, med lyst slør som er tettest bak teksten til venstre */
+.hero.med-bilde { position: relative; overflow: hidden; isolation: isolate; }
+.hero.med-bilde::before { content: ""; position: absolute; inset: -24px; z-index: -2; background: var(--hero-bilde) center 35% / cover no-repeat; filter: blur(3px); }
+.hero.med-bilde::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(251,250,247,.93) 0%, rgba(251,250,247,.82) 45%, rgba(251,250,247,.45) 100%); }
+@media (max-width: 760px) { .hero.med-bilde::after { background: rgba(251,250,247,.85); } }
 .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; margin: 8px 0 16px; color: var(--aksent); letter-spacing: -.01em; }
-.hero.med-bilde h1 { color: #fff; }
 .slagord { color: var(--lenke); font-weight: 600; text-transform: uppercase; letter-spacing: .06em; font-size: .85rem; margin: 0; }
 .ingress { font-size: 1.15rem; color: var(--dempet); max-width: 680px; margin: 0; }
 

@@ -184,7 +184,8 @@ async function visForside() {
 
     if (s.hovedbilde) {
       const h = document.getElementById('hero');
-      h.style.backgroundImage = `linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)), url("${encodeURI(s.hovedbilde)}")`;
+      // Bildet vises uskarpt med et lyst slør over (se .hero.med-bilde i style.css)
+      h.style.setProperty('--hero-bilde', `url("${encodeURI(s.hovedbilde)}")`);
       h.classList.add('med-bilde');
     }
 
