@@ -2,12 +2,14 @@
 backend:
   name: github
   repo: GjovikMikroTek/nettside
+  base_url: https://gjovik-mikrotek-auth.gjovik-mikrotek.workers.dev   # innlogging (auth/worker.js)
+  auth_endpoint: auth
   branch: main
 
 locale: nb_no
 media_folder: site/images/uploads
 public_folder: /images/uploads
-site_url: https://DITTDOMENE.no         # <-- ENDRES ved oppsett
+site_url: https://gjovik-mikrotek.pages.dev
 logo_url: /assets/logo.svg
 
 collections:

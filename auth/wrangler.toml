@@ -3,5 +3,9 @@ name = "gjovik-mikrotek-auth"
 main = "worker.js"
 compatibility_date = "2026-09-01"
 
-# Hemmeligheter legges inn i Cloudflare-dashbordet, ikke her:
-# GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, ALLOWED_ORIGINS
+[vars]
+# Adressene som får lov å bruke innloggingen. Legg til eget domene her når det er kjøpt.
+ALLOWED_ORIGINS = "https://gjovik-mikrotek.pages.dev"
+GITHUB_CLIENT_ID = ""
+
+# GITHUB_CLIENT_SECRET er hemmelig og legges inn i Cloudflare-dashbordet, ikke her.
