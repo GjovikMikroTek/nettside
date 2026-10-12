@@ -22,6 +22,14 @@ Etter at du har trykket **Publish / Publiser**, er endringen ute på nettsiden e
 
 Vil du skjule en artikkel uten å slette den: slå av «Vis på nettsiden».
 
+## Legge til eller oppdatere et prosjekt
+1. Velg **Prosjekter** → **Alle prosjekter**.
+2. Trykk **«Legg til prosjekt»**, eller åpne et prosjekt som finnes fra før.
+3. Fyll inn tittel, status (Planlegges, Pågår eller Ferdig), bilde, ingress og prosjekttekst.
+4. Trykk **Publiser** øverst.
+
+Prosjektene vises på siden **Prosjekter** og øverst på forsiden, i samme rekkefølge som i adminpanelet. Dra dem for å endre rekkefølgen. Når et prosjekt er ferdig, endrer du bare statusen til «Ferdig».
+
 ## Oppdatere styret
 **Sider og innhold** → **Styret**. Legg til, fjern eller dra medlemmer i den rekkefølgen de skal vises. Bilde er valgfritt. Uten bilde vises initialene.
 

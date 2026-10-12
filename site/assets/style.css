@@ -76,6 +76,14 @@ time { color: var(--dempet); font-size: .85rem; }
 .artikkel time { display: block; margin-top: 24px; }
 .artikkel-bilde { border-radius: var(--radius); margin: 24px 0; width: 100%; }
 
+/* Prosjekter */
+.bilde-prosjekt { background-color: var(--flate); background-image: linear-gradient(var(--rutenett) 1px, transparent 1px), linear-gradient(90deg, var(--rutenett) 1px, transparent 1px); background-size: 20px 20px; }
+.status { display: inline-block; font-size: .75rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; padding: 3px 10px; border-radius: 999px; background: var(--flate); color: var(--dempet); }
+.status-pagar { background: #fdebd6; color: #8a4b05; }
+.status-planlegges { background: #e3eaf5; color: var(--aksent); }
+.status-ferdig { background: #e2f0e4; color: #2d6a3a; }
+.prosjekt-status { margin-top: 24px; }
+
 /* Instagram */
 .insta-rutenett { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
 .insta { display: block; border-radius: 6px; overflow: hidden; background: var(--flate); }

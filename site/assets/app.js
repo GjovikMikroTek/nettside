@@ -28,7 +28,10 @@ const TEKST = {
     meny: 'Meny', nav_medlem: 'Bli medlem', banner_tittel: 'Bli med og bygg!',
     banner_tekst: 'Medlemskap er gratis og åpent for studenter ved NTNU Campus Gjøvik.',
     apne_skjema: 'Åpne innmeldingsskjemaet', skjema_tittel: 'Innmeldingsskjema',
-    skjema_mangler: 'Innmeldingsskjemaet kommer snart. Ta kontakt med styret i mellomtiden.'
+    skjema_mangler: 'Innmeldingsskjemaet kommer snart. Ta kontakt med styret i mellomtiden.',
+    nav_prosjekter: 'Prosjekter', prosjekter: 'Prosjekter', alle_prosjekter: 'Alle prosjekter →',
+    tilbake_prosjekter: '← Alle prosjekter', ingen_prosjekter: 'Ingen prosjekter ennå.', fant_ikke_prosjekt: 'Fant ikke prosjektet.',
+    Planlegges: 'Planlegges', 'Pågår': 'Pågår', Ferdig: 'Ferdig'
   },
   en: {
     nav_om: 'About', nav_artikler: 'News', nav_styret: 'Board', nav_sponsorer: 'Sponsors', nav_kontakt: 'Contact',
@@ -43,7 +46,10 @@ const TEKST = {
     meny: 'Menu', nav_medlem: 'Join us', banner_tittel: 'Come build with us!',
     banner_tekst: 'Membership is free and open to students at NTNU Campus Gjøvik.',
     apne_skjema: 'Open the membership form', skjema_tittel: 'Membership form',
-    skjema_mangler: 'The membership form is coming soon. Please contact the board in the meantime.'
+    skjema_mangler: 'The membership form is coming soon. Please contact the board in the meantime.',
+    nav_prosjekter: 'Projects', prosjekter: 'Projects', alle_prosjekter: 'All projects →',
+    tilbake_prosjekter: '← All projects', ingen_prosjekter: 'No projects yet.', fant_ikke_prosjekt: 'Project not found.',
+    Planlegges: 'Planned', 'Pågår': 'In progress', Ferdig: 'Completed'
   }
 };
 
@@ -106,12 +112,15 @@ function trygLenke(url) {
   return /^(https?:|mailto:|\/)/i.test(url || '') ? url : '';
 }
 
-// Artikkeladressen bygges alltid av den norske tittelen, så lenker virker på begge språk.
-function slug(a) {
-  const s = (a.tittel || '').toLowerCase()
+// Artikkel- og prosjektadressen bygges alltid av den norske tittelen, så lenker virker på begge språk.
+function tittelSlug(a) {
+  return (a.tittel || '').toLowerCase()
     .replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-  return (a.dato || '') + '-' + s;
+}
+
+function slug(a) {
+  return (a.dato || '') + '-' + tittelSlug(a);
 }
 
 function datoTekst(d) {
@@ -134,6 +143,27 @@ function artikkelKort(a) {
       <time>${esc(datoTekst(a.dato))}</time>
       <h3>${esc(felt(a, 'tittel'))}</h3>
       <p>${esc(felt(a, 'ingress'))}</p>
+    </div>
+  </a>`;
+}
+
+// Prosjektene vises i den rekkefølgen de står i adminpanelet (dra for å endre).
+function synligeProsjekter(data) {
+  return (data.prosjekter || []).filter(p => p.publisert !== false);
+}
+
+function statusMerke(p) {
+  return p.status ? `<span class="status status-${esc(tittelSlug({ tittel: p.status }))}">${esc(t(p.status))}</span>` : '';
+}
+
+function prosjektKort(p) {
+  const bilde = p.bilde ? `<img src="${esc(p.bilde)}" alt="" loading="lazy">` : '<div class="bilde-tom bilde-prosjekt"></div>';
+  return `<a class="kort" href="/prosjekter.html?p=${encodeURIComponent(tittelSlug(p))}">
+    ${bilde}
+    <div class="kort-tekst">
+      ${statusMerke(p)}
+      <h3>${esc(felt(p, 'tittel'))}</h3>
+      <p>${esc(felt(p, 'ingress'))}</p>
     </div>
   </a>`;
 }
@@ -176,8 +206,9 @@ async function visInstagram(s) {
 
 async function visForside() {
   try {
-    const [s, prosjekt, artikler, styret, sponsorer] = await Promise.all([
-      fellesInnstillinger(), hent('prosjekt'), hent('artikler'), hent('styret'), hent('sponsorer')
+    const [s, prosjekt, artikler, styret, sponsorer, prosjekter] = await Promise.all([
+      fellesInnstillinger(), hent('prosjekt'), hent('artikler'), hent('styret'), hent('sponsorer'),
+      hent('prosjekter').catch(() => ({}))
     ]);
     document.title = s.navn || 'Gjøvik MikroTek';
     visInstagram(s).catch(e => console.error('Instagram:', e));
@@ -191,6 +222,12 @@ async function visForside() {
 
     document.getElementById('om-tittel').textContent = felt(prosjekt, 'tittel') || t('om_tittel');
     document.getElementById('om-tekst').innerHTML = md(felt(prosjekt, 'tekst'));
+
+    const pr = synligeProsjekter(prosjekter).slice(0, 3);
+    if (pr.length) {
+      document.getElementById('prosjekter-liste').innerHTML = pr.map(prosjektKort).join('');
+      document.getElementById('prosjekter').hidden = false;
+    }
 
     const siste = synligeArtikler(artikler).slice(0, 3);
     document.getElementById('artikler-siste').innerHTML = siste.length
@@ -261,6 +298,37 @@ async function visArtikler() {
     document.title = t('artikler') + ' – ' + (s.navn || 'Gjøvik MikroTek');
     boks.innerHTML = `<h1>${esc(t('artikler'))}</h1><div class="kort-rutenett">` +
       (alle.map(artikkelKort).join('') || `<p class="tom">${esc(t('ingen_artikler'))}</p>`) + '</div>';
+  } catch (e) {
+    console.error(e);
+    boks.innerHTML = `<p>${esc(t('kunne_ikke'))}</p>`;
+  }
+}
+
+async function visProsjekter() {
+  const boks = document.getElementById('innhold');
+  try {
+    const [s, data] = await Promise.all([fellesInnstillinger(), hent('prosjekter')]);
+    const alle = synligeProsjekter(data);
+    const valgt = new URLSearchParams(location.search).get('p');
+
+    if (valgt) {
+      const p = alle.find(x => tittelSlug(x) === valgt);
+      if (!p) { boks.innerHTML = `<p>${esc(t('fant_ikke_prosjekt'))} <a href="/prosjekter.html">${esc(t('tilbake_prosjekter'))}</a></p>`; return; }
+      document.title = felt(p, 'tittel') + ' – ' + (s.navn || 'Gjøvik MikroTek');
+      boks.innerHTML = `<article class="artikkel">
+        <a href="/prosjekter.html" class="lenke-pil">${esc(t('tilbake_prosjekter'))}</a>
+        <div class="prosjekt-status">${statusMerke(p)}</div>
+        <h1>${esc(felt(p, 'tittel'))}</h1>
+        <p class="ingress">${esc(felt(p, 'ingress'))}</p>
+        ${p.bilde ? `<img src="${esc(p.bilde)}" alt="" class="artikkel-bilde">` : ''}
+        <div class="brodtekst">${md(felt(p, 'tekst'))}</div>
+      </article>`;
+      return;
+    }
+
+    document.title = t('prosjekter') + ' – ' + (s.navn || 'Gjøvik MikroTek');
+    boks.innerHTML = `<h1>${esc(t('prosjekter'))}</h1><div class="kort-rutenett">` +
+      (alle.map(prosjektKort).join('') || `<p class="tom">${esc(t('ingen_prosjekter'))}</p>`) + '</div>';
   } catch (e) {
     console.error(e);
     boks.innerHTML = `<p>${esc(t('kunne_ikke'))}</p>`;

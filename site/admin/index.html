@@ -4,9 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <title>Adminpanel</title>
+  <title>Adminpanel – Gjøvik MikroTek</title>
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <meta name="theme-color" content="#0d1830">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/admin.css">
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <!-- Versjonen er låst fordi admin.css bruker Decaps interne klassenavn. Test adminpanelet før du endrer den. -->
+  <script src="https://unpkg.com/decap-cms@3.16.3/dist/decap-cms.js"></script>
+  <script>
+    // Forhåndsvisningen i redigeringen bruker nettsidens eget stilark
+    CMS.registerPreviewStyle('/assets/style.css');
+  </script>
 </body>
 </html>

@@ -1,0 +1,147 @@
+/* Utseende på adminpanelet (Decap CMS) i Gjøvik MikroTek-stil.
+   Decap gir elementene klassenavn som slutter på komponentnavnet, f.eks. «css-14ts7qn-StyledAuthenticationPage».
+   Vi treffer dem med [class*="-Navn"]. Decap-versjonen er låst i index.html, så navnene endrer seg ikke uten videre. */
+
+:root {
+  --gmt-natt: #0d1830;
+  --gmt-natt-2: #15264a;
+  --gmt-bla: #2a529a;
+  --gmt-bla-lys: #6f93d6;
+  --gmt-oransje: #f39228;
+  --gmt-flate: #f3f5f9;
+  --gmt-linje: #dfe4ee;
+  --gmt-tekst: #1b2233;
+  --gmt-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --gmt-sans: "Inter", system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--gmt-sans);
+  color: var(--gmt-tekst);
+  background-color: var(--gmt-flate);
+  background-image:
+    linear-gradient(rgba(42, 82, 154, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 82, 154, .06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ---------- Innloggingssiden ---------- */
+[class*="-StyledAuthenticationPage"] {
+  position: relative;
+  background-color: var(--gmt-natt);
+  background-image:
+    radial-gradient(ellipse at 50% 35%, rgba(42, 82, 154, .55), transparent 60%),
+    linear-gradient(rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .05) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+  background-size: auto, 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  color: #fff;
+  gap: 36px !important;
+}
+[class*="-StyledAuthenticationPage"]::before {
+  content: "GJØVIK MIKROTEK  //  ADMINPANEL";
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--gmt-mono);
+  font-size: 12px;
+  letter-spacing: .25em;
+  color: var(--gmt-bla-lys);
+  white-space: nowrap;
+}
+[class*="-StyledAuthenticationPage"]::after {
+  content: "Logg inn for å oppdatere nettsiden  ·  v1.0";
+  position: absolute;
+  bottom: 28px;
+  font-family: var(--gmt-mono);
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: rgba(255, 255, 255, .45);
+}
+[class*="-PageLogoIcon"], [class*="-CustomIconWrapper"] {
+  width: 280px !important;
+  max-width: 70vw;
+  height: auto !important;
+  filter: drop-shadow(0 8px 30px rgba(243, 146, 40, .25));
+}
+[class*="-PageLogoIcon"] img, [class*="-CustomIconWrapper"] img { width: 100%; height: auto; }
+[class*="-DecapLogoIcon"], [class*="-NetlifyCreditIcon"] { display: none !important; }
+[class*="-LoginButton-"] {
+  background: var(--gmt-oransje) !important;
+  color: #1a1d23 !important;
+  font-family: var(--gmt-mono) !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em;
+  height: 48px !important;
+  padding: 0 26px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .15), 0 10px 30px rgba(243, 146, 40, .3);
+  transition: transform .15s, box-shadow .15s;
+}
+[class*="-LoginButton-"]:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(255, 255, 255, .25), 0 14px 34px rgba(243, 146, 40, .45); }
+[class*="-LoginButtonIcon"] { color: #1a1d23 !important; }
+[class*="-GoBackButtonStyle"], [class*="-StyledAuthenticationPage"] a { color: rgba(255, 255, 255, .7) !important; }
+
+/* ---------- Toppmenyen ---------- */
+header[class*="-AppHeader"] {
+  background: linear-gradient(90deg, var(--gmt-natt), var(--gmt-natt-2)) !important;
+  border-bottom: 3px solid var(--gmt-oransje);
+  box-shadow: 0 6px 24px rgba(13, 24, 48, .25) !important;
+}
+[class*="-AppHeaderLogo"] img { height: 30px !important; width: 72px !important; max-height: none !important; max-width: none !important; padding: 0 !important; margin: 0 18px 0 4px; }
+[class*="-AppHeaderNavLink"], [class*="-AppHeaderButton"], [class*="-AppHeaderLink"] {
+  color: rgba(255, 255, 255, .72) !important;
+  font-family: var(--gmt-mono);
+  letter-spacing: .02em;
+}
+[class*="-AppHeaderNavLink"]:hover, [class*="-AppHeaderNavLink"].header-link-active,
+[class*="-AppHeaderButton"]:hover { color: #fff !important; }
+[class*="-AppHeaderNavLink"].header-link-active { box-shadow: inset 0 -3px 0 var(--gmt-oransje); }
+[class*="-AppHeaderNavLink"] svg, [class*="-AppHeaderButton"] svg { color: inherit !important; }
+[class*="-AppHeaderQuickNewButton"] {
+  background: var(--gmt-oransje) !important;
+  color: #1a1d23 !important;
+  font-weight: 700 !important;
+}
+
+/* ---------- Sidemeny og lister ---------- */
+[class*="-SidebarContainer"], [class*="-CollectionTopContainer"], [class*="-ListCard"], [class*="-GridCard"] {
+  border: 1px solid var(--gmt-linje);
+  border-radius: 8px !important;
+  box-shadow: 0 2px 10px rgba(13, 24, 48, .05) !important;
+}
+[class*="-SidebarHeading"], [class*="-CollectionTopHeading"] {
+  font-family: var(--gmt-mono);
+  color: var(--gmt-bla) !important;
+  letter-spacing: .02em;
+}
+[class*="-SidebarHeading"]::before, [class*="-CollectionTopHeading"]::before {
+  content: "// ";
+  color: var(--gmt-oransje);
+}
+[class*="-SidebarNavLink"]:hover, [class*="-SidebarNavLink"].sidebar-active {
+  color: var(--gmt-bla) !important;
+  background: #eef2fa !important;
+  border-left-color: var(--gmt-oransje) !important;
+}
+[class*="-ListCard"]:hover, [class*="-GridCard"]:hover { border-color: var(--gmt-bla-lys); }
+[class*="-CollectionTopNewButton"] {
+  background: var(--gmt-bla) !important;
+  color: #fff !important;
+}
+[class*="-CollectionTopNewButton"]:hover { background: var(--gmt-oransje) !important; color: #1a1d23 !important; }
+
+/* ---------- Redigering ---------- */
+[class*="-ToolbarContainer"] {
+  border-bottom: 3px solid var(--gmt-oransje);
+}
+[class*="-PublishButton"], [class*="-SaveButton"] { font-family: var(--gmt-mono); }
+[class*="-PreviewPaneContainer"] {
+  background-color: #fff;
+  background-image:
+    linear-gradient(rgba(42, 82, 154, .05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 82, 154, .05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

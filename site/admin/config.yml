@@ -10,7 +10,9 @@ locale: nb_no
 media_folder: site/images/uploads
 public_folder: /images/uploads
 site_url: https://gjovik-mikrotek.pages.dev
-logo_url: /assets/logo.svg
+logo:
+  src: /assets/logo-hvit.svg
+  show_in_header: true
 
 collections:
   - name: artikler
@@ -34,6 +36,30 @@ collections:
               - { name: ingress_en, label: "Ingress (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: tekst, label: Artikkeltekst, widget: markdown }
               - { name: tekst_en, label: "Artikkeltekst (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: publisert, label: "Vis på nettsiden", widget: boolean, default: true }
+
+  - name: prosjekter
+    label: Prosjekter
+    files:
+      - name: prosjekter
+        label: Alle prosjekter
+        file: site/content/prosjekter.json
+        fields:
+          - name: prosjekter
+            label: Prosjekter
+            label_singular: Prosjekt
+            widget: list
+            summary: "{{fields.status}} – {{fields.tittel}}"
+            hint: "Prosjektene vises på nettsiden i samme rekkefølge som her. Dra for å endre rekkefølgen."
+            fields:
+              - { name: tittel, label: Tittel, widget: string }
+              - { name: tittel_en, label: "Tittel (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: status, label: Status, widget: select, options: ["Planlegges", "Pågår", "Ferdig"], default: "Planlegges" }
+              - { name: bilde, label: Bilde, widget: image, required: false }
+              - { name: ingress, label: "Ingress (kort tekst i oversikten)", widget: text }
+              - { name: ingress_en, label: "Ingress (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
+              - { name: tekst, label: Prosjekttekst, widget: markdown }
+              - { name: tekst_en, label: "Prosjekttekst (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: publisert, label: "Vis på nettsiden", widget: boolean, default: true }
 
   - name: innhold
