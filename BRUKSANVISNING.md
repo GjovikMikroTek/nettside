@@ -79,5 +79,5 @@ Svarene finner du i Forms under «Svar» → «Åpne i Excel».
 
 ## Tips
 - Bilder: hold dem under ca. 1–2 MB. Mobilbilder kan gjerne forminskes først.
-- Gjort noe feil? Alle versjoner lagres. Den som satte opp siden kan rulle tilbake i Netlify eller GitHub.
+- Gjort noe feil? Alle versjoner lagres. Den som satte opp siden kan rulle tilbake i Cloudflare eller GitHub.
 - Gi andre tilgang: legg dem til som «collaborator» i GitHub-repoet. Da kan de logge inn på /admin.
