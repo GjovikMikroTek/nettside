@@ -15,9 +15,23 @@
       "epost": ""
     },
     {
-      "navn": "Kenneth Liabø",
+      "navn": "Mohammad Haj Hasan",
       "rolle": "Økonomileder",
       "rolle_en": "Head of finance",
+      "bilde": "",
+      "epost": ""
+    },
+    {
+      "navn": "Nils Gåsemyr Staalesen",
+      "rolle": "Sponsoransvarlig",
+      "rolle_en": "Sponsorship manager",
+      "bilde": "",
+      "epost": ""
+    },
+    {
+      "navn": "Thomas Brix",
+      "rolle": "HR-ansvarlig",
+      "rolle_en": "HR manager",
       "bilde": "",
       "epost": ""
     }
