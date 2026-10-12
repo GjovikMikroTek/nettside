@@ -37,7 +37,7 @@ Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU
 - [x] Logo lagt inn (SVG, hvit variant for mørk modus, favicon/app-ikoner i `site/assets/`)
 - [x] Navn, slagord, beskrivelse, «Om oss» og profilfarger (blå `#2a529a`, oransje `#f39228`) fra logo, vedtekter og stiftelsesprotokoll
 - [x] Språkvalg norsk/engelsk (alt eksisterende innhold er oversatt)
-- [x] Instagram-bilder på forsiden (kode ferdig; venter på Behold-konto og feed-lenke)
+- [x] Instagram-bilder på forsiden fra @gjovik_mikrotek (Behold-feed 5LIqyMhQTSSTbr09vbVQ)
 - [x] «Bli medlem»-side (`bli-medlem.html`, `content/medlem.json`) med Microsoft Forms innebygd → Excel = medlemsregister (kode ferdig; venter på skjemalenke)
 - [x] Mobilmeny (menyknapp under 760 px) og mobiltilpasning testet på 375 px
 - [ ] Ekte innhold som mangler: nåværende styre (seks roller etter vedtekter versjon B, 08.09.2026), kontakt-e-post, forsidebilde, sosiale medier
