@@ -1,0 +1,7 @@
+# Innloggingstjenesten til adminpanelet. Publiseres med: npx wrangler deploy (fra denne mappen)
+name = "gjovik-mikrotek-auth"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+# Hemmeligheter legges inn i Cloudflare-dashbordet, ikke her:
+# GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, ALLOWED_ORIGINS

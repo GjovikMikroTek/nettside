@@ -1,0 +1,3 @@
+# Cloudflare Pages: innholdet skal alltid hentes ferskt etter at noen har lagret i adminpanelet
+/content/*
+  Cache-Control: no-cache
