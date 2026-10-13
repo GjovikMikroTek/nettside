@@ -29,7 +29,7 @@ const TEKST = {
     banner_tekst: 'Medlemskap er gratis og åpent for studenter ved NTNU Campus Gjøvik.',
     apne_skjema: 'Åpne innmeldingsskjemaet', skjema_tittel: 'Innmeldingsskjema',
     skjema_mangler: 'Innmeldingsskjemaet kommer snart. Ta kontakt med styret i mellomtiden.',
-    nav_prosjekter: 'Prosjekter', prosjekter: 'Prosjekter', alle_prosjekter: 'Alle prosjekter →',
+    innmelding: 'Innmelding', nav_prosjekter: 'Prosjekter', prosjekter: 'Prosjekter', alle_prosjekter: 'Alle prosjekter →',
     tilbake_prosjekter: '← Alle prosjekter', ingen_prosjekter: 'Ingen prosjekter ennå.', fant_ikke_prosjekt: 'Fant ikke prosjektet.',
     Planlegges: 'Planlegges', 'Pågår': 'Pågår', Ferdig: 'Ferdig'
   },
@@ -47,7 +47,7 @@ const TEKST = {
     banner_tekst: 'Membership is free and open to students at NTNU Campus Gjøvik.',
     apne_skjema: 'Open the membership form', skjema_tittel: 'Membership form',
     skjema_mangler: 'The membership form is coming soon. Please contact the board in the meantime.',
-    nav_prosjekter: 'Projects', prosjekter: 'Projects', alle_prosjekter: 'All projects →',
+    innmelding: 'Membership', nav_prosjekter: 'Projects', prosjekter: 'Projects', alle_prosjekter: 'All projects →',
     tilbake_prosjekter: '← All projects', ingen_prosjekter: 'No projects yet.', fant_ikke_prosjekt: 'Project not found.',
     Planlegges: 'Planned', 'Pågår': 'In progress', Ferdig: 'Completed'
   }
@@ -341,7 +341,7 @@ function skjemaAdresse(verdi) {
   const v = String(verdi || '').trim();
   const fraIframe = v.match(/src=["']([^"']+)["']/i);
   const url = (fraIframe ? fraIframe[1] : v).replace(/&amp;/g, '&');
-  if (!/^https:\/\/forms\.(office|microsoft)\.com\//i.test(url)) return null;
+  if (!/^https:\/\/forms\.(office\.com|microsoft\.com|cloud\.microsoft)\//i.test(url)) return null;
   const visning = url.includes('ResponsePage.aspx') && !/[?&]embed=true/i.test(url) ? url + '&embed=true' : url;
   return { visning, lenke: url.replace(/[?&]embed=true/i, '') };
 }
