@@ -146,17 +146,19 @@ time { color: var(--dempet); font-size: .85rem; }
 .medlem-banner h2 { margin: 0 0 6px; }
 .medlem-banner p { margin: 0; color: rgba(255, 255, 255, .75); }
 /* Toppfelt på innmeldingssiden: stor, sentrert logo og 3D-mikrohuset */
-.medlem-hero { text-align: center; color: #fff; padding: 64px 0 52px; border-bottom: 6px solid var(--oransje);
+.medlem-hero { text-align: center; color: #fff; padding: 60px 0 56px; border-bottom: 6px solid var(--oransje);
   background-color: var(--natt);
   background-image:
     radial-gradient(ellipse at 50% 45%, rgba(42, 82, 154, .6), transparent 62%),
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
   background-size: auto, 96px 96px, 96px 96px, 24px 24px, 24px 24px; }
-.medlem-hero-bilder { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); margin-bottom: 28px; }
-.medlem-hero-logo { width: clamp(150px, 30vw, 320px); height: auto; filter: drop-shadow(0 10px 30px rgba(243, 146, 40, .25)); }
-.medlem-hero-skille { width: 2px; align-self: stretch; margin: 12px 0; background: rgba(255, 255, 255, .2); }
-.medlem-hero-hus { width: clamp(160px, 34vw, 400px); height: auto; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .35)); }
+/* Husmerket fra logoen (M-en med huset) i et rundt emblem */
+.medlem-emblem { width: 150px; height: 150px; margin: 0 auto 26px; border-radius: 50%; display: grid; place-items: center;
+  border: 2px solid rgba(143, 176, 234, .5); background: rgba(13, 24, 48, .6);
+  box-shadow: 0 0 0 10px rgba(143, 176, 234, .08), 0 0 60px rgba(243, 146, 40, .25); }
+.medlem-emblem img { width: 78px; height: auto; }
+.medlem-hero-under { margin: 14px 0 0; font-family: var(--mono); font-size: .8rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bla-lys); }
 .medlem-hero h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); line-height: 1.1; margin: 8px 0 0; color: #fff; letter-spacing: -.02em; }
 .medlem-side { max-width: 792px; }  /* samme bredde som skjemaet (760px) + marg */
 .medlem-side .brodtekst em { color: var(--dempet); font-size: .92rem; }
@@ -184,6 +186,9 @@ time { color: var(--dempet); font-size: .85rem; }
   .medlem-banner .knapp { width: 100%; text-align: center; }
   .skjema-ramme { border-radius: 0; margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
   .skjema-ramme iframe { height: 2250px; }
+  .medlem-hero-under { font-size: .68rem; letter-spacing: .08em; }
+  .medlem-emblem { width: 124px; height: 124px; }
+  .medlem-emblem img { width: 64px; }
   .personer { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
   .person img, .initialer { width: 96px; height: 96px; }
 }
