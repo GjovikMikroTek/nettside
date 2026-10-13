@@ -362,6 +362,15 @@ async function visMedlem() {
     iframe.loading = 'lazy';
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('scrolling', 'no');
+    // Etter innsending vises takkesiden øverst i skjemaet, mens den som fylte ut står nederst.
+    // Skjemaet ligger hos Microsoft, så vi ser bare at det laster på nytt eller sender en melding.
+    const tilToppen = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+    let lastet = false;
+    iframe.addEventListener('load', () => { if (lastet) tilToppen(); lastet = true; });
+    window.addEventListener('message', e => {
+      if (e.source !== iframe.contentWindow) return;
+      if (/submit|thank|confirm/i.test(typeof e.data === 'string' ? e.data : JSON.stringify(e.data || ''))) tilToppen();
+    });
     ramme.appendChild(iframe);
     ramme.hidden = false;
   } catch (e) {
