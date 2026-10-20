@@ -1,7 +1,7 @@
 # Slik oppdaterer du nettsiden
 
 ## Logge inn
-1. Gå til **https://gjovik-mikrotek.pages.dev/admin/**
+1. Gå til **https://gjovikmikrotek.no/admin/** (den gamle adressen gjovik-mikrotek.pages.dev/admin/ virker også)
 2. Trykk **«Login with GitHub»**. Et lite vindu åpnes.
 3. Logg inn med foreningens GitHub-konto:
    - Brukernavn: **GjovikMikroTek**

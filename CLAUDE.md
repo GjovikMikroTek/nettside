@@ -13,7 +13,7 @@ Vi lager en nettside for et studentprosjekt ved NTNU. Richard bygger og setter o
 Siden er en statisk nettside med et adminpanel. Det finnes ingen server eller database å drifte.
 
 ```
-Adminpanel (/admin) → lagrer i GitHub → Cloudflare Pages publiserer → gjovik-mikrotek.pages.dev
+Adminpanel (/admin) → lagrer i GitHub → Cloudflare Pages publiserer → gjovikmikrotek.no (og gjovik-mikrotek.pages.dev)
 ```
 
 1. **Innholdet** ligger som JSON-filer i `site/content/` (artikler, styret, sponsorer, innstillinger, om prosjektet).
@@ -55,7 +55,7 @@ Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU
 - [ ] Pause fra 13.10.2026: styret gjør de endringene de selv vil på nettsiden først. Richard kommer tilbake til prosjektet senere (domene, svar fra styremøtet, oppdatere BRUKSANVISNING.md, flyt 2 hvis skjemaet skal brukes)
 - [ ] Medlemsregister: bygges midlertidig på Paulinas egen NTNU-konto (12.10.2026, passordet til mikrotek@ivb.ntnu.no mangler). Flyttes til mikrotek@ivb.ntnu.no når tilgangen er på plass (overfør Forms-eierskap, kopier Excel, lag flytene på nytt). Steg: sjekk Power Automate-lisens → last opp Excel til OneDrive → lag Forms-skjema → flyt 1 (ny innmelding → ny rad, Status=Ny) → flyt 2 (hver natt: Utmeldt → sett datoer, slett etter 30 dager) → sjekk Power Automate-lisens → last opp Excel til OneDrive → lag Forms-skjema → flyt 1 (ny innmelding → ny rad, Status=Ny) → flyt 2 (hver natt: Utmeldt → sett datoer, slett etter 30 dager) →
 - [ ] Legge inn svarene fra styremøtet (kontakt-e-post, PR-ansvarlig, frivillige?, utforming, domene)
-- [ ] Eget domene (valgfritt) – legg da også til i ALLOWED_ORIGINS i `auth/wrangler.toml`
+- [x] 20.10.2026: Eget domene **gjovikmikrotek.no** (kjøpt hos Webhuset, DNS flyttet til Cloudflare, custom domain på Pages for apex og www). Lagt inn i ALLOWED_ORIGINS (`auth/wrangler.toml`) og `site_url`. pages.dev-adressen virker fortsatt
 - [ ] Gå gjennom BRUKSANVISNING.md med Paulina
 - [ ] Logge ut Wrangler (`npx wrangler logout`) når oppsettet er ferdig
 

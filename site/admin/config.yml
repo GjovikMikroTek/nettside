@@ -9,7 +9,7 @@ backend:
 locale: nb_no
 media_folder: site/images/uploads
 public_folder: /images/uploads
-site_url: https://gjovik-mikrotek.pages.dev
+site_url: https://gjovikmikrotek.no
 logo:
   src: /assets/logo-hvit.svg
   show_in_header: true
