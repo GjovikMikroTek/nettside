@@ -161,8 +161,8 @@ time { color: var(--dempet); font-size: .85rem; }
 .medlem-side { max-width: 792px; }  /* samme bredde som skjemaet (760px) + marg */
 .medlem-side .brodtekst em { color: var(--dempet); font-size: .92rem; }
 .skjema-ramme { margin-top: 24px; max-width: 760px; border: 1px solid var(--linje); border-radius: var(--radius); overflow: hidden; background: #fff; }
-/* Høy nok til hele skjemaet (målt ca. 1700px på PC, 2000px på smal mobil) + plass til feilmeldinger, så det ikke scroller for seg selv */
-.skjema-ramme iframe { display: block; width: 100%; height: 1950px; border: 0; }
+/* Egen rullefelt i skjemaet, så takkemeldingen etter «Send» står synlig i boksen. Høyden følger skjermen. */
+.skjema-ramme iframe { display: block; width: 100%; height: min(820px, calc(100vh - 120px)); min-height: 520px; border: 0; }
 
 /* Menyknapp (vises bare på smale skjermer) */
 .skjult { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -183,7 +183,7 @@ time { color: var(--dempet); font-size: .85rem; }
   .medlem-banner { padding: 22px; }
   .medlem-banner .knapp { width: 100%; text-align: center; }
   .skjema-ramme { border-radius: 0; margin-left: -16px; margin-right: -16px; border-left: 0; border-right: 0; }
-  .skjema-ramme iframe { height: 2250px; }
+  .skjema-ramme iframe { height: calc(100vh - 100px); }
   .personer { grid-template-columns: repeat(2, 1fr); gap: 20px 12px; }
   .person img, .initialer { width: 96px; height: 96px; }
 }
