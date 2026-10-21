@@ -99,7 +99,6 @@ collections:
               - { name: rolle_en, label: "Rolle (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: bilde, label: Bilde, widget: image, required: false }
               - { name: epost, label: "E-post (valgfritt)", widget: string, required: false }
-              - { name: tlf, label: "Telefon (valgfritt)", widget: string, required: false, hint: "Fylles ut for styrelederen, så vises det under Kontakt på forsiden." }
 
       - name: sponsorer
         label: Sponsorer

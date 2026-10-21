@@ -166,8 +166,8 @@ time { color: var(--dempet); font-size: .85rem; }
 
 /* Kontakt */
 .kontakt { border-top: 1px solid var(--linje); }
-/* Kontakt i tre spalter: organisasjon, leder, kanaler. Under hverandre på mobil */
-.kontakt-spalter { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+/* Kontakt i to spalter: organisasjon og kanaler. Under hverandre på mobil */
+.kontakt-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; max-width: 760px; }
 .kontakt-spalter h3 { font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--oransje); margin: 0 0 10px; }
 .kontakt-spalter p { margin: 0 0 12px; line-height: 1.8; }
 .k-etikett { color: var(--dempet); margin-right: 8px; }

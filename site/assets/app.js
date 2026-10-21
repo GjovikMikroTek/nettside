@@ -341,7 +341,7 @@ async function visForside() {
         }).join('') + '</div>';
     }).join('') : `<p class="tom">${esc(t('sponsor_tom'))}</p>`;
 
-    // Kontakt i tre spalter. Lederen hentes fra styret (rollen «Styreleder»), så den følger med når styret oppdateres.
+    // Kontakt i to spalter: organisasjonen og kanalene
     const linje = (etikett, verdi) => verdi ? `<span class="k-etikett">${esc(etikett)}</span>${verdi}` : '';
     const orgnr = String(s.orgnr || '').replace(/\D/g, '');
     document.getElementById('k-org').innerHTML = [
@@ -349,14 +349,6 @@ async function visForside() {
       orgnr && linje(t('k_orgnr'), `<a href="https://virksomhet.brreg.no/nb/oppslag/enheter/${orgnr}" target="_blank" rel="noopener">${esc(orgnr.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'))}</a>`),
       s.adresse && esc(s.adresse)
     ].filter(Boolean).join('<br>');
-    const medl = styret.medlemmer || [];
-    const leder = medl.find(m => /^styreleder$|^leder$/i.test((m.rolle || '').trim())) || medl[0];
-    document.getElementById('k-leder').innerHTML = leder ? [
-      `<strong>${esc(leder.navn)}</strong>`,
-      esc(felt(leder, 'rolle')),
-      leder.tlf && linje(t('k_tlf'), `<a href="tel:${esc(String(leder.tlf).replace(/[^\d+]/g, ''))}">${esc(leder.tlf)}</a>`),
-      leder.epost && linje(t('k_epost'), `<a href="mailto:${esc(leder.epost)}">${esc(leder.epost)}</a>`)
-    ].filter(Boolean).join('<br>') : `<span class="tom">${esc(t('styret_tom'))}</span>`;
     const insta = trygLenke(s.instagram);
     const instaNavn = insta ? '@' + ((insta.match(/instagram\.com\/([^/?#]+)/i) || [, 'instagram'])[1]) : '';
     document.getElementById('k-kanaler').innerHTML = [
