@@ -167,7 +167,7 @@ time { color: var(--dempet); font-size: .85rem; }
 /* Kontakt */
 .kontakt { border-top: 1px solid var(--linje); }
 /* Kontakt i to spalter: organisasjon og kanaler. Under hverandre på mobil */
-.kontakt-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.kontakt-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; padding: 0 clamp(16px, 9%, 110px); }
 /* «Ta kontakt» står helt til høyre på PC */
 .kontakt-spalter > div:last-child { text-align: right; }
 .kontakt-spalter h3 { font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--oransje); margin: 0 0 10px; }
@@ -181,7 +181,7 @@ time { color: var(--dempet); font-size: .85rem; }
 .k-ikon-linkedin { background: #0a66c2; }
 .k-ikon-linkedin svg { width: 28px; height: 28px; }
 .k-ikon:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 10px 24px rgba(0, 0, 0, .4); }
-@media (max-width: 760px) { .kontakt-spalter { grid-template-columns: minmax(0, 1fr); gap: 24px; } .kontakt-spalter > div:last-child { text-align: left; } }
+@media (max-width: 760px) { .kontakt-spalter { grid-template-columns: minmax(0, 1fr); gap: 24px; padding: 0; } .kontakt-spalter > div:last-child { text-align: left; } }
 .knapp:hover { background: var(--oransje); color: #1a1d23; }
 .knapp { display: inline-block; background: var(--aksent); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }
 
