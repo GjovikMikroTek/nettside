@@ -79,4 +79,5 @@ Kontoene bør opprettes med en e-post som ikke stenges etter studiene (ikke NTNU
   - Faste tekster i HTML har `data-tekst="nokkel"` og står i `TEKST` i `app.js`, på begge språk.
   - Innholdsfelt som skal oversettes, får et tvillingfelt med `_en` (f.eks. `tittel_en`) i JSON og `config.yml`, og leses med `felt(obj, 'tittel')`. Tomt engelsk felt gir norsk tekst.
 - Instagram-bilder hentes fra en Behold-feed (behold.so, JSON v2). Lenken ligger i `instagram_feed` i innstillingene. Krever profesjonell Instagram-konto.
+- Endrer du `style.css` eller `app.js`: øk versjonen (`?v=ÅÅÅÅ-MM-DD`, evt. med bokstav) i alle HTML-filene i `site/`. Cloudflare lar nettleseren huske filene i 4 timer (Browser Cache TTL, overstyrer `_headers`), så uten ny versjon ser folk det gamle stilarket.
 - All tekst fra JSON-filene skal escapes (`esc()`) før den settes inn i HTML. Unntaket er markdown-felt, som går gjennom `md()`.
