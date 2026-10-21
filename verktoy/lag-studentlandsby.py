@@ -550,7 +550,7 @@ def vei(x0, x1, y, b=4.0):
 def forslag_7():
     """Gate med konturhus: to rekker langs en vei, ulike tak. De bakerste er ferdige (kontur),
     så kommer ett i bindingsverk, og de siste er stiplet: det som kommer. Uten tomt og trær."""
-    global S, OX, OY, MODUS, W, H; S, OX, OY, W, H = 11.5, 168.0, 64.0, 720, 440
+    global S, OX, OY, MODUS, W, H; S, OX, OY, W, H = 10.8, 162.0, 60.0, 720, 440
     vei(-3, 48, 5.0)
     MODUS = 'kontur'
     mikrohus(0, 0.6); lykt(9.0, 4.6, 3.6)
