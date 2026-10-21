@@ -1,0 +1,27 @@
+/* Forslag 3 «Grafitt»: nøytral koksgrå i stedet for blå, originallogoen på en lys plate */
+:root { --natt: #131518; --natt-2: #1c1f24; --bakgrunn: #16181c; --flate: #20242a; --dempet: #a3a8b0; --lenke: #f39228; }
+body { background: var(--bakgrunn); }
+.topp { background: #131518; border-bottom-color: rgba(255,255,255,.08); }
+.merke { color: #fff; }
+.merke img { background: #fbfaf7; padding: 6px 10px; border-radius: 8px; height: 40px; width: auto; }
+nav a { color: rgba(255,255,255,.72); }
+nav a:hover { color: var(--oransje); }
+@media (max-width: 760px) { nav { background: #131518; } }
+
+/* Toppfeltet: grå i stedet for blå, med varm oransje glød bak teksten */
+.hero, .medlem-hero { background-color: #131518;
+  background-image: radial-gradient(ellipse at 25% 40%, rgba(243,146,40,.16), transparent 60%),
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px); }
+.hero.med-bilde::after { background:
+    linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(19,21,24,.95) 0%, rgba(19,21,24,.86) 50%, rgba(28,31,36,.72) 100%);
+  background-size: 96px 96px, 96px 96px, auto; }
+.slagord { color: #c9ccd1; }
+.hero, .medlem-hero { border-bottom-width: 3px; }
+.medlem-banner { background-color: #20242a; }
+.bunn { background-color: #0e1012; }
+.knapp { background: var(--oransje); color: #1a1d23; }
+.knapp:hover { background: #fff; color: #1a1d23; }
+.initialer { color: var(--oransje); }
+.bilde-tom, .bilde-prosjekt { background-color: #262a31; }
