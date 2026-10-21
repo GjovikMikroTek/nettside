@@ -221,7 +221,8 @@ async function visInstagram(s) {
       <span>@${esc((profil.match(/instagram\.com\/([^/?#]+)/i) || [, 'instagram'])[1])}</span><span class="lenke-pil">${esc(t('folg_instagram'))}</span></a>` : '');
   rullerInstagram(rute, bilder, SYNLIGE);
   const folg = document.getElementById('instagram-folg');
-  if (profil) { folg.href = profil; folg.hidden = false; }
+  // Lenken i overskriften trengs bare når «Følg oss»-ruten ikke vises
+  if (profil && bilder.length >= SYNLIGE) { folg.href = profil; folg.hidden = false; }
   document.getElementById('instagram').hidden = false;
 }
 

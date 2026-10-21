@@ -112,6 +112,14 @@ time { color: var(--dempet); font-size: .85rem; }
 .status-ferdig { background: rgba(98,190,120,.16); color: #8fd6a1; }
 .prosjekt-status { margin-top: 24px; }
 
+/* Forsiden: Om oss til venstre, Instagram øverst til høyre. Under hverandre på mobil */
+.forside-to { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+.forside-insta .seksjon-topp h2 { font-size: 1.35rem; }
+.forside-insta .seksjon-topp { margin-bottom: 4px; }
+.forside-insta .insta-rutenett { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.forside-insta .insta-folg { grid-column: 1 / -1 !important; min-height: 0; padding: 14px 18px; }
+@media (max-width: 860px) { .forside-to { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+
 /* Instagram */
 .insta-rutenett { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
 @media (max-width: 760px) { .insta-rutenett { grid-template-columns: repeat(3, minmax(0, 1fr)); } .insta-folg { grid-column: 1 / -1 !important; } }
