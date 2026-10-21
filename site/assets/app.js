@@ -19,7 +19,7 @@ const TEKST = {
     nav_om: 'Om', nav_artikler: 'Artikler', nav_styret: 'Styret', nav_sponsorer: 'Sponsorer', nav_kontakt: 'Kontakt',
     om_tittel: 'Om oss', siste_artikler: 'Siste artikler', alle_artikler: 'Alle artikler →', tilbake: '← Alle artikler',
     artikler: 'Artikler', ingen_artikler: 'Ingen artikler ennå.', fant_ikke: 'Fant ikke artikkelen.', kunne_ikke: 'Kunne ikke laste innholdet.',
-    fra_instagram: 'Fra Instagram', folg_instagram: 'Følg oss på Instagram →', instagram_alt: 'Innlegg på Instagram',
+    fra_instagram: 'Fra Instagram', folg_instagram: 'Følg oss på Instagram →', instagram_alt: 'Innlegg på Instagram', insta_tekst: 'Bilder fra byggingen og arrangementene våre legges ut på Instagram.',
     styret: 'Styret', styret_tom: 'Styret legges inn snart.',
     sponsorer: 'Sponsorer og samarbeidspartnere', sponsor_tom: 'Vil du støtte oss? Ta kontakt!',
     Hovedsponsor: 'Hovedsponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Samarbeidspartner',
@@ -37,7 +37,7 @@ const TEKST = {
     nav_om: 'About', nav_artikler: 'News', nav_styret: 'Board', nav_sponsorer: 'Sponsors', nav_kontakt: 'Contact',
     om_tittel: 'About us', siste_artikler: 'Latest news', alle_artikler: 'All news →', tilbake: '← All news',
     artikler: 'News', ingen_artikler: 'No articles yet.', fant_ikke: 'Article not found.', kunne_ikke: 'Could not load the content.',
-    fra_instagram: 'From Instagram', folg_instagram: 'Follow us on Instagram →', instagram_alt: 'Instagram post',
+    fra_instagram: 'From Instagram', folg_instagram: 'Follow us on Instagram →', instagram_alt: 'Instagram post', insta_tekst: 'Photos from our builds and events are posted on Instagram.',
     styret: 'The board', styret_tom: 'Board members coming soon.',
     sponsorer: 'Sponsors and partners', sponsor_tom: 'Want to support us? Get in touch!',
     Hovedsponsor: 'Main sponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Partner',
@@ -181,27 +181,85 @@ async function fellesInnstillinger() {
 }
 
 // Instagram-bilder via Behold (behold.so), som henter de siste innleggene fra Instagram-kontoen.
-// Seksjonen vises bare når feed-lenken er fylt inn i adminpanelet.
+// Uten feed-lenke (eller hvis feeden ikke svarer) vises en knapp til profilen i stedet.
+// Samme løsning som på gronnefingre-uis.no.
 async function visInstagram(s) {
-  const feed = s.instagram_feed || '';
-  if (!/^https:\/\/feeds\.behold\.so\/[A-Za-z0-9_-]+$/.test(feed)) return;
-  const svar = await fetch(feed);
-  if (!svar.ok) return;
-  const data = await svar.json();
-  const bildeUrl = p => {
-    const u = p.mediaType === 'VIDEO' ? p.thumbnailUrl : (p.sizes?.medium?.mediaUrl || p.mediaUrl);
-    return /^https:\/\//.test(u || '') ? u : '';
-  };
-  const innlegg = (data.posts || []).filter(p => bildeUrl(p) && /^https:\/\/(www\.)?instagram\.com\//.test(p.permalink || '')).slice(0, 6);
-  if (!innlegg.length) return;
-  document.getElementById('instagram-bilder').innerHTML = innlegg.map(p => `
-    <a class="insta" href="${esc(p.permalink)}" target="_blank" rel="noopener">
-      <img src="${esc(bildeUrl(p))}" alt="${esc(p.altText || p.prunedCaption || t('instagram_alt'))}" loading="lazy">
-    </a>`).join('');
-  const folg = document.getElementById('instagram-folg');
   const profil = trygLenke(s.instagram);
+  const feed = s.instagram_feed || '';
+  const visKnapp = () => {
+    if (!profil) return;
+    const k = document.getElementById('instagram-knapp');
+    k.href = profil;
+    k.textContent = '@' + (profil.match(/instagram\.com\/([^/?#]+)/i) || [, 'instagram'])[1];
+    document.getElementById('instagram-boks').hidden = false;
+    document.getElementById('instagram').hidden = false;
+  };
+  if (!/^https:\/\/feeds\.behold\.so\/[A-Za-z0-9_-]+$/.test(feed)) return visKnapp();
+  const svar = await fetch(feed);
+  if (!svar.ok) return visKnapp();
+  const data = await svar.json();
+  // Alle bildene i feeden: hvert innlegg, og hvert bilde inni karuseller. Videoer vises som stillbilde.
+  const https = u => /^https:\/\//.test(u || '') ? u : '';
+  const stillbilde = m => https(m.sizes?.medium?.mediaUrl) || (m.mediaType === 'VIDEO' ? https(m.thumbnailUrl) : https(m.mediaUrl));
+  const perInnlegg = (data.posts || []).filter(p => /^https:\/\/(www\.)?instagram\.com\//.test(p.permalink || '')).map(p => {
+    const alt = p.altText || p.prunedCaption || t('instagram_alt');
+    const deler = p.children && p.children.length ? p.children : [p];
+    return deler.map(m => ({ lenke: p.permalink, bilde: stillbilde(m), alt })).filter(b => b.bilde);
+  });
+  // Blandes på tvers av innleggene (første bilde fra hvert, så andre fra hvert …), så rutenettet ikke fylles fra én karusell
+  const bilder = [];
+  for (let i = 0; perInnlegg.some(l => l[i]); i++) perInnlegg.forEach(l => { if (l[i]) bilder.push(l[i]); });
+  if (!bilder.length) return visKnapp();
+  const rute = document.getElementById('instagram-bilder');
+  const SYNLIGE = 6;
+  rute.innerHTML = bilder.slice(0, SYNLIGE).map(b => `
+    <a class="insta" href="${esc(b.lenke)}" target="_blank" rel="noopener">
+      <img src="${esc(b.bilde)}" alt="${esc(b.alt)}" loading="lazy">
+    </a>`).join('') +
+    // Færre enn seks bilder (som i starten): en rute med lenke til profilen fyller resten av raden
+    (bilder.length < SYNLIGE && profil ? `<a class="insta insta-folg" href="${esc(profil)}" target="_blank" rel="noopener" style="grid-column: span ${SYNLIGE - bilder.length}">
+      <span>@${esc((profil.match(/instagram\.com\/([^/?#]+)/i) || [, 'instagram'])[1])}</span><span class="lenke-pil">${esc(t('folg_instagram'))}</span></a>` : '');
+  rullerInstagram(rute, bilder, SYNLIGE);
+  const folg = document.getElementById('instagram-folg');
   if (profil) { folg.href = profil; folg.hidden = false; }
   document.getElementById('instagram').hidden = false;
+}
+
+// Viser seks bilder om gangen og bytter ett av dem med neste bilde med noen sekunders mellomrom,
+// til alle bildene har vært vist, og så starter den på nytt.
+// Står bare stille når fanen ikke vises. Byttet er en ren toning uten bevegelse,
+// så den går også når animasjoner er slått av i operativsystemet.
+function rullerInstagram(rute, bilder, synlige) {
+  if (bilder.length <= synlige) return;
+  let neste = synlige, plass = 0;
+  const forhandslast = n => { const b = bilder[n % bilder.length]; if (b) new Image().src = b.bilde; };
+  forhandslast(neste);
+  setInterval(() => {
+    if (document.hidden) return;
+    const lenke = rute.children[plass];
+    const b = bilder[neste];
+    if (!lenke || !b) return;
+    const img = lenke.querySelector('img');
+    // Kryssovergang: det nye bildet legges bak, det gamle tones ut, og så byttes bildet uten blink
+    lenke.style.backgroundImage = `url("${encodeURI(b.bilde)}")`;
+    lenke.classList.add('bytter');
+    setTimeout(() => {
+      lenke.href = b.lenke;
+      img.alt = b.alt;
+      const ferdig = () => {
+        img.style.transition = 'none';
+        lenke.classList.remove('bytter');
+        void img.offsetWidth;
+        img.style.transition = '';
+      };
+      img.onload = ferdig;
+      img.src = b.bilde;
+      if (img.complete) ferdig();
+    }, 1200);
+    plass = (plass + 1) % synlige;
+    neste = (neste + 1) % bilder.length;
+    forhandslast(neste);
+  }, 3500);
 }
 
 async function visForside() {

@@ -1,3 +1,7 @@
 # Cloudflare Pages: innholdet skal alltid hentes ferskt etter at noen har lagret i adminpanelet
 /content/*
   Cache-Control: no-cache
+
+# Stil og skript sjekkes hver gang, så endringer vises med en gang (filene lastes bare på nytt hvis de er endret)
+/assets/*
+  Cache-Control: no-cache

@@ -113,10 +113,19 @@ time { color: var(--dempet); font-size: .85rem; }
 .prosjekt-status { margin-top: 24px; }
 
 /* Instagram */
-.insta-rutenett { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
-.insta { display: block; border-radius: 6px; overflow: hidden; background: var(--flate); }
-.insta img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: transform .2s; }
-.insta:hover img { transform: scale(1.04); }
+.insta-rutenett { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 760px) { .insta-rutenett { grid-template-columns: repeat(3, minmax(0, 1fr)); } .insta-folg { grid-column: 1 / -1 !important; } }
+/* Bildet bak (background) er det neste i rekken; det synlige tones ut over det (se rullerInstagram i app.js) */
+.insta { display: block; border-radius: 6px; overflow: hidden; background: var(--flate) center / cover no-repeat; }
+.insta img { width: 100%; aspect-ratio: 1; object-fit: cover; transition: opacity 1.2s ease-in-out; }
+.insta.bytter img { opacity: 0; }
+.insta-folg { display: flex; flex-direction: column; justify-content: center; gap: 6px; padding: 20px 24px; text-decoration: none; border: 1px dashed var(--linje); background: transparent; min-height: 120px; }
+.insta-folg span:first-child { font-family: var(--mono); font-weight: 600; color: #fff; font-size: 1.05rem; }
+.insta-folg:hover { border-color: var(--oransje); }
+/* Reserve når feeden mangler: kort tekst og knapp til profilen */
+.insta-boks { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; background: var(--flate); border: 1px solid var(--linje); border-radius: var(--radius); padding: 20px 24px; }
+.insta-boks p { margin: 0; color: var(--dempet); }
+.insta-boks[hidden] { display: none; }
 
 /* Styret */
 /* Styret: tre i bredden, sentrert, så en enslig person på siste rad står midt på i stedet for alene til venstre */
