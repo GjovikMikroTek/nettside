@@ -6,11 +6,15 @@
 # kontrautligger med motvekt og strekkstag, og en benk har fire bein.
 #
 # Forslagene:  1 Gaterekke   2 Tun   3 Byggeplass   4 Eksplodert mikrohus   5 Terreng ved Mjøsa   6 Plan og 3D
-#              7 Gate med konturhus og stiplede hus som kommer (valgt retning 21.10.2026)
+#              7 Gate med konturhus og stiplede hus som kommer
+#              8–11 Til investorpresentasjon (21.10.2026): én vei inn, ett felt med 3–5 områder, mest ferdig,
+#                   noe under bygging med maskiner, lite oransje, hele flaten brukt. 8 Tun  9 Rekkefelt  10 Terrasser  11 Kvartal i faser
 import math, sys
 
 S, OX, OY, ZOFF = 10.0, 330.0, 60.0, 0.0
 MODUS = 'full'   # 'full' | 'kontur' | 'stiplet'
+SPEIL = False    # True: veien går fra nederst til venstre og innover i bildet
+DOR = 'rgba(159,188,240,.28)'   # vanlig dør; oransje bare der det er naturlig (aksent=True)
 C30 = math.cos(math.radians(30))
 W, H = 660, 430
 
@@ -24,7 +28,8 @@ BAKTAK = 'rgba(130,170,240,.42)'
 
 def iso(x, y, z=0.0):
     z += ZOFF
-    return (OX + (x - y) * C30 * S, OY + (x + y) * 0.5 * S - z * S)
+    sx = (x - y) * C30 * S
+    return (OX - sx if SPEIL else OX + sx, OY + (x + y) * 0.5 * S - z * S)
 
 def pts(*p):
     return ' '.join(f'{a:.1f},{b:.1f}' for a, b in (iso(*q) for q in p))
@@ -93,7 +98,7 @@ def vindu(x, y, z, b=1.2, hh=1.3):
     poly((x, y, z), (x + b, y, z), (x + b, y, z + hh), (x, y, z + hh), fill='rgba(13,24,48,.65)', sw=1)
     line((x + b / 2, y, z), (x + b / 2, y, z + hh), sw=.7); line((x, y, z + hh / 2), (x + b, y, z + hh / 2), sw=.7)
 
-def mikrohus(x, y, solceller=False, varmepumpe=False, dor=True):
+def mikrohus(x, y, solceller=False, varmepumpe=False, dor=True, aksent=False):
     skygge(x, y, HW, HD)
     saltak_boks(x, y, HW - TW, HD, HH, HR, True)
     tx = x + HW - TW
@@ -101,7 +106,7 @@ def mikrohus(x, y, solceller=False, varmepumpe=False, dor=True):
     vindu(x + .8, y + HD, .9); vindu(x + 2.6, y + HD, .9)
     if dor:
         dx = x + HW - TW - 1.5
-        poly((dx, y + HD, 0), (dx + .95, y + HD, 0), (dx + .95, y + HD, 2.1), (dx, y + HD, 2.1), fill=ORANSJE, stroke='none')
+        poly((dx, y + HD, 0), (dx + .95, y + HD, 0), (dx + .95, y + HD, 2.1), (dx, y + HD, 2.1), fill=ORANSJE if aksent else DOR, stroke='none' if aksent else STREK, sw=1)
     vindu(tx + 1.0, y + HD, 1.0, b=1.2, hh=1.2); vindu(tx + 1.0, y + HD, 2.6, b=1.2, hh=.9)
     if solceller:
         for i in range(3):
@@ -127,7 +132,7 @@ def spokelse(x, y):
     path((tx + TW, y + HD, 0), (tx + TW, y, 0), (tx + TW, y, TH), (tx + TW / 2, y, TH + TR), (tx + TW / 2, y + HD, TH + TR), **kw)
     line((tx + TW, y, TH), (tx + TW, y + HD, TH), **kw); line((tx + TW, y, 0), (tx, y, 0), **kw)
 
-def hus_b(x, y, solceller=False):
+def hus_b(x, y, solceller=False, aksent=False):
     """B: pulttak. Høy bakvegg (3,6 m) og lav front (2,4 m), vindusbånd mot sør."""
     w, d, hb, hf = 8.0, 4.2, 3.6, 2.4
     skygge(x, y, w, d)
@@ -137,7 +142,7 @@ def hus_b(x, y, solceller=False):
     line((x, y, hb), (x + w, y, hb), sw=2.2)   # takutstikk bak
     for i in range(4):
         vindu(x + .5 + i * 1.5, y + d, .8, b=1.1, hh=1.2)
-    poly((x + 6.6, y + d, 0), (x + 7.5, y + d, 0), (x + 7.5, y + d, 2.1), (x + 6.6, y + d, 2.1), fill=ORANSJE, stroke='none')
+    poly((x + 6.6, y + d, 0), (x + 7.5, y + d, 0), (x + 7.5, y + d, 2.1), (x + 6.6, y + d, 2.1), fill=ORANSJE if aksent else DOR, stroke='none' if aksent else STREK, sw=1)
     poly((x + w, y + 1.4, 1.0), (x + w, y + 2.8, 1.0), (x + w, y + 2.8, 2.2), (x + w, y + 1.4, 2.2), fill='rgba(13,24,48,.65)', sw=1)
     if solceller:
         for i in range(4):
@@ -145,19 +150,19 @@ def hus_b(x, y, solceller=False):
             z0 = hf + (hb - hf) * .55; z1 = hf + (hb - hf) * .85
             poly((px, y + d * .45, z0), (px + 1.5, y + d * .45, z0), (px + 1.5, y + d * .15, z1), (px, y + d * .15, z1), fill='rgba(13,24,48,.7)', stroke='#62c8ff', sw=.9)
 
-def hus_c(x, y):
+def hus_c(x, y, aksent=False):
     """C: kvadratisk hus 5,6 × 5,6 m med bratt saltak og hems under mønet. Rundt vindu i gavlen."""
     w, d, h, r = 5.6, 5.6, 2.5, 1.9
     skygge(x, y, w, d)
     saltak_boks(x, y, w, d, h, r, True)
     vindu(x + .6, y + d, .9, b=1.3, hh=1.3); vindu(x + 3.7, y + d, .9, b=1.3, hh=1.3)
-    poly((x + 2.3, y + d, 0), (x + 3.25, y + d, 0), (x + 3.25, y + d, 2.1), (x + 2.3, y + d, 2.1), fill=ORANSJE, stroke='none')
+    poly((x + 2.3, y + d, 0), (x + 3.25, y + d, 0), (x + 3.25, y + d, 2.1), (x + 2.3, y + d, 2.1), fill=ORANSJE if aksent else DOR, stroke='none' if aksent else STREK, sw=1)
     poly((x + w, y + 1.2, 1.0), (x + w, y + 2.4, 1.0), (x + w, y + 2.4, 2.2), (x + w, y + 1.2, 2.2), fill='rgba(13,24,48,.65)', sw=1)
     # hemsvindu i gavlen: rett under mønet, i gavlflaten
     poly((x + w, y + d / 2 - .6, h + .1), (x + w, y + d / 2 + .6, h + .1), (x + w, y + d / 2 + .6, h + 1.1), (x + w, y + d / 2 - .6, h + 1.1), fill='rgba(13,24,48,.65)', sw=1)
     line((x + w, y + d / 2, h + .1), (x + w, y + d / 2, h + 1.1), sw=.7)
 
-def hus_d(x, y, solceller=True):
+def hus_d(x, y, solceller=True, aksent=False):
     """D: flatt tak med takterrasse og rekkverk, 7,0 × 4,4 m, 3,0 m vegg. Lange vindusbånd."""
     w, d, h = 7.0, 4.4, 3.0
     skygge(x, y, w, d)
@@ -168,7 +173,7 @@ def hus_d(x, y, solceller=True):
     path((x, y + d, h + .4), (x + w, y + d, h + .4), (x + w, y, h + .4), stroke=STAAL, sw=1.2)
     for i in range(3):
         vindu(x + .5 + i * 1.7, y + d, .9, b=1.4, hh=1.3)
-    poly((x + 5.8, y + d, 0), (x + 6.7, y + d, 0), (x + 6.7, y + d, 2.1), (x + 5.8, y + d, 2.1), fill=ORANSJE, stroke='none')
+    poly((x + 5.8, y + d, 0), (x + 6.7, y + d, 0), (x + 6.7, y + d, 2.1), (x + 5.8, y + d, 2.1), fill=ORANSJE if aksent else DOR, stroke='none' if aksent else STREK, sw=1)
     poly((x + w, y + .6, .9), (x + w, y + 2.6, .9), (x + w, y + 2.6, 2.2), (x + w, y + .6, 2.2), fill='rgba(13,24,48,.65)', sw=1)
     for bx in (x + 2.6, x + 4.4):   # benk på terrassen: fire bein
         for by in (y + 1.3, y + 1.7):
@@ -287,6 +292,75 @@ def brakke(x, y):
     for i, z in enumerate((.1, .2, .3)):   # trapp: tre trinn
         line((x + .5, y + d + .9 - i * .3, z), (x + 1.6, y + d + .9 - i * .3, z), stroke=TRE, sw=1.4)
 
+MASKIN = ('#ffcf5a', '#f2b532', '#b8841a')   # gul anleggsmaskin (naturlig farge), ikke profiloransje
+
+def gravemaskin(x, y):
+    """Beltegraver: to belter, overvogn med hytte, bom og stikke med skuffe som står på bakken."""
+    for by in (y, y + 1.9):
+        boks(x, by, 0, 3.4, .8, .75, fill=('rgba(90,95,105,.9)', 'rgba(70,75,85,.9)', 'rgba(50,55,65,.9)'), stroke='#8a93a6', sw=.8)
+    boks(x + .3, y + .15, .75, 2.6, 2.4, 1.3, fill=MASKIN, stroke='#5a4206', sw=.8)         # overvogn
+    boks(x + 1.9, y + 1.6, 2.05, 1.0, .95, 1.05, fill=('rgba(13,24,48,.7)', 'rgba(13,24,48,.75)', 'rgba(13,24,48,.8)'), stroke='#8a93a6', sw=.8)  # hytte
+    ym = y + 1.35
+    path((x + 2.9, ym, 1.9), (x + 5.2, ym, 3.9), (x + 7.3, ym, 1.4), stroke='#b8841a', sw=3.2)   # bom og stikke
+    path((x + 2.9, ym, 1.9), (x + 5.2, ym, 3.9), (x + 7.3, ym, 1.4), stroke='#ffcf5a', sw=1.6)
+    line((x + 3.6, ym, 2.6), (x + 4.6, ym, 3.0), stroke='#8a93a6', sw=1.6)                      # hydraulikksylinder
+    boks(x + 7.0, ym - .55, 0, 1.0, 1.1, .9, fill=('rgba(90,95,105,.9)', 'rgba(70,75,85,.9)', 'rgba(50,55,65,.9)'), stroke='#8a93a6', sw=.8)  # skuffe på bakken
+
+def hjullaster(x, y):
+    """Hjullaster med skuffe senket mot bakken."""
+    for bx in (x + .4, x + 3.0):
+        for by in (y - .15, y + 1.95):
+            boks(bx, by, 0, .9, .35, .9, fill=('rgba(50,55,65,.9)',) * 3, stroke='#8a93a6', sw=.7)
+    boks(x, y + .2, .6, 4.2, 1.8, 1.1, fill=MASKIN, stroke='#5a4206', sw=.8)
+    boks(x + .4, y + .45, 1.7, 1.5, 1.3, 1.1, fill=('rgba(13,24,48,.7)', 'rgba(13,24,48,.75)', 'rgba(13,24,48,.8)'), stroke='#8a93a6', sw=.8)
+    for by in (y + .5, y + 1.7):
+        line((x + 4.2, by, 1.3), (x + 6.0, by, .6), stroke='#b8841a', sw=2.2)                  # løftearmer
+    boks(x + 5.9, y - .1, 0, .7, 2.4, 1.0, fill=('rgba(90,95,105,.9)', 'rgba(70,75,85,.9)', 'rgba(50,55,65,.9)'), stroke='#8a93a6', sw=.8)
+
+def stabel(x, y):
+    """Materialer på byggeplassen: bunter med stendere og en pall med plater."""
+    for i in range(3):
+        boks(x, y + i * .55, i * .0 + (0 if i < 2 else .0), 4.0, .45, .4, fill=(TRE, '#c98d5b', '#a86f3f'), stroke='#f3cf98', sw=.6)
+    boks(x + .5, y + 2.4, 0, 2.4, 1.2, .15, fill=('rgba(150,160,180,.5)',) * 3, stroke='#8a93a6', sw=.6)
+    boks(x + .5, y + 2.4, .15, 2.4, 1.2, .9, fill=('rgba(200,185,160,.5)', 'rgba(180,165,140,.5)', 'rgba(150,135,110,.5)'), stroke='#c9b89a', sw=.6)
+
+def gjerde(punkter):
+    """Byggegjerde: stolper og nettinglinje langs en polygon (lukket)."""
+    for i, (px, py) in enumerate(punkter):
+        line((px, py, 0), (px, py, 2.0), stroke=STAAL, sw=1)
+        nx, ny = punkter[(i + 1) % len(punkter)]
+        line((px, py, 1.9), (nx, ny, 1.9), stroke=STAAL, sw=.8)
+        line((px, py, .3), (nx, ny, .3), stroke=STAAL, sw=.5, extra='opacity=".6"')
+
+def etikett(x, y, z, tekst_, dx=0, dy=-10):
+    """Liten tekst med punkt, til felt- og fasemerking for investorpresentasjon."""
+    sirkel(x, y, z, 2.2, ORANSJE)
+    tekst(x, y, z, tekst_, size=8, fill=STAAL, anchor='start', dx=dx + 6, dy=dy + 8)
+
+def markor(x, y, bokstav):
+    """Bokstavmarkør på bakken ved et felt."""
+    a, b = iso(x, y)
+    ut.append(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="8" fill="#0d1830" stroke="{STAAL}" stroke-width="1.4"/>')
+    ut.append(f'<text x="{a:.1f}" y="{b + 3.5:.1f}" font-family="JetBrains Mono, Consolas, monospace" font-size="9.5" font-weight="700" fill="#fff" text-anchor="middle">{bokstav}</text>')
+
+def legende(linjer, x=14, y=18):
+    """Tegnforklaring i skjermkoordinater (øverst til venstre), én linje per felt."""
+    for i, (bokstav, tekst_) in enumerate(linjer):
+        yy = y + i * 16
+        ut.append(f'<circle cx="{x + 7}" cy="{yy - 3.5}" r="7" fill="#0d1830" stroke="{STAAL}" stroke-width="1.2"/>')
+        ut.append(f'<text x="{x + 7}" y="{yy}" font-family="JetBrains Mono, Consolas, monospace" font-size="8.5" font-weight="700" fill="#fff" text-anchor="middle">{bokstav}</text>')
+        ut.append(f'<text x="{x + 20}" y="{yy}" font-family="JetBrains Mono, Consolas, monospace" font-size="8.5" font-weight="600" fill="{STAAL}">{tekst_}</text>')
+
+def nordpil(x, y):
+    a, b = iso(x, y)
+    ut.append(f'<path d="M{a:.1f},{b - 16:.1f} L{a - 5:.1f},{b + 2:.1f} L{a:.1f},{b - 3:.1f} L{a + 5:.1f},{b + 2:.1f} Z" fill="{STAAL}"/>')
+    ut.append(f'<text x="{a:.1f}" y="{b + 14:.1f}" font-family="JetBrains Mono, Consolas, monospace" font-size="8" font-weight="600" fill="{STAAL}" text-anchor="middle">N</text>')
+
+def maalestokk(x, y, m=10):
+    line((x, y, 0), (x + m, y, 0), stroke=STAAL, sw=1.4)
+    for px in (x, x + m / 2, x + m): line((px, y - .3, 0), (px, y + .3, 0), stroke=STAAL, sw=1)
+    tekst(x + m / 2, y, 0, f'{m} m', size=7.5, fill=STAAL, dy=12)
+
 def kran(x, y, mast=13.0, utligger=18.0, kontra=6.0, katt=11.0, last_z=5.0):
     """Tårnkran, oppbygd som i virkeligheten: betongfundament, gittermast, svingkrans med førerhus,
     utligger med løpekatt, kontrautligger med motvekt, tårntopp med strekkstag, og last som henger loddrett."""
@@ -304,7 +378,7 @@ def kran(x, y, mast=13.0, utligger=18.0, kontra=6.0, katt=11.0, last_z=5.0):
         z = z2
     # svingkrans og førerhus (på utliggersiden, hengende under utliggeren)
     boks(x - .1, y - .1, mast, a + .2, a + .2, .5, fill=('rgba(214,222,236,.6)',) * 3, stroke=STAAL, sw=.9)
-    boks(cx - 1.6, y + a + .05, mast - .6, 1.3, .9, 1.1, fill=(ORANSJE, ORANSJE, '#c4701a'), stroke='#ffd0a0', sw=.8)
+    boks(cx - 1.6, y + a + .05, mast - .6, 1.3, .9, 1.1, fill=('#ffcf5a', '#f2b532', '#b8841a'), stroke='#5a4206', sw=.8)
     zu = mast + .5   # underkant utligger
     # utligger (mot -x): to undergurter, én overgurt, gitter
     for dy in (-.45, .45):
@@ -335,7 +409,7 @@ def kran(x, y, mast=13.0, utligger=18.0, kontra=6.0, katt=11.0, last_z=5.0):
     boks(lx - .45, cy - .45, zu - .35, .9, .9, .35, fill=('rgba(214,222,236,.7)',) * 3, stroke=STAAL, sw=.7)
     for dy in (-.15, .15):
         line((lx, cy + dy, zu - .35), (lx, cy + dy, last_z + 1.6), stroke=STAAL, sw=.8)
-    boks(lx - .2, cy - .2, last_z + 1.2, .4, .4, .4, fill=(ORANSJE, ORANSJE, '#c4701a'), stroke='#ffd0a0', sw=.7)
+    boks(lx - .2, cy - .2, last_z + 1.2, .4, .4, .4, fill=('rgba(214,222,236,.8)', 'rgba(160,175,200,.9)', 'rgba(110,120,140,.9)'), stroke=STAAL, sw=.7)
     line((lx, cy, last_z + 1.2), (lx - 1.7, cy, last_z + .3), stroke=STAAL, sw=.8); line((lx, cy, last_z + 1.2), (lx + 1.7, cy, last_z + .3), stroke=STAAL, sw=.8)
     for i in range(4):   # bunt med stendere i stroppene
         boks(lx - 1.9, cy - .3 + i * .15, last_z - .05 + (i % 2) * .12, 3.8, .12, .12, fill=(TRE, TRE, '#c98d5b'), stroke='#f3cf98', sw=.6)
@@ -562,7 +636,89 @@ def forslag_7():
     MODUS = 'stiplet'; hus_b(29.0, 10.0); mikrohus(39.5, 10.4)
     MODUS = 'full'
 
-FORSLAG = {1: forslag_1, 2: forslag_2, 3: forslag_3, 4: forslag_4, 5: forslag_5, 6: forslag_6, 7: forslag_7}
+def _grunn(bredde, dybde):
+    """Felles for 8–11: speilet bilde, konturhus. Ingen tomtegrense, ingen trær."""
+    global SPEIL, MODUS, W, H; SPEIL = True; W, H = 720, 440; MODUS = 'kontur'
+
+def forslag_8():
+    """Tun med innkjøring: én vei inn nederst til venstre til et tun. Fire felt rundt tunet."""
+    global S, OX, OY, MODUS; S, OX, OY = 8.8, 392.0, 66.0
+    _grunn(48, 32)
+    vei(24, 54, 14.0, 3.6)
+    tun = [(20 + 4.0 * math.cos(math.radians(a)), 15.8 + 4.0 * math.sin(math.radians(a))) for a in range(0, 360, 45)]
+    poly(*tun, fill='rgba(111,147,214,.10)', stroke='rgba(159,188,240,.45)', sw=1)
+    lykt(27, 13.4, 3.6); lykt(40, 13.4, 3.6); flaggstang(20, 15.8)
+    mikrohus(2, 1.5, aksent=True); hus_b(11, 1.0, solceller=True); hus_c(21.5, -0.5); markor(1, 6.2, 'A')
+    hus_d(2, 10); hus_c(2, 17); mikrohus(1.5, 24.5); markor(0.6, 29.3, 'B')
+    MODUS = 'full'
+    gjerde([(30, 0), (47, 0), (47, 11.5), (30, 11.5)])
+    bindingsverk(31.5, 1.5); fundament(40.5, 2.5)
+    kran(42.5, 8.0, mast=12.0, utligger=10.0, kontra=4.5, katt=6.5, last_z=4.8)
+    gravemaskin(31, 7.5); markor(29.5, 12.2, 'C')
+    MODUS = 'stiplet'; hus_b(29, 19.5); hus_d(39, 20); mikrohus(29, 26.5); MODUS = 'kontur'; markor(28, 24.5, 'D')
+    nordpil(47.5, 30); maalestokk(1, 32)
+    legende([('A', 'Felt A · 3 enheter · ferdig'), ('B', 'Felt B · 3 enheter · ferdig'), ('C', 'Felt C · under bygging'), ('D', 'Felt D · 3 enheter · regulert')])
+
+def forslag_9():
+    """Rekkefelt langs én gate: veien inn nederst til venstre, feltene etter hverandre fra ferdig til regulert."""
+    global S, OX, OY, MODUS; S, OX, OY = 8.6, 296.0, 60.0
+    _grunn(52, 32)
+    vei(-2, 56, 9.5, 3.8)
+    for lx in (6, 18, 30, 42): lykt(lx, 9.1, 3.6)
+    mikrohus(0, 5.0, aksent=True); hus_c(9.5, 3.4); hus_b(16.5, 4.6, solceller=True); markor(0, 9.2, '1')
+    hus_d(27, 4.4); mikrohus(35.5, 5.0); hus_c(44.5, 3.4); markor(26.5, 9.2, '2')
+    MODUS = 'full'
+    gjerde([(0, 14), (23, 14), (23, 24), (0, 24)])
+    bindingsverk(1, 15.5); fundament(11, 15.5)
+    kran(18.5, 20.5, mast=12.0, utligger=10.0, kontra=4.5, katt=6.0, last_z=4.8)
+    hjullaster(2, 20.5); stabel(11, 21); markor(0, 24.8, '3')
+    MODUS = 'stiplet'; hus_b(26, 15.4); mikrohus(35.5, 15.8); hus_d(44.5, 15.2); hus_c(30, 24); mikrohus(40, 24.5); MODUS = 'kontur'; markor(25.5, 20.2, '4')
+    nordpil(55, 2); maalestokk(40, 31)
+    legende([('1', 'Felt 1 · 3 enheter · ferdig 2026'), ('2', 'Felt 2 · 3 enheter · ferdig 2027'), ('3', 'Felt 3 · under bygging'), ('4', 'Felt 4 · 5 enheter · regulert 2028')])
+
+def forslag_10():
+    """Terrassert felt i skråning: veien inn nederst og opp langs terrassene. Øverste terrasse bygges."""
+    global S, OX, OY, MODUS, ZOFF; S, OX, OY = 9.4, 396.0, 86.0
+    _grunn(48, 32)
+    def terrasse(px, py, pw, pd, z):
+        poly((px, py + pd, 0), (px + pw, py + pd, 0), (px + pw, py + pd, z), (px, py + pd, z), fill='rgba(13,24,48,.88)', stroke='#aab6cc', sw=1)
+        poly((px + pw, py, 0), (px + pw, py + pd, 0), (px + pw, py + pd, z), (px + pw, py, z), fill='rgba(13,24,48,.88)', stroke='#aab6cc', sw=1)
+        poly((px, py, z), (px + pw, py, z), (px + pw, py + pd, z), (px, py + pd, z), fill='rgba(111,147,214,.08)', stroke='rgba(159,188,240,.5)', sw=1)
+        for i in range(1, int(pw), 2): line((px + i, py + pd, 0), (px + i, py + pd, z), stroke='rgba(170,180,200,.3)', sw=.6)
+    vei(30, 54, 24.5, 3.4)
+    terrasse(0, 0, 30, 9, 4.0); terrasse(0, 11, 36, 9, 2.0)
+    ZOFF = 2.0; vei(-2, 36, 20.2, 3.0); ZOFF = 4.0; vei(-2, 30, 9.2, 3.0); ZOFF = 0.0
+    mikrohus(0, 22.5, aksent=True); hus_c(10, 21.2); hus_b(18, 22.3, solceller=True); markor(-1, 27, '1')
+    ZOFF = 2.0; hus_d(1, 12.6); mikrohus(10, 13.2); MODUS = 'stiplet'; hus_c(19.5, 11.9); MODUS = 'kontur'; markor(-1, 17.5, '2'); ZOFF = 0.0
+    ZOFF = 4.0; MODUS = 'full'
+    gjerde([(0, 0), (29, 0), (29, 8.5), (0, 8.5)])
+    fundament(1, 1.8); bindingsverk(10.5, 1.5); gravemaskin(21, 2.0)
+    kran(25.5, 5.6, mast=11.0, utligger=12.0, kontra=4.5, katt=9.0, last_z=4.6)
+    MODUS = 'kontur'; markor(-1, 7.5, '3'); ZOFF = 0.0
+    nordpil(47, 31); maalestokk(36, 31)
+    legende([('1', 'Terrasse 1 · 3 enheter · ferdig'), ('2', 'Terrasse 2 · 2 av 3 ferdig'), ('3', 'Terrasse 3 · under bygging')])
+
+def forslag_11():
+    """Kvartal i tre faser: vei inn nederst til venstre og en sløyfe rundt tunet."""
+    global S, OX, OY, MODUS; S, OX, OY = 8.4, 392.0, 64.0
+    _grunn(50, 34)
+    vei(28, 56, 15.0, 3.6); vei(0, 30, 15.0, 3.6)
+    poly((12, 9.5), (15.4, 9.5), (15.4, 27), (12, 27), fill='rgba(111,147,214,.10)', stroke='rgba(159,188,240,.45)', sw=1)
+    for lx in (4, 20, 36, 48): lykt(lx, 14.6, 3.6)
+    flaggstang(22.5, 12.0)
+    mikrohus(0, 1.5, aksent=True); hus_b(0, 8.0, solceller=True); hus_c(17, 0.5); hus_d(17, 7.2); markor(-1, 13, '1')
+    MODUS = 'full'
+    gjerde([(0, 19.5), (11, 19.5), (11, 34), (0, 34)])
+    bindingsverk(1, 20.5); fundament(1.5, 28.5)
+    kran(7.5, 24.0, mast=12.0, utligger=9.0, kontra=4.0, katt=5.5, last_z=4.8)
+    gravemaskin(17, 21); stabel(17.5, 29); markor(-1, 34.6, '2')
+    MODUS = 'stiplet'; hus_b(29, 1.0); mikrohus(39, 1.5); hus_c(29, 8.0); hus_d(38.5, 8.6); MODUS = 'kontur'; markor(28, 13.6, '3')
+    MODUS = 'stiplet'; hus_c(31, 20); mikrohus(40.5, 20.5); MODUS = 'kontur'
+    nordpil(49, 33); maalestokk(30, 32)
+    legende([('1', 'Fase 1 · 4 enheter · ferdig'), ('2', 'Fase 2 · under bygging'), ('3', 'Fase 3 · 6 enheter · regulert')])
+
+FORSLAG = {1: forslag_1, 2: forslag_2, 3: forslag_3, 4: forslag_4, 5: forslag_5, 6: forslag_6, 7: forslag_7,
+           8: forslag_8, 9: forslag_9, 10: forslag_10, 11: forslag_11}
 
 if __name__ == '__main__':
     nr, utfil = int(sys.argv[1]), sys.argv[2]
