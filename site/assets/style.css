@@ -166,6 +166,9 @@ time { color: var(--dempet); font-size: .85rem; }
 
 /* Kontakt */
 .kontakt { border-top: 1px solid var(--linje); }
+/* Overskriften «Kontakt» står midt på, med streken under sentrert */
+.kontakt > h2 { text-align: center; }
+.kontakt > h2::after { margin-left: auto; margin-right: auto; }
 /* Kontakt i to spalter: organisasjon og kanaler. Under hverandre på mobil */
 .kontakt-spalter { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; padding: 0 clamp(16px, 9%, 110px); }
 /* «Ta kontakt» står helt til høyre på PC */
