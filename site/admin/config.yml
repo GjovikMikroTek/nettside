@@ -99,6 +99,7 @@ collections:
               - { name: rolle_en, label: "Rolle (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: bilde, label: Bilde, widget: image, required: false }
               - { name: epost, label: "E-post (valgfritt)", widget: string, required: false }
+              - { name: tlf, label: "Telefon (valgfritt)", widget: string, required: false, hint: "Fylles ut for styrelederen, så vises det under Kontakt på forsiden." }
 
       - name: sponsorer
         label: Sponsorer
@@ -126,7 +127,9 @@ collections:
           - { name: beskrivelse_en, label: "Kort beskrivelse (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
           - { name: hovedbilde, label: "Hovedbilde (forsiden)", widget: image, required: false }
           - { name: aksentfarge, label: "Profilfarge (hex, logoens blå er #2a529a)", widget: string }
-          - { name: epost, label: Kontakt-e-post, widget: string }
+          - { name: epost, label: Kontakt-e-post, widget: string, required: false, hint: "Vises under Kontakt på forsiden." }
+          - { name: orgnr, label: "Organisasjonsnummer", widget: string, required: false, hint: "9 siffer fra Brønnøysundregistrene. Vises under Kontakt med lenke til registeret." }
+          - { name: adresse, label: "Adresse", widget: string, required: false, hint: "F.eks. Teknologivegen 22, 2815 Gjøvik" }
           - { name: instagram, label: "Instagram-lenke", widget: string, required: false, hint: "Lenken til profilen, f.eks. https://www.instagram.com/brukernavn/" }
           - { name: instagram_feed, label: "Instagram-bilder (Behold-feed)", widget: string, required: false, hint: "Lim inn feed-lenken fra behold.so (https://feeds.behold.so/...). Da vises de siste bildene fra Instagram automatisk på forsiden. La stå tom for å skjule bildene." }
           - { name: linkedin, label: "LinkedIn-lenke", widget: string, required: false }

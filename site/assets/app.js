@@ -28,7 +28,7 @@ const TEKST = {
     styret: 'Styret', styret_tom: 'Styret legges inn snart.',
     sponsorer: 'Sponsorer og samarbeidspartnere', sponsor_tom: 'Vil du støtte oss? Ta kontakt!',
     Hovedsponsor: 'Hovedsponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Samarbeidspartner',
-    kontakt: 'Kontakt', epost_tekst: 'Send oss en e-post på', skjema: 'Fyll ut kontaktskjema',
+    kontakt: 'Kontakt', epost_tekst: 'Send oss en e-post på', k_organisasjon: 'Organisasjon', k_leder: 'Leder', k_kontakt: 'Ta kontakt', k_orgnr: 'Org.nr.', k_tlf: 'Telefon', k_epost: 'E-post', skjema: 'Fyll ut kontaktskjema',
     bunn: 'Studentorganisasjon ved NTNU Campus Gjøvik', bytt: 'English', bytt_tittel: 'Switch to English',
     meny: 'Meny', nav_medlem: 'Bli medlem', banner_tittel: 'Bli med og bygg!',
     banner_tekst: 'Medlemskap er gratis og åpent for studenter ved NTNU Campus Gjøvik.',
@@ -46,7 +46,7 @@ const TEKST = {
     styret: 'The board', styret_tom: 'Board members coming soon.',
     sponsorer: 'Sponsors and partners', sponsor_tom: 'Want to support us? Get in touch!',
     Hovedsponsor: 'Main sponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Partner',
-    kontakt: 'Contact', epost_tekst: 'Email us at', skjema: 'Fill out the contact form',
+    kontakt: 'Contact', epost_tekst: 'Email us at', k_organisasjon: 'Organisation', k_leder: 'Chair', k_kontakt: 'Get in touch', k_orgnr: 'Org. no.', k_tlf: 'Phone', k_epost: 'Email', skjema: 'Fill out the contact form',
     bunn: 'Student organisation at NTNU Campus Gjøvik', bytt: 'Norsk', bytt_tittel: 'Bytt til norsk',
     meny: 'Menu', nav_medlem: 'Join us', banner_tittel: 'Come build with us!',
     banner_tekst: 'Membership is free and open to students at NTNU Campus Gjøvik.',
@@ -319,19 +319,34 @@ async function visForside() {
         }).join('') + '</div>';
     }).join('') : `<p class="tom">${esc(t('sponsor_tom'))}</p>`;
 
-    const ep = document.getElementById('kontakt-epost');
-    ep.textContent = s.epost || '';
-    ep.href = 'mailto:' + (s.epost || '');
-    document.getElementById('epost-boks').hidden = !s.epost;
+    // Kontakt i tre spalter. Lederen hentes fra styret (rollen «Styreleder»), så den følger med når styret oppdateres.
+    const linje = (etikett, verdi) => verdi ? `<span class="k-etikett">${esc(etikett)}</span>${verdi}` : '';
+    const orgnr = String(s.orgnr || '').replace(/\D/g, '');
+    document.getElementById('k-org').innerHTML = [
+      `<strong>${esc(s.navn || 'Gjøvik MikroTek')}</strong>`,
+      orgnr && linje(t('k_orgnr'), `<a href="https://virksomhet.brreg.no/nb/oppslag/enheter/${orgnr}" target="_blank" rel="noopener">${esc(orgnr.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'))}</a>`),
+      s.adresse && esc(s.adresse)
+    ].filter(Boolean).join('<br>');
+    const medl = styret.medlemmer || [];
+    const leder = medl.find(m => /^styreleder$|^leder$/i.test((m.rolle || '').trim())) || medl[0];
+    document.getElementById('k-leder').innerHTML = leder ? [
+      `<strong>${esc(leder.navn)}</strong>`,
+      esc(felt(leder, 'rolle')),
+      leder.tlf && linje(t('k_tlf'), `<a href="tel:${esc(String(leder.tlf).replace(/[^\d+]/g, ''))}">${esc(leder.tlf)}</a>`),
+      leder.epost && linje(t('k_epost'), `<a href="mailto:${esc(leder.epost)}">${esc(leder.epost)}</a>`)
+    ].filter(Boolean).join('<br>') : `<span class="tom">${esc(t('styret_tom'))}</span>`;
+    const insta = trygLenke(s.instagram);
+    const instaNavn = insta ? '@' + ((insta.match(/instagram\.com\/([^/?#]+)/i) || [, 'instagram'])[1]) : '';
+    document.getElementById('k-kanaler').innerHTML = [
+      s.epost && linje(t('k_epost'), `<a href="mailto:${esc(s.epost)}">${esc(s.epost)}</a>`),
+      insta && linje('Instagram', `<a href="${esc(insta)}" target="_blank" rel="noopener">${esc(instaNavn)}</a>`),
+      trygLenke(s.linkedin) && linje('LinkedIn', `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`)
+    ].filter(Boolean).join('<br>');
     const skjema = trygLenke(s.skjema_lenke);
     if (skjema) {
       document.getElementById('skjema-lenke').href = skjema;
       document.getElementById('skjema-boks').hidden = false;
     }
-    document.getElementById('sosiale').innerHTML = [
-      trygLenke(s.instagram) && `<a href="${esc(s.instagram)}" target="_blank" rel="noopener">Instagram</a>`,
-      trygLenke(s.linkedin) && `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`
-    ].filter(Boolean).join(' · ');
     hoppTilAnker();
   } catch (e) {
     console.error(e);

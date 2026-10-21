@@ -12,7 +12,7 @@
   <meta property="og:image" content="/assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2026-10-21d">
+  <link rel="stylesheet" href="/assets/style.css?v=2026-10-21e">
 </head>
 <body>
   <header class="topp">
@@ -107,9 +107,21 @@
 
     <section id="kontakt" class="ramme seksjon kontakt">
       <h2 data-tekst="kontakt">Kontakt</h2>
-      <p id="epost-boks" hidden><span data-tekst="epost_tekst">Send oss en e-post på</span> <a id="kontakt-epost" href="#"></a>.</p>
-      <p id="skjema-boks" hidden><a id="skjema-lenke" class="knapp" target="_blank" rel="noopener" data-tekst="skjema">Fyll ut kontaktskjema</a></p>
-      <p class="sosiale" id="sosiale"></p>
+      <div class="kontakt-spalter">
+        <div>
+          <h3 data-tekst="k_organisasjon">Organisasjon</h3>
+          <p id="k-org"></p>
+        </div>
+        <div>
+          <h3 data-tekst="k_leder">Leder</h3>
+          <p id="k-leder"></p>
+        </div>
+        <div>
+          <h3 data-tekst="k_kontakt">Ta kontakt</h3>
+          <p id="k-kanaler"></p>
+          <p id="skjema-boks" hidden><a id="skjema-lenke" class="knapp" target="_blank" rel="noopener" data-tekst="skjema">Fyll ut kontaktskjema</a></p>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -118,7 +130,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-  <script src="/assets/app.js?v=2026-10-21d"></script>
+  <script src="/assets/app.js?v=2026-10-21e"></script>
   <script>visForside();</script>
 </body>
 </html>
