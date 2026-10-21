@@ -1,3 +1,9 @@
 {
-  "sponsorer": []
+  "sponsorer": [
+    {
+      "niva": "Sponsor",
+      "navn": "Hunton",
+      "logo": "/images/uploads/img_0326.png"
+    }
+  ]
 }
