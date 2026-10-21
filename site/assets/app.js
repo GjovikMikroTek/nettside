@@ -1,5 +1,10 @@
 // Henter innhold fra /content/*.json (det adminpanelet redigerer) og fyller sidene.
 
+// Når siden lastes på nytt, starter man øverst i stedet for der man var (nettleseren husker det ellers).
+// Lenker med anker (/#styret osv.) går fortsatt til riktig sted, se hoppTilAnker.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) window.scrollTo(0, 0);
+
 // Språk: norsk (nb) eller engelsk (en).
 // Valget leses fra ?lang= i adressen, deretter fra forrige besøk, ellers fra nettleserens språk.
 const SPRAK = (() => {
