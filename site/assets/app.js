@@ -18,6 +18,14 @@ function skjulAdresse() {
 skjulAdresse();
 window.addEventListener('hashchange', skjulAdresse);
 
+// Når adressen er «/», tror nettleseren at lenkene /#styret, /#kontakt osv. peker til samme side,
+// og blir stående (f.eks. på Artikler). Utenfor forsiden går de derfor via /index.html, som laster forsiden.
+if (!/^\/(index\.html)?$/.test(EKTE.pathname)) {
+  document.querySelectorAll('a[href^="/#"], a[href="/"]').forEach(a => {
+    a.setAttribute('href', '/index.html' + a.getAttribute('href').slice(1));
+  });
+}
+
 // Språk: norsk (nb) eller engelsk (en).
 // Valget leses fra ?lang= i adressen, deretter fra forrige besøk, ellers fra nettleserens språk.
 const SPRAK = (() => {

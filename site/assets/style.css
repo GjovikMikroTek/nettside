@@ -15,9 +15,10 @@
   --natt-2: #15264a;
   --bla-lys: #8fb0ea;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
-  /* Overskrifter: Bahnschrift Bold (fra styret). Den finnes bare på Windows og kan ikke legges ut på nett,
+  /* Overskrifter: Bahnschrift Bold, brødtekst: Bahnschrift Regular (fra styret). Den finnes bare på Windows og kan ikke legges ut på nett,
      så andre maskiner får Barlow fra Google Fonts, som også bygger på DIN */
-  --overskrift: Bahnschrift, Barlow, Inter, system-ui, sans-serif;
+  --overskrift: Bahnschrift, Barlow, system-ui, sans-serif;
+  --brodtekst: Bahnschrift, Barlow, system-ui, -apple-system, Segoe UI, sans-serif;
   color-scheme: dark;
 }
 
@@ -26,7 +27,7 @@ html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 72px; }
 body {
   margin: 0;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+  font-family: var(--brodtekst);
   color: var(--tekst);
   background: var(--bakgrunn);
   line-height: 1.6;
