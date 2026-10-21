@@ -31,3 +31,6 @@
 .forslag-velger a { color: #1a1d23; text-decoration: none; padding: 7px 12px; border-radius: 999px; white-space: nowrap; }
 .forslag-velger a[aria-current] { background: #f39228; }
 @media (max-width: 760px) { .forslag-velger span { display: none; } .forslag-velger a { padding: 7px 10px; } }
+
+/* Studentlandsbyen i toppfeltet er bredere enn mikrohuset */
+.hero-landsby { width: 520px; max-width: 44vw; }
