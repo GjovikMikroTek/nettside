@@ -42,6 +42,10 @@
     {
       "navn": "Katt",
       "rolle": "Medlem"
+    },
+    {
+      "navn": "Rolf",
+      "rolle": "Medlem"
     }
   ]
 }
