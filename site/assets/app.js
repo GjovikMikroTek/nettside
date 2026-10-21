@@ -211,7 +211,7 @@ async function visForside() {
       hent('prosjekter').catch(() => ({}))
     ]);
     document.title = s.navn || 'Gjøvik MikroTek';
-    visInstagram(s).catch(e => console.error('Instagram:', e));
+    visInstagram(s).catch(e => console.error('Instagram:', e)).then(hoppTilAnker);
 
     if (s.hovedbilde) {
       const h = document.getElementById('hero');
@@ -268,9 +268,19 @@ async function visForside() {
       trygLenke(s.instagram) && `<a href="${esc(s.instagram)}" target="_blank" rel="noopener">Instagram</a>`,
       trygLenke(s.linkedin) && `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`
     ].filter(Boolean).join(' · ');
+    hoppTilAnker();
   } catch (e) {
     console.error(e);
   }
+}
+
+// Lenkene /#styret, /#sponsorer osv. hopper til ankeret idet siden lastes, før innholdet over er hentet.
+// Når innholdet kommer, dyttes ankeret nedover, og man blir stående på feil sted (typisk ved Prosjekter).
+// Derfor hopper vi til ankeret på nytt når innholdet er på plass.
+function hoppTilAnker() {
+  if (!location.hash) return;
+  const el = document.getElementById(location.hash.slice(1));
+  if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
 }
 
 async function visArtikler() {
