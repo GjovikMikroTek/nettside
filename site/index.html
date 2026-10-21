@@ -10,9 +10,14 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <meta name="theme-color" content="#2a529a">
   <meta property="og:image" content="/assets/logo.png">
+  <script>
+    // Adressen vises alltid som gjovikmikrotek.no/ (se app.js). Ved Tilbake eller «Last inn på nytt»
+    // står derfor «/» i historikken, så her sendes man videre til siden man egentlig var på.
+    (function () { var e = history.state && history.state.ekte; if (e && e !== location.href) location.replace(e); })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2026-10-21e">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/style.css?v=2026-10-21g">
 </head>
 <body>
   <header class="topp">
@@ -69,13 +74,23 @@
       </section>
     </div>
 
-    <section id="prosjekter" class="ramme seksjon" hidden>
-      <div class="seksjon-topp">
-        <h2 data-tekst="prosjekter">Prosjekter</h2>
-        <a href="/prosjekter.html" class="lenke-pil" data-tekst="alle_prosjekter">Alle prosjekter →</a>
-      </div>
-      <div id="prosjekter-liste" class="kort-rutenett"></div>
-    </section>
+    <!-- Prosjekter og artikler side ved side, nyeste øverst. Under hverandre på mobil -->
+    <div class="ramme seksjon forside-par">
+      <section id="prosjekter" hidden>
+        <div class="seksjon-topp">
+          <h2 data-tekst="prosjekter">Prosjekter</h2>
+          <a href="/prosjekter.html" class="lenke-pil" data-tekst="alle_prosjekter">Alle prosjekter →</a>
+        </div>
+        <div id="prosjekter-liste" class="kort-stabel"></div>
+      </section>
+      <section>
+        <div class="seksjon-topp">
+          <h2 data-tekst="siste_artikler">Siste artikler</h2>
+          <a href="/artikler.html" class="lenke-pil" data-tekst="alle_artikler">Alle artikler →</a>
+        </div>
+        <div id="artikler-siste" class="kort-stabel"></div>
+      </section>
+    </div>
 
     <section class="ramme seksjon">
       <div class="medlem-banner">
@@ -85,14 +100,6 @@
         </div>
         <a href="/bli-medlem.html" class="knapp knapp-oransje" data-tekst="nav_medlem">Bli medlem</a>
       </div>
-    </section>
-
-    <section class="ramme seksjon">
-      <div class="seksjon-topp">
-        <h2 data-tekst="siste_artikler">Siste artikler</h2>
-        <a href="/artikler.html" class="lenke-pil" data-tekst="alle_artikler">Alle artikler →</a>
-      </div>
-      <div id="artikler-siste" class="kort-rutenett"></div>
     </section>
 
     <section id="styret" class="ramme seksjon">
@@ -130,7 +137,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-  <script src="/assets/app.js?v=2026-10-21e"></script>
+  <script src="/assets/app.js?v=2026-10-21g"></script>
   <script>visForside();</script>
 </body>
 </html>

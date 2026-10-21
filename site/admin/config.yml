@@ -31,7 +31,7 @@ collections:
               - { name: tittel, label: Tittel, widget: string }
               - { name: tittel_en, label: "Tittel (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: dato, label: Dato, widget: datetime, format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
-              - { name: bilde, label: Bilde, widget: image, required: false }
+              - { name: bilde, label: Bilde, widget: image, hint: "Påkrevd. Bildet vises på kortet på forsiden og øverst i artikkelen." }
               - { name: ingress, label: "Ingress (kort tekst i oversikten)", widget: text }
               - { name: ingress_en, label: "Ingress (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: tekst, label: Artikkeltekst, widget: markdown }

@@ -15,6 +15,9 @@
   --natt-2: #15264a;
   --bla-lys: #8fb0ea;
   --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  /* Overskrifter: Bahnschrift Bold (fra styret). Den finnes bare på Windows og kan ikke legges ut på nett,
+     så andre maskiner får Barlow fra Google Fonts, som også bygger på DIN */
+  --overskrift: Bahnschrift, Barlow, Inter, system-ui, sans-serif;
   color-scheme: dark;
 }
 
@@ -28,6 +31,7 @@ body {
   background: var(--bakgrunn);
   line-height: 1.6;
 }
+h1, h2, h3 { font-family: var(--overskrift); font-weight: 700; }
 img { max-width: 100%; display: block; }
 a { color: var(--lenke); }
 
@@ -90,6 +94,11 @@ nav { align-items: center; }
 
 /* Artikler */
 .kort-rutenett { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+/* Forsiden: Prosjekter og Siste artikler i to like spalter. Uten prosjekter får artiklene hele bredden */
+.forside-par { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px; align-items: start; }
+.forside-par:has(> [hidden]) { grid-template-columns: minmax(0, 1fr); }
+.kort-stabel { display: grid; gap: 20px; }
+@media (max-width: 760px) { .forside-par { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
 .kort { border: 1px solid var(--linje); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: inherit; background: var(--bakgrunn); transition: transform .15s, box-shadow .15s; }
 .kort:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,0,0,.35); }
 .kort img, .bilde-tom { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--flate); }

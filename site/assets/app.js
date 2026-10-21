@@ -5,10 +5,23 @@
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 if (!location.hash) window.scrollTo(0, 0);
 
+// Adresselinjen viser alltid https://gjovikmikrotek.no/, uansett side (ønske fra styret).
+// Den egentlige adressen (side, ?a=, ?p=, #anker) ligger i EKTE og i historikken (history.state),
+// så Tilbake-knappen og «Last inn på nytt» kommer til riktig side, se skriptet øverst i index.html.
+// Ankeret (#kontakt osv.) lagres ikke i historikken, så «Last inn på nytt» alltid starter øverst på siden.
+const EKTE = new URL(location.href);
+function skjulAdresse() {
+  const uten = new URL(EKTE.href);
+  uten.hash = '';
+  history.replaceState({ ekte: uten.href }, '', '/');
+}
+skjulAdresse();
+window.addEventListener('hashchange', skjulAdresse);
+
 // Språk: norsk (nb) eller engelsk (en).
 // Valget leses fra ?lang= i adressen, deretter fra forrige besøk, ellers fra nettleserens språk.
 const SPRAK = (() => {
-  const fraUrl = new URLSearchParams(location.search).get('lang');
+  const fraUrl = EKTE.searchParams.get('lang');
   if (fraUrl === 'en' || fraUrl === 'nb') { lagreSprak(fraUrl); return fraUrl; }
   try { const lagret = localStorage.getItem('sprak'); if (lagret === 'en' || lagret === 'nb') return lagret; } catch (e) {}
   return /^(nb|nn|no|da|sv)/i.test(navigator.language || '') ? 'nb' : 'en';
@@ -79,7 +92,7 @@ function settOppSprak() {
     knapp.addEventListener('click', () => {
       const nytt = SPRAK === 'en' ? 'nb' : 'en';
       lagreSprak(nytt);
-      const url = new URL(location.href);
+      const url = new URL(EKTE.href);
       url.searchParams.set('lang', nytt);
       location.href = url.toString();
     });
@@ -287,13 +300,14 @@ async function visForside() {
     document.getElementById('om-tittel').textContent = felt(prosjekt, 'tittel') || t('om_tittel');
     document.getElementById('om-tekst').innerHTML = md(felt(prosjekt, 'tekst'));
 
-    const pr = synligeProsjekter(prosjekter).slice(0, 3);
+    // To av hver side ved side (se .forside-par i style.css). Resten ligger under «Alle prosjekter/artikler».
+    const pr = synligeProsjekter(prosjekter).slice(0, 2);
     if (pr.length) {
       document.getElementById('prosjekter-liste').innerHTML = pr.map(prosjektKort).join('');
       document.getElementById('prosjekter').hidden = false;
     }
 
-    const siste = synligeArtikler(artikler).slice(0, 3);
+    const siste = synligeArtikler(artikler).slice(0, 2);
     document.getElementById('artikler-siste').innerHTML = siste.length
       ? siste.map(artikkelKort).join('')
       : `<p class="tom">${esc(t('ingen_artikler'))}</p>`;
@@ -357,8 +371,8 @@ async function visForside() {
 // Når innholdet kommer, dyttes ankeret nedover, og man blir stående på feil sted (typisk ved Prosjekter).
 // Derfor hopper vi til ankeret på nytt når innholdet er på plass.
 function hoppTilAnker() {
-  if (!location.hash) return;
-  const el = document.getElementById(location.hash.slice(1));
+  if (!EKTE.hash) return;
+  const el = document.getElementById(EKTE.hash.slice(1));
   if (el) el.scrollIntoView({ behavior: 'instant', block: 'start' });
 }
 
@@ -367,7 +381,7 @@ async function visArtikler() {
   try {
     const [s, data] = await Promise.all([fellesInnstillinger(), hent('artikler')]);
     const alle = synligeArtikler(data);
-    const valgt = new URLSearchParams(location.search).get('a');
+    const valgt = EKTE.searchParams.get('a');
 
     if (valgt) {
       const a = alle.find(x => slug(x) === valgt);
@@ -398,7 +412,7 @@ async function visProsjekter() {
   try {
     const [s, data] = await Promise.all([fellesInnstillinger(), hent('prosjekter')]);
     const alle = synligeProsjekter(data);
-    const valgt = new URLSearchParams(location.search).get('p');
+    const valgt = EKTE.searchParams.get('p');
 
     if (valgt) {
       const p = alle.find(x => tittelSlug(x) === valgt);
