@@ -211,7 +211,7 @@ time { color: var(--dempet); font-size: .85rem; }
 .medlem-hero-bilder { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); margin-bottom: 28px; }
 .medlem-hero-logo { width: clamp(150px, 30vw, 320px); height: auto; filter: drop-shadow(0 10px 30px rgba(243, 146, 40, .25)); }
 .medlem-hero-skille { width: 2px; align-self: stretch; margin: 12px 0; background: rgba(255, 255, 255, .2); }
-.medlem-hero-hus { width: clamp(160px, 34vw, 400px); height: auto; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .35)); }
+.medlem-hero-hus { width: clamp(200px, 46vw, 560px); height: auto; filter: drop-shadow(0 18px 40px rgba(0, 0, 0, .35)); }
 .medlem-hero h1 { font-size: clamp(2rem, 5.5vw, 3.2rem); line-height: 1.1; margin: 8px 0 0; color: #fff; letter-spacing: -.02em; }
 .medlem-side { max-width: 792px; }  /* samme bredde som skjemaet (760px) + marg */
 .medlem-side .brodtekst em { color: var(--dempet); font-size: .92rem; }
