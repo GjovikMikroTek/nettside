@@ -171,6 +171,10 @@ time { color: var(--dempet); font-size: .85rem; }
 .kontakt-spalter h3 { font-family: var(--mono); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; color: var(--oransje); margin: 0 0 10px; }
 .kontakt-spalter p { margin: 0 0 12px; line-height: 1.8; }
 .k-etikett { color: var(--dempet); margin-right: 8px; }
+.k-ikoner { display: inline-flex; gap: 12px; margin-top: 4px; }
+.k-ikon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 10px; color: #fff; background: var(--flate); border: 1px solid var(--linje); transition: color .15s, border-color .15s, transform .15s; }
+.k-ikon svg { width: 24px; height: 24px; }
+.k-ikon:hover { color: var(--oransje); border-color: var(--oransje); transform: translateY(-1px); }
 @media (max-width: 760px) { .kontakt-spalter { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 .knapp:hover { background: var(--oransje); color: #1a1d23; }
 .knapp { display: inline-block; background: var(--aksent); color: #fff; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: 600; }

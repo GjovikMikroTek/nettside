@@ -132,5 +132,4 @@ collections:
           - { name: instagram, label: "Instagram-lenke", widget: string, required: false, hint: "Lenken til profilen, f.eks. https://www.instagram.com/brukernavn/" }
           - { name: instagram_feed, label: "Instagram-bilder (Behold-feed)", widget: string, required: false, hint: "Lim inn feed-lenken fra behold.so (https://feeds.behold.so/...). Da vises de siste bildene fra Instagram automatisk på forsiden. La stå tom for å skjule bildene." }
           - { name: linkedin, label: "LinkedIn-lenke", widget: string, required: false }
-          - { name: linkedin_navn, label: "LinkedIn-navn (teksten på lenken)", widget: string, required: false, hint: "Det som står på lenken under Kontakt. Står feltet tomt, brukes organisasjonens navn." }
           - { name: skjema_lenke, label: "Microsoft Forms-lenke (kontakt-/sponsorskjema)", widget: string, required: false, hint: "Svarene havner automatisk i Excel i Microsoft-kontoen som eier skjemaet." }
