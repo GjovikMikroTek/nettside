@@ -6,9 +6,11 @@
 # kontrautligger med motvekt og strekkstag, og en benk har fire bein.
 #
 # Forslagene:  1 Gaterekke   2 Tun   3 Byggeplass   4 Eksplodert mikrohus   5 Terreng ved Mjøsa   6 Plan og 3D
+#              7 Gate med konturhus og stiplede hus som kommer (valgt retning 21.10.2026)
 import math, sys
 
 S, OX, OY, ZOFF = 10.0, 330.0, 60.0, 0.0
+MODUS = 'full'   # 'full' | 'kontur' | 'stiplet'
 C30 = math.cos(math.radians(30))
 W, H = 660, 430
 
@@ -29,8 +31,16 @@ def pts(*p):
 
 ut = []
 def poly(*p, fill='none', stroke=STREK, sw=1.4, extra=''):
+    if MODUS != 'full':
+        if fill.startswith('rgba(0,0,0'): return          # ingen skygger
+        if MODUS == 'kontur':
+            if fill != 'none' and fill != ORANSJE: fill = 'rgba(13,24,48,.88)'   # nesten tett: skjuler linjene bak
+            if stroke == 'none': stroke = STREK
+        else:   # stiplet: hus som kommer
+            fill = 'none'; stroke = STREK; extra = (extra + ' stroke-dasharray="4 4" opacity=".65"').strip()
     ut.append(f'<polygon points="{pts(*p)}" fill="{fill}" stroke="{stroke}" stroke-width="{sw}" stroke-linejoin="round" {extra}/>')
 def line(a, b, stroke=STREK, sw=1.4, extra=''):
+    if MODUS == 'stiplet': stroke = STREK; extra = (extra + ' stroke-dasharray="4 4" opacity=".65"').strip()
     (x1, y1), (x2, y2) = iso(*a), iso(*b)
     ut.append(f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{stroke}" stroke-width="{sw}" stroke-linecap="round" {extra}/>')
 def path(*p, stroke=STREK, sw=1.4, extra='', lukk=False):
@@ -40,6 +50,9 @@ def tekst(x, y, z, t, size=9, fill=STREK, anchor='middle', dy=0, dx=0):
     a, b = iso(x, y, z)
     ut.append(f'<text x="{a + dx:.1f}" y="{b + dy:.1f}" font-family="JetBrains Mono, Consolas, monospace" font-size="{size}" font-weight="600" fill="{fill}" text-anchor="{anchor}">{t}</text>')
 def sirkel(x, y, z, r, fill, stroke='none', sw=1):
+    if MODUS != 'full':
+        if fill.startswith('rgba(0,0,0'): return
+        fill = 'none'; stroke = STREK
     a, b = iso(x, y, z)
     ut.append(f'<circle cx="{a:.1f}" cy="{b:.1f}" r="{r:.1f}" fill="{fill}" stroke="{stroke}" stroke-width="{sw}"/>')
 def boks(x, y, z, w, d, h, fill=(TOPP, FRONT, SIDE), stroke=STREK, sw=1.2):
@@ -140,10 +153,9 @@ def hus_c(x, y):
     vindu(x + .6, y + d, .9, b=1.3, hh=1.3); vindu(x + 3.7, y + d, .9, b=1.3, hh=1.3)
     poly((x + 2.3, y + d, 0), (x + 3.25, y + d, 0), (x + 3.25, y + d, 2.1), (x + 2.3, y + d, 2.1), fill=ORANSJE, stroke='none')
     poly((x + w, y + 1.2, 1.0), (x + w, y + 2.4, 1.0), (x + w, y + 2.4, 2.2), (x + w, y + 1.2, 2.2), fill='rgba(13,24,48,.65)', sw=1)
-    sirkel(x + w, y + d / 2, h + r * .55, 4.2, 'rgba(13,24,48,.65)', STREK, 1)   # hemsvindu i gavlen
-    for i in range(2):   # takvinduer til hemsen
-        z0, z1 = h + r * .9 / (d / 2), h + r * 1.7 / (d / 2)
-        poly((x + 1.2 + i * 2.4, y + d - .9, z0), (x + 2.0 + i * 2.4, y + d - .9, z0), (x + 2.0 + i * 2.4, y + d - 1.7, z1), (x + 1.2 + i * 2.4, y + d - 1.7, z1), fill='rgba(13,24,48,.6)', stroke='#8fb0ea', sw=.9)
+    # hemsvindu i gavlen: rett under mønet, i gavlflaten
+    poly((x + w, y + d / 2 - .6, h + .1), (x + w, y + d / 2 + .6, h + .1), (x + w, y + d / 2 + .6, h + 1.1), (x + w, y + d / 2 - .6, h + 1.1), fill='rgba(13,24,48,.65)', sw=1)
+    line((x + w, y + d / 2, h + .1), (x + w, y + d / 2, h + 1.1), sw=.7)
 
 def hus_d(x, y, solceller=True):
     """D: flatt tak med takterrasse og rekkverk, 7,0 × 4,4 m, 3,0 m vegg. Lange vindusbånd."""
@@ -530,7 +542,27 @@ def forslag_6():
     tekst(x + 24.5, y + HD, 0, 'NESTE', size=8, fill=STAAL, dy=14)
     tre(x + 10.2, y + HD + 1.6, 2.2); tre(x + 28.2, y - .8, 2.4)
 
-FORSLAG = {1: forslag_1, 2: forslag_2, 3: forslag_3, 4: forslag_4, 5: forslag_5, 6: forslag_6}
+def vei(x0, x1, y, b=4.0):
+    """Vei langs x: lys bane, kantlinjer og stiplet midtlinje."""
+    poly((x0, y), (x1, y), (x1, y + b), (x0, y + b), fill='rgba(111,147,214,.10)', stroke='rgba(159,188,240,.45)', sw=1)
+    path((x0, y + b / 2), (x1, y + b / 2), stroke='rgba(255,255,255,.3)', sw=1, extra='stroke-dasharray="7 7"')
+
+def forslag_7():
+    """Gate med konturhus: to rekker langs en vei, ulike tak. De bakerste er ferdige (kontur),
+    så kommer ett i bindingsverk, og de siste er stiplet: det som kommer. Uten tomt og trær."""
+    global S, OX, OY, MODUS, W, H; S, OX, OY, W, H = 11.5, 168.0, 64.0, 720, 440
+    vei(-3, 48, 5.0)
+    MODUS = 'kontur'
+    mikrohus(0, 0.6); lykt(9.0, 4.6, 3.6)
+    hus_b(10.5, 0.2, solceller=True); lykt(19.8, 4.6, 3.6)
+    hus_c(21.5, -1.2); lykt(29.2, 4.6, 3.6)
+    MODUS = 'stiplet'; hus_d(31.5, 0.0); MODUS = 'kontur'; lykt(39.8, 4.6, 3.6)
+    hus_d(0.5, 9.8); hus_c(10.0, 9.8)
+    bindingsverk(19.0, 10.4, plate=False)
+    MODUS = 'stiplet'; hus_b(29.0, 10.0); mikrohus(39.5, 10.4)
+    MODUS = 'full'
+
+FORSLAG = {1: forslag_1, 2: forslag_2, 3: forslag_3, 4: forslag_4, 5: forslag_5, 6: forslag_6, 7: forslag_7}
 
 if __name__ == '__main__':
     nr, utfil = int(sys.argv[1]), sys.argv[2]
