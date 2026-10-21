@@ -362,7 +362,8 @@ async function visForside() {
     document.getElementById('k-kanaler').innerHTML = [
       s.epost && linje(t('k_epost'), `<a href="mailto:${esc(s.epost)}">${esc(s.epost)}</a>`),
       insta && linje('Instagram', `<a href="${esc(insta)}" target="_blank" rel="noopener">${esc(instaNavn)}</a>`),
-      trygLenke(s.linkedin) && linje('LinkedIn', `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`)
+      // Lenketeksten er «LinkedIn-navn» fra innstillingene, ellers organisasjonens navn
+      trygLenke(s.linkedin) && linje('LinkedIn', `<a href="${esc(s.linkedin)}" target="_blank" rel="noopener">${esc(s.linkedin_navn || s.navn || 'LinkedIn')}</a>`)
     ].filter(Boolean).join('<br>');
     const skjema = trygLenke(s.skjema_lenke);
     if (skjema) {
