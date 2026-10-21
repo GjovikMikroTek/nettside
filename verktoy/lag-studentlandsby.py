@@ -1,5 +1,6 @@
 # Tegner studentlandsbyen til toppfeltet som isometrisk «arbeidstegning», i samme strek som mikrohus-3d.svg.
-# Kjør fra prosjektside/:  python -I verktoy/lag-studentlandsby.py <forslag 1-6> <ut.svg>
+# Kjør fra prosjektside/:  python -I verktoy/lag-studentlandsby.py <forslag 1-11> <ut.svg>
+# Nettsiden bruker forslag 11 (valgt av styret 21.10.2026):  python -I verktoy/lag-studentlandsby.py 11 site/assets/studentlandsby-3d.svg
 #
 # Hovedmotivet er GMT Mikrohus (lang hoveddel 7,5 × 3,8 m + høyere tilbygg). Alt skal følge fysikken:
 # ingenting svever, laster henger loddrett under løpekatten, kranen har fundament, mast, utligger,
