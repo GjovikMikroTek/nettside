@@ -1,6 +1,6 @@
 /* Forslag 1 «Natt»: helmørk side, hvit utgave av logoen (G og T hvite, M oransje) */
 .topp { background: rgba(13, 24, 48, .92); backdrop-filter: blur(8px); border-bottom-color: rgba(255,255,255,.08); }
-.merke img { content: url(/assets/logo-hvit.svg); height: 32px; }
+.merke .merke-logo { content: url(/assets/logo-hvit.svg); height: 32px; }
 .merke { color: #fff; }
 nav a { color: rgba(255,255,255,.75); }
 nav a:hover { color: #fff; }

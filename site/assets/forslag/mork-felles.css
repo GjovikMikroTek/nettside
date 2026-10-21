@@ -34,3 +34,10 @@
 
 /* Studentlandsbyen i toppfeltet er bredere enn mikrohuset */
 .hero-landsby { width: 520px; max-width: 44vw; }
+
+/* Mikrohuset (fra prosjekttegningen) til venstre for logoen i toppmenyen */
+.merke { gap: 12px; }
+.merke .merke-hus { height: 44px; width: auto; margin: -8px 0; filter: drop-shadow(0 4px 10px rgba(0,0,0,.45)); }
+.merke .merke-logo { height: 30px; width: auto; }
+.merke-skille { width: 1px; height: 26px; background: rgba(255,255,255,.18); }
+@media (max-width: 480px) { .merke span { display: none; } }

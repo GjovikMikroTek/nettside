@@ -3,7 +3,7 @@
 body { background: var(--bakgrunn); }
 .topp { background: #131518; border-bottom-color: rgba(255,255,255,.08); }
 .merke { color: #fff; }
-.merke img { background: #fbfaf7; padding: 6px 10px; border-radius: 8px; height: 40px; width: auto; }
+.merke .merke-logo { background: #fbfaf7; padding: 6px 10px; border-radius: 8px; height: 40px; width: auto; }
 nav a { color: rgba(255,255,255,.72); }
 nav a:hover { color: var(--oransje); }
 @media (max-width: 760px) { nav { background: #131518; } }
