@@ -1,16 +1,16 @@
 {
-  "navn": "Gjøvik MikroTek",
-  "slagord": "Studentorganisasjon ved NTNU Campus Gjøvik",
-  "slagord_en": "Student organisation at NTNU Campus Gjøvik",
-  "beskrivelse": "Vi er studenter som planlegger og bygger mikrohus og andre bygningsrelaterte prosjekter. Målet er å samle studentene på Campus Gjøvik rundt praktisk arbeid.",
-  "beskrivelse_en": "We are students who plan and build micro houses and other construction projects. Our goal is to bring the students at Campus Gjøvik together through hands-on work.",
-  "hovedbilde": "/images/uploads/forside-gruppebilde.jpg",
-  "aksentfarge": "#2a529a",
+  "slagord": "Fra idé til ferdig mikrohus",
   "epost": "",
+  "slagord_en": "Student organisation at NTNU Campus Gjøvik",
   "orgnr": "937 583 362",
+  "instagram_feed": "https://feeds.behold.so/5LIqyMhQTSSTbr09vbVQ",
+  "beskrivelse_en": "We are students who plan and build micro houses and other construction projects. Our goal is to bring the students at Campus Gjøvik together through hands-on work.",
+  "navn": "Gjøvik MikroTek",
   "adresse": "Teknologivegen 22, 2815 Gjøvik",
   "instagram": "https://www.instagram.com/gjovik_mikrotek/",
-  "instagram_feed": "https://feeds.behold.so/5LIqyMhQTSSTbr09vbVQ",
-  "linkedin": "",
-  "skjema_lenke": ""
+  "aksentfarge": "#2a529a",
+  "skjema_lenke": "",
+  "hovedbilde": "/images/uploads/forside-gruppebilde.jpg",
+  "beskrivelse": "Vi er studenter som planlegger og bygger mikrohus og andre bygningsrelaterte prosjekter. Målet er å samle studentene på Campus Gjøvik rundt praktisk arbeid.",
+  "linkedin": ""
 }
