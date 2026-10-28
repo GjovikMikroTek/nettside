@@ -82,7 +82,8 @@ collections:
           - { name: tittel_en, label: "Overskrift (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
           - { name: tekst, label: "Tekst over skjemaet", widget: markdown }
           - { name: tekst_en, label: "Tekst over skjemaet (engelsk)", widget: markdown, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
-          - { name: skjema, label: "Microsoft Forms-skjema", widget: text, required: false, hint: "Lim inn lenken til skjemaet, eller hele koden fra «Bygg inn» i Forms. Svarene havner i Excel-filen som skjemaet er koblet til." }
+          - { name: registrering, label: "Innmeldingsskjema (Google-registeret)", widget: string, required: false, hint: "Nettapp-lenken fra Apps Script i admin.mikrotek@gmail.com (slutter på /exec). Når den er fylt inn, vises nettsidens eget skjema, og innmeldingene går til Google Sheets. Se OPPSETT.md." }
+          - { name: skjema, label: "Microsoft Forms-skjema (reserve)", widget: text, required: false, hint: "Brukes bare når Google-lenken over er tom. Lim inn lenken til skjemaet, eller hele koden fra «Bygg inn» i Forms." }
 
       - name: styret
         label: Styret

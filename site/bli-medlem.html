@@ -11,7 +11,7 @@
   <meta property="og:image" content="/assets/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/assets/style.css?v=2026-10-28c">
+  <link rel="stylesheet" href="/assets/style.css?v=2026-10-28d">
 </head>
 <body>
   <header class="topp">
@@ -50,6 +50,73 @@
 
   <main class="ramme seksjon medlem-side">
     <div id="medlem-tekst" class="brodtekst"></div>
+
+    <form id="innmelding" class="skjema" novalidate hidden>
+      <div class="skjema-topp">
+        <span class="skjema-merke">// <span data-tekst="f_tittel">INNMELDING</span></span>
+        <span class="skjema-krav"><span class="krav">*</span> <span data-tekst="f_paakrevd">Alle felt må fylles ut</span></span>
+      </div>
+      <div class="rad">
+        <div class="felt">
+          <label for="fornavn" data-tekst="f_fornavn">Fornavn</label>
+          <input type="text" id="fornavn" name="fornavn" autocomplete="given-name" required maxlength="80">
+        </div>
+        <div class="felt">
+          <label for="etternavn" data-tekst="f_etternavn">Etternavn</label>
+          <input type="text" id="etternavn" name="etternavn" autocomplete="family-name" required maxlength="80">
+        </div>
+      </div>
+      <div class="rad">
+        <div class="felt">
+          <label for="epost" data-tekst="f_epost">E-post</label>
+          <input type="email" id="epost" name="epost" autocomplete="email" inputmode="email" required maxlength="120" placeholder="navn@stud.ntnu.no">
+        </div>
+        <div class="felt">
+          <label for="telefon" data-tekst="f_telefon">Telefon</label>
+          <input type="tel" id="telefon" name="telefon" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="+47 …">
+        </div>
+      </div>
+      <div class="rad">
+        <div class="felt">
+          <label for="studieprogram" data-tekst="f_studie">Studieprogram</label>
+          <input type="text" id="studieprogram" name="studieprogram" required maxlength="120" data-plassholder="f_studie_eks" placeholder="F.eks. Bachelor i bygg">
+        </div>
+        <div class="felt">
+          <label for="arstrinn" data-tekst="f_arstrinn">Årstrinn</label>
+          <select id="arstrinn" name="arstrinn" required>
+            <option value="" data-tekst="f_velg">Velg …</option>
+            <option value="1" data-tekst="f_ar1">1. år</option>
+            <option value="2" data-tekst="f_ar2">2. år</option>
+            <option value="3" data-tekst="f_ar3">3. år</option>
+            <option value="4" data-tekst="f_ar4">4. år</option>
+            <option value="5" data-tekst="f_ar5">5. år</option>
+            <option value="Annet" data-tekst="f_annet">Annet</option>
+          </select>
+        </div>
+      </div>
+      <fieldset class="felt">
+        <legend data-tekst="f_foto">Får vi bruke bilder og video der du er med?</legend>
+        <p class="hjelp" data-tekst="f_foto_hjelp">Gjelder Instagram (@gjovik_mikrotek), LinkedIn og nettsiden vår. Svaret påvirker ikke medlemskapet ditt.</p>
+        <div class="janei">
+          <label><input type="radio" name="foto" value="Ja" required><span data-tekst="ja">Ja</span></label>
+          <label><input type="radio" name="foto" value="Nei"><span data-tekst="nei">Nei</span></label>
+        </div>
+      </fieldset>
+      <div class="boks">
+        <label class="avkryss"><input type="checkbox" name="vedtekter" id="vedtekter" required>
+          <span data-tekst="f_vedtekter">Jeg har lest og godtar vedtektene til Gjøvik MikroTek.</span></label>
+        <label class="avkryss"><input type="checkbox" name="lagring" id="lagring" required>
+          <span data-tekst="f_lagring">Jeg samtykker til at opplysningene lagres i medlemsregisteret til Gjøvik MikroTek.</span></label>
+        <p class="liten" data-tekst="f_personvern">Opplysningene brukes bare til å drive foreningen, og bare styret ser dem. Melder du deg ut, sletter vi dem etter 30 dager.</p>
+      </div>
+      <div class="skjult" aria-hidden="true">
+        <label for="nettsted">La dette feltet stå tomt</label>
+        <input type="text" id="nettsted" name="nettsted" tabindex="-1" autocomplete="off">
+      </div>
+      <button type="submit" id="send-knapp" class="knapp knapp-oransje" data-tekst="f_send">Meld meg inn</button>
+      <div id="melding" class="melding" role="alert" hidden></div>
+    </form>
+
     <div id="skjema-ramme" class="skjema-ramme" hidden></div>
     <p id="skjema-mangler" class="tom" hidden data-tekst="skjema_mangler">Innmeldingsskjemaet kommer snart. Ta kontakt med styret i mellomtiden.</p>
   </main>
@@ -59,7 +126,7 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-  <script src="/assets/app.js?v=2026-10-28c"></script>
+  <script src="/assets/app.js?v=2026-10-28d"></script>
   <script>visMedlem();</script>
 </body>
 </html>

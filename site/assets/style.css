@@ -239,6 +239,53 @@ a.person:hover strong { color: var(--oransje); }
 /* Egen rullefelt i skjemaet, så takkemeldingen etter «Send» står synlig i boksen. Høyden følger skjermen. */
 .skjema-ramme iframe { display: block; width: 100%; height: min(820px, calc(100vh - 120px)); min-height: 520px; border: 0; }
 
+/* Innmeldingsskjemaet (eget skjema mot Google-registeret) */
+.skjema { margin-top: 28px; max-width: 760px; background: var(--flate); border: 1px solid var(--linje); border-top: 4px solid var(--oransje); border-radius: var(--radius); padding: 28px 28px 24px;
+  background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 24px 24px; }
+.skjema-topp { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.skjema-merke { font-family: var(--mono); font-weight: 600; letter-spacing: .14em; color: var(--oransje); font-size: .85rem; }
+.skjema-krav { font-size: .82rem; color: var(--dempet); }
+.krav { color: var(--oransje); }
+.skjema .rad { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.skjema .felt { margin: 0 0 18px; }
+.skjema label, .skjema legend { display: block; font-weight: 600; font-size: .95rem; margin-bottom: 6px; color: var(--tekst); }
+.skjema input[type=text], .skjema input[type=email], .skjema input[type=tel], .skjema select {
+  width: 100%; font: inherit; font-size: 1rem; color: var(--tekst); background: var(--bakgrunn); border: 1px solid rgba(255,255,255,.18); border-radius: 8px; padding: 12px 14px; }
+.skjema select { appearance: none; background-image: linear-gradient(45deg, transparent 50%, var(--dempet) 50%), linear-gradient(135deg, var(--dempet) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 52%, calc(100% - 14px) 52%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 40px; }
+.skjema input::placeholder { color: rgba(155,167,187,.6); }
+.skjema input:focus, .skjema select:focus { outline: none; border-color: var(--oransje); box-shadow: 0 0 0 3px rgba(242,146,40,.2); }
+.skjema .feil { border-color: #ff8a73 !important; box-shadow: 0 0 0 3px rgba(255,138,115,.2) !important; }
+.skjema fieldset { border: 0; padding: 0; }
+.skjema .hjelp { font-size: .85rem; color: var(--dempet); margin: -2px 0 10px; }
+.janei { display: flex; gap: 10px; }
+.janei label { display: flex; align-items: center; gap: 8px; margin: 0; padding: 10px 22px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; cursor: pointer; font-weight: 600; }
+.janei input { accent-color: var(--oransje); width: 18px; height: 18px; margin: 0; }
+.janei label:has(input:checked) { border-color: var(--oransje); background: rgba(242,146,40,.12); }
+.skjema .boks { background: var(--bakgrunn); border: 1px solid var(--linje); border-radius: 8px; padding: 16px 18px; margin: 4px 0 20px; }
+.avkryss { display: flex !important; gap: 12px; align-items: flex-start; font-weight: 400 !important; margin-bottom: 12px !important; cursor: pointer; }
+.avkryss input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--oransje); flex: none; }
+.skjema .liten { font-size: .82rem; color: var(--dempet); margin: 4px 0 0; }
+.skjema .knapp { width: 100%; padding: 15px; font-size: 1.05rem; border: 0; cursor: pointer; font-family: inherit; }
+.skjema .knapp:disabled { opacity: .6; cursor: wait; }
+.melding { margin-top: 14px; padding: 12px 14px; border-radius: 8px; background: rgba(255,138,115,.12); border: 1px solid rgba(255,138,115,.45); color: #ffc2b5; font-size: .95rem; }
+@media (max-width: 560px) { .skjema { padding: 22px 16px 18px; } .skjema .rad { grid-template-columns: 1fr; gap: 0; } }
+
+/* Takkemelding på forsiden etter innmelding (visTakk i app.js) */
+.takk { border: 0; border-top: 6px solid var(--oransje); border-radius: var(--radius); box-sizing: border-box; width: min(460px, calc(100vw - 32px)); max-width: none; padding: 36px 28px 28px; text-align: center; color: #fff;
+  background-color: var(--natt);
+  background-image: radial-gradient(ellipse at 50% 30%, rgba(42, 82, 154, .6), transparent 70%),
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: auto, 24px 24px, 24px 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
+.takk::backdrop { background: rgba(13, 24, 48, .6); backdrop-filter: blur(3px); }
+.takk img { display: block; width: 120px; height: auto; margin: 0 auto 18px; }
+.takk h2 { margin: 0 0 10px; font-size: 1.6rem; color: #fff; }
+.takk p { margin: 0 0 14px; line-height: 1.5; color: rgba(255, 255, 255, .85); }
+.takk-nr { font-family: var(--mono); }
+.takk-nr strong { color: var(--oransje); }
+.takk-liten { font-size: .85rem; color: rgba(255,255,255,.6) !important; }
+.takk button { margin-top: 8px; background: var(--oransje); color: #1a1d23; border: 0; border-radius: 8px; padding: 11px 28px; font: inherit; font-weight: 700; cursor: pointer; }
+
 /* Menyknapp (vises bare på smale skjermer) */
 .skjult { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .meny-knapp { display: none; background: none; border: 1px solid var(--linje); border-radius: 8px; width: 44px; height: 44px; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }

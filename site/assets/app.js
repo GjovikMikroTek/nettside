@@ -55,6 +55,17 @@ const TEKST = {
     banner_tekst: 'Medlemskap er gratis og åpent for studenter ved NTNU Gjøvik.',
     skjema_tittel: 'Innmeldingsskjema',
     skjema_mangler: 'Innmeldingsskjemaet kommer snart. Ta kontakt med styret i mellomtiden.',
+    f_tittel: 'INNMELDING', f_paakrevd: 'Alle felt må fylles ut', f_fornavn: 'Fornavn', f_etternavn: 'Etternavn', f_epost: 'E-post', f_telefon: 'Telefon',
+    f_studie: 'Studieprogram', f_studie_eks: 'F.eks. Bachelor i bygg', f_arstrinn: 'Årstrinn', f_velg: 'Velg …', f_ar1: '1. år', f_ar2: '2. år', f_ar3: '3. år', f_ar4: '4. år', f_ar5: '5. år', f_annet: 'Annet',
+    f_foto: 'Får vi bruke bilder og video der du er med?', f_foto_hjelp: 'Gjelder Instagram (@gjovik_mikrotek), LinkedIn og nettsiden vår. Svaret påvirker ikke medlemskapet ditt.', ja: 'Ja', nei: 'Nei',
+    f_vedtekter: 'Jeg har lest og godtar vedtektene til Gjøvik MikroTek.', f_lagring: 'Jeg samtykker til at opplysningene lagres i medlemsregisteret til Gjøvik MikroTek.',
+    f_personvern: 'Opplysningene brukes bare til å drive foreningen, og bare styret ser dem. Melder du deg ut, sletter vi dem etter 30 dager.',
+    f_send: 'Meld meg inn', f_sender: 'Sender …',
+    feil_navn: 'Fyll inn både fornavn og etternavn.', feil_epost: 'E-postadressen ser ikke riktig ut.', feil_telefon: 'Telefonnummeret ser ikke riktig ut (minst 8 siffer).',
+    feil_studie: 'Skriv hva du studerer.', feil_arstrinn: 'Velg årstrinn.', feil_foto: 'Svar Ja eller Nei på spørsmålet om bilder og video.',
+    feil_vedtekter: 'Du må godta vedtektene for å bli medlem.', feil_lagring: 'Du må samtykke til at opplysningene lagres.',
+    feil_nett: 'Fikk ikke kontakt. Sjekk nettet og prøv igjen.', feil_ukjent: 'Noe gikk galt. Prøv igjen om litt.',
+    takk_tittel: 'Takk for din interesse', takk_tekst: 'Vi har mottatt innmeldingen din, og styret tar kontakt med deg.', takk_nr: 'Medlemsnummer:', takk_epost: 'Du har fått en kopi av svarene på e-post. Sjekk søppelpost hvis du ikke finner den.', takk_lukk: 'Lukk',
     nav_prosjekter: 'Prosjekter', prosjekter: 'Prosjekter', alle_prosjekter: 'Alle prosjekter →',
     tilbake_prosjekter: '← Alle prosjekter', ingen_prosjekter: 'Ingen prosjekter ennå.', fant_ikke_prosjekt: 'Fant ikke prosjektet.',
     Planlegges: 'Planlegges', 'Pågår': 'Pågår', Ferdig: 'Ferdig'
@@ -73,6 +84,17 @@ const TEKST = {
     banner_tekst: 'Membership is free and open to students at NTNU Gjøvik.',
     skjema_tittel: 'Membership form',
     skjema_mangler: 'The membership form is coming soon. Please contact the board in the meantime.',
+    f_tittel: 'SIGN UP', f_paakrevd: 'All fields are required', f_fornavn: 'First name', f_etternavn: 'Last name', f_epost: 'Email', f_telefon: 'Phone',
+    f_studie: 'Study programme', f_studie_eks: 'E.g. Bachelor in civil engineering', f_arstrinn: 'Year', f_velg: 'Choose …', f_ar1: '1st year', f_ar2: '2nd year', f_ar3: '3rd year', f_ar4: '4th year', f_ar5: '5th year', f_annet: 'Other',
+    f_foto: 'May we use photos and video you appear in?', f_foto_hjelp: 'Applies to Instagram (@gjovik_mikrotek), LinkedIn and our website. Your answer does not affect your membership.', ja: 'Yes', nei: 'No',
+    f_vedtekter: 'I have read and accept the statutes of Gjøvik MikroTek.', f_lagring: 'I consent to my details being stored in the membership register of Gjøvik MikroTek.',
+    f_personvern: 'Your details are only used to run the organisation, and only the board can see them. If you leave, we delete them after 30 days.',
+    f_send: 'Sign me up', f_sender: 'Sending …',
+    feil_navn: 'Please fill in both first and last name.', feil_epost: 'The email address does not look right.', feil_telefon: 'The phone number does not look right (at least 8 digits).',
+    feil_studie: 'Please write what you study.', feil_arstrinn: 'Please choose your year.', feil_foto: 'Please answer Yes or No about photos and video.',
+    feil_vedtekter: 'You must accept the statutes to become a member.', feil_lagring: 'You must consent to your details being stored.',
+    feil_nett: 'Could not connect. Check your connection and try again.', feil_ukjent: 'Something went wrong. Please try again shortly.',
+    takk_tittel: 'Thank you for your interest', takk_tekst: 'We have received your application, and the board will be in touch.', takk_nr: 'Membership number:', takk_epost: 'A copy of your answers has been sent to your email. Check your spam folder if you cannot find it.', takk_lukk: 'Close',
     nav_prosjekter: 'Projects', prosjekter: 'Projects', alle_prosjekter: 'All projects →',
     tilbake_prosjekter: '← All projects', ingen_prosjekter: 'No projects yet.', fant_ikke_prosjekt: 'Project not found.',
     Planlegges: 'Planned', 'Pågår': 'In progress', Ferdig: 'Completed'
@@ -298,7 +320,32 @@ function rullerInstagram(rute, bilder, synlige) {
   }, 3500);
 }
 
+// Takkemelding på forsiden etter innmelding. Parametrene fjernes etterpå, så den ikke vises igjen ved oppdatering.
+function visTakk() {
+  if (!EKTE.searchParams.has('innmeldt')) return;
+  const nr = EKTE.searchParams.get('innmeldt') || '';
+  const navn = EKTE.searchParams.get('navn') || '';
+  EKTE.searchParams.delete('innmeldt');
+  EKTE.searchParams.delete('navn');
+  skjulAdresse();
+  const vindu = document.createElement('dialog');
+  vindu.className = 'takk';
+  vindu.innerHTML = `
+    <img src="/assets/logo-hvit.svg" alt="" width="120" height="50">
+    <h2>${esc(t('takk_tittel'))}${navn ? ', ' + esc(navn) : ''}!</h2>
+    <p>${esc(t('takk_tekst'))}</p>
+    ${nr ? `<p class="takk-nr">${esc(t('takk_nr'))} <strong>${esc(nr)}</strong></p>` : ''}
+    <p class="takk-liten">${esc(t('takk_epost'))}</p>
+    <button type="button">${esc(t('takk_lukk'))}</button>`;
+  vindu.querySelector('button').addEventListener('click', () => vindu.close());
+  vindu.addEventListener('click', e => { if (e.target === vindu) vindu.close(); });
+  vindu.addEventListener('close', () => vindu.remove());
+  document.body.appendChild(vindu);
+  vindu.showModal();
+}
+
 async function visForside() {
+  visTakk();
   try {
     const [s, prosjekt, artikler, styret, sponsorer, prosjekter] = await Promise.all([
       fellesInnstillinger(), hent('prosjekt'), hent('artikler'), hent('styret'), hent('sponsorer'),
@@ -492,12 +539,89 @@ function skjemaAdresse(verdi) {
   return { visning };
 }
 
+// Lenken til Google Apps Script-registeret (se ../medlemsregister-google). Bare script.google.com godtas.
+function registerAdresse(verdi) {
+  const v = String(verdi || '').trim();
+  return /^https:\/\/script\.google\.com\/macros\/s\/[A-Za-z0-9_-]+\/exec$/.test(v) ? v : null;
+}
+
+// Innmeldingsskjemaet på siden. Sender til Google-registeret, som lagrer, gir medlemsnummer og sender e-post.
+// Når det er sendt, går man til forsiden, som viser takkemeldingen (visTakk).
+function settOppInnmelding(adresse) {
+  const skjema = document.getElementById('innmelding');
+  const knapp = document.getElementById('send-knapp');
+  const melding = document.getElementById('melding');
+  skjema.querySelectorAll('[data-plassholder]').forEach(el => { el.placeholder = t(el.dataset.plassholder); });
+  skjema.hidden = false;
+
+  const visFeil = (tekst, felt) => {
+    melding.textContent = tekst; melding.hidden = false;
+    skjema.querySelectorAll('.feil').forEach(el => el.classList.remove('feil'));
+    if (felt) { felt.classList.add('feil'); felt.focus(); }
+  };
+
+  skjema.addEventListener('submit', async e => {
+    e.preventDefault();
+    melding.hidden = true;
+    const f = skjema.elements;
+    const foto = skjema.querySelector('input[name=foto]:checked');
+    const data = {
+      fornavn: f.fornavn.value.trim(),
+      etternavn: f.etternavn.value.trim(),
+      epost: f.epost.value.trim(),
+      telefon: f.telefon.value.trim(),
+      studieprogram: f.studieprogram.value.trim(),
+      arstrinn: f.arstrinn.value,
+      foto: foto ? foto.value : '',
+      vedtekter: f.vedtekter.checked,
+      lagring: f.lagring.checked,
+      nettsted: f.nettsted.value,
+    };
+
+    if (!data.fornavn) return visFeil(t('feil_navn'), f.fornavn);
+    if (!data.etternavn) return visFeil(t('feil_navn'), f.etternavn);
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(data.epost)) return visFeil(t('feil_epost'), f.epost);
+    if (!/^\+?[\d\s-]{8,20}$/.test(data.telefon)) return visFeil(t('feil_telefon'), f.telefon);
+    if (!data.studieprogram) return visFeil(t('feil_studie'), f.studieprogram);
+    if (!data.arstrinn) return visFeil(t('feil_arstrinn'), f.arstrinn);
+    if (!data.foto) return visFeil(t('feil_foto'), skjema.querySelector('input[name=foto]'));
+    if (!data.vedtekter) return visFeil(t('feil_vedtekter'), f.vedtekter);
+    if (!data.lagring) return visFeil(t('feil_lagring'), f.lagring);
+
+    knapp.disabled = true;
+    knapp.textContent = t('f_sender');
+    let svar;
+    try {
+      // text/plain gjør at nettleseren sender direkte uten forhåndssjekk (CORS), som Apps Script ikke støtter
+      const r = await fetch(adresse, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(data) });
+      svar = await r.json();
+    } catch (err) {
+      console.error(err);
+      svar = null;
+    }
+    knapp.disabled = false;
+    knapp.textContent = t('f_send');
+    if (!svar) return visFeil(t('feil_nett'));
+    if (!svar.ok) return visFeil(svar.feil || t('feil_ukjent'));
+
+    const til = new URL('/index.html', location.origin);
+    til.searchParams.set('innmeldt', svar.medlemsnr || '');
+    til.searchParams.set('navn', svar.fornavn || data.fornavn);
+    location.href = til.href;
+  });
+}
+
 async function visMedlem() {
   try {
     const [s, medlem] = await Promise.all([fellesInnstillinger(), hent('medlem')]);
     document.title = (felt(medlem, 'tittel') || t('nav_medlem')) + ' – ' + (s.navn || 'Gjøvik MikroTek');
     if (felt(medlem, 'tittel')) document.getElementById('medlem-tittel').textContent = felt(medlem, 'tittel');
     document.getElementById('medlem-tekst').innerHTML = md(felt(medlem, 'tekst'));
+
+    // Eget skjema når Google-registeret er koblet til (adminpanelet: «Innmeldingsskjema (Google)»).
+    // Ellers vises Microsoft Forms-skjemaet som før.
+    const register = registerAdresse(medlem.registrering);
+    if (register) return settOppInnmelding(register);
 
     const skjema = skjemaAdresse(medlem.skjema);
     if (!skjema) { document.getElementById('skjema-mangler').hidden = false; return; }
