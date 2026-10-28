@@ -58,12 +58,12 @@ const TEKST = {
     f_tittel: 'INNMELDING', f_paakrevd: 'Alle felt må fylles ut', f_fornavn: 'Fornavn', f_etternavn: 'Etternavn', f_epost: 'E-post', f_telefon: 'Telefon',
     f_studie: 'Studieprogram', f_studie_eks: 'F.eks. Bachelor i bygg', f_arstrinn: 'Årstrinn', f_velg: 'Velg …', f_ar1: '1. år', f_ar2: '2. år', f_ar3: '3. år', f_ar4: '4. år', f_ar5: '5. år', f_annet: 'Annet',
     f_foto: 'Får vi bruke bilder og video der du er med?', f_foto_hjelp: 'Gjelder Instagram (@gjovik_mikrotek), LinkedIn og nettsiden vår. Svaret påvirker ikke medlemskapet ditt.', ja: 'Ja', nei: 'Nei',
-    f_vedtekter: 'Jeg har lest og godtar vedtektene til Gjøvik MikroTek.', f_lagring: 'Jeg samtykker til at opplysningene lagres i medlemsregisteret til Gjøvik MikroTek.',
+    f_lagring: 'Jeg samtykker til at opplysningene lagres i medlemsregisteret til Gjøvik MikroTek.',
     f_personvern: 'Opplysningene brukes bare til å drive foreningen, og bare styret ser dem. Melder du deg ut, sletter vi dem etter 30 dager.',
     f_send: 'Meld meg inn', f_sender: 'Sender …',
     feil_navn: 'Fyll inn både fornavn og etternavn.', feil_epost: 'E-postadressen ser ikke riktig ut.', feil_telefon: 'Telefonnummeret ser ikke riktig ut (minst 8 siffer).',
     feil_studie: 'Skriv hva du studerer.', feil_arstrinn: 'Velg årstrinn.', feil_foto: 'Svar Ja eller Nei på spørsmålet om bilder og video.',
-    feil_vedtekter: 'Du må godta vedtektene for å bli medlem.', feil_lagring: 'Du må samtykke til at opplysningene lagres.',
+    feil_lagring: 'Du må samtykke til at opplysningene lagres.',
     feil_nett: 'Fikk ikke kontakt. Sjekk nettet og prøv igjen.', feil_ukjent: 'Noe gikk galt. Prøv igjen om litt.',
     takk_tittel: 'Takk for din interesse', takk_tekst: 'Vi har mottatt innmeldingen din, og styret tar kontakt med deg.', takk_nr: 'Medlemsnummer:', takk_epost: 'Du har fått en kopi av svarene på e-post. Sjekk søppelpost hvis du ikke finner den.', takk_lukk: 'Lukk',
     nav_prosjekter: 'Prosjekter', prosjekter: 'Prosjekter', alle_prosjekter: 'Alle prosjekter →',
@@ -87,12 +87,12 @@ const TEKST = {
     f_tittel: 'SIGN UP', f_paakrevd: 'All fields are required', f_fornavn: 'First name', f_etternavn: 'Last name', f_epost: 'Email', f_telefon: 'Phone',
     f_studie: 'Study programme', f_studie_eks: 'E.g. Bachelor in civil engineering', f_arstrinn: 'Year', f_velg: 'Choose …', f_ar1: '1st year', f_ar2: '2nd year', f_ar3: '3rd year', f_ar4: '4th year', f_ar5: '5th year', f_annet: 'Other',
     f_foto: 'May we use photos and video you appear in?', f_foto_hjelp: 'Applies to Instagram (@gjovik_mikrotek), LinkedIn and our website. Your answer does not affect your membership.', ja: 'Yes', nei: 'No',
-    f_vedtekter: 'I have read and accept the statutes of Gjøvik MikroTek.', f_lagring: 'I consent to my details being stored in the membership register of Gjøvik MikroTek.',
+    f_lagring: 'I consent to my details being stored in the membership register of Gjøvik MikroTek.',
     f_personvern: 'Your details are only used to run the organisation, and only the board can see them. If you leave, we delete them after 30 days.',
     f_send: 'Sign me up', f_sender: 'Sending …',
     feil_navn: 'Please fill in both first and last name.', feil_epost: 'The email address does not look right.', feil_telefon: 'The phone number does not look right (at least 8 digits).',
     feil_studie: 'Please write what you study.', feil_arstrinn: 'Please choose your year.', feil_foto: 'Please answer Yes or No about photos and video.',
-    feil_vedtekter: 'You must accept the statutes to become a member.', feil_lagring: 'You must consent to your details being stored.',
+    feil_lagring: 'You must consent to your details being stored.',
     feil_nett: 'Could not connect. Check your connection and try again.', feil_ukjent: 'Something went wrong. Please try again shortly.',
     takk_tittel: 'Thank you for your interest', takk_tekst: 'We have received your application, and the board will be in touch.', takk_nr: 'Membership number:', takk_epost: 'A copy of your answers has been sent to your email. Check your spam folder if you cannot find it.', takk_lukk: 'Close',
     nav_prosjekter: 'Projects', prosjekter: 'Projects', alle_prosjekter: 'All projects →',
@@ -573,7 +573,6 @@ function settOppInnmelding(adresse) {
       studieprogram: f.studieprogram.value.trim(),
       arstrinn: f.arstrinn.value,
       foto: foto ? foto.value : '',
-      vedtekter: f.vedtekter.checked,
       lagring: f.lagring.checked,
       nettsted: f.nettsted.value,
     };
@@ -585,7 +584,6 @@ function settOppInnmelding(adresse) {
     if (!data.studieprogram) return visFeil(t('feil_studie'), f.studieprogram);
     if (!data.arstrinn) return visFeil(t('feil_arstrinn'), f.arstrinn);
     if (!data.foto) return visFeil(t('feil_foto'), skjema.querySelector('input[name=foto]'));
-    if (!data.vedtekter) return visFeil(t('feil_vedtekter'), f.vedtekter);
     if (!data.lagring) return visFeil(t('feil_lagring'), f.lagring);
 
     knapp.disabled = true;
