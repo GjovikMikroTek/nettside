@@ -3,16 +3,16 @@
    Vi treffer dem med [class*="-Navn"]. Decap-versjonen er låst i index.html, så navnene endrer seg ikke uten videre. */
 
 :root {
-  --gmt-natt: #0d1830;
+  --gmt-natt: #10192e;
   --gmt-natt-2: #15264a;
-  --gmt-bla: #2a529a;
+  --gmt-bla: #2b5299;
   --gmt-bla-lys: #6f93d6;
   --gmt-oransje: #f29228;
   --gmt-flate: #f3f5f9;
   --gmt-linje: #dfe4ee;
   --gmt-tekst: #1b2233;
-  --gmt-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
-  --gmt-sans: "Inter", system-ui, sans-serif;
+  --gmt-mono: "Bahnschrift SemiBold SemiCondensed", "Bahnschrift SemiCondensed", "Barlow Semi Condensed", Bahnschrift, sans-serif;
+  --gmt-sans: Bahnschrift, Barlow, system-ui, sans-serif;
 }
 
 body {
@@ -88,7 +88,7 @@ body {
 header[class*="-AppHeader"] {
   background: linear-gradient(90deg, var(--gmt-natt), var(--gmt-natt-2)) !important;
   border-bottom: 3px solid var(--gmt-oransje);
-  box-shadow: 0 6px 24px rgba(13, 24, 48, .25) !important;
+  box-shadow: 0 6px 24px rgba(16, 25, 46, .25) !important;
 }
 [class*="-AppHeaderLogo"] img { height: 30px !important; width: 72px !important; max-height: none !important; max-width: none !important; padding: 0 !important; margin: 0 18px 0 4px; }
 [class*="-AppHeaderNavLink"], [class*="-AppHeaderButton"], [class*="-AppHeaderLink"] {
@@ -110,7 +110,7 @@ header[class*="-AppHeader"] {
 [class*="-SidebarContainer"], [class*="-CollectionTopContainer"], [class*="-ListCard"], [class*="-GridCard"] {
   border: 1px solid var(--gmt-linje);
   border-radius: 8px !important;
-  box-shadow: 0 2px 10px rgba(13, 24, 48, .05) !important;
+  box-shadow: 0 2px 10px rgba(16, 25, 46, .05) !important;
 }
 [class*="-SidebarHeading"], [class*="-CollectionTopHeading"] {
   font-family: var(--gmt-mono);

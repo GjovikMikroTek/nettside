@@ -1,20 +1,22 @@
 :root {
-  /* Mørkt «natt»-tema (valgt av styret 21.10.2026): marineblå arbeidstegning, logoens blå og oransje */
-  --aksent: #2a529a;   /* blå fra logoen */
+  /* Fargene følger «Visuell verktøykasse GMT»: logofarge 1 #F29228, logofarge 2 #2B5299, farge 3 #8DB1DD, farge 4 #10192E.
+     Palett også: #404939, #E88C6D, #F4D4A2, #3E2A13 (lysere toner 10–40 % som bakgrunn bak tekst). */
+  --aksent: #2b5299;   /* blå fra logoen */
   --oransje: #f29228;  /* oransje fra logoen */
-  --lenke: #9db8ef;
+  --lenke: #8db1dd;
   --tekst: #e9edf4;
   --dempet: #9ba7bb;
-  --bakgrunn: #0d1830; /* natt */
+  --bakgrunn: #10192e; /* natt */
   --flate: #15264a;    /* litt lysere blå flate */
   --linje: rgba(255, 255, 255, .10);
   --rutenett: rgba(255, 255, 255, .05); /* «arbeidstegning»-rutenett */
   --radius: 8px;
   /* Mørk «tech»-stil (som adminpanelet og innmeldingsskjemaet) */
-  --natt: #0d1830;
+  --natt: #10192e;
   --natt-2: #15264a;
-  --bla-lys: #8fb0ea;
-  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --bla-lys: #8db1dd;
+  /* Teknisk typografi: Bahnschrift SemiBold SemiCondensed (verktøykassen). Andre maskiner får Barlow Semi Condensed */
+  --mono: "Bahnschrift SemiBold SemiCondensed", "Bahnschrift SemiCondensed", "Barlow Semi Condensed", Bahnschrift, sans-serif;
   /* Overskrifter: Bahnschrift Bold, brødtekst: Bahnschrift Regular (fra styret). Den finnes bare på Windows og kan ikke legges ut på nett,
      så andre maskiner får Barlow fra Google Fonts, som også bygger på DIN */
   --overskrift: Bahnschrift, Barlow, system-ui, sans-serif;
@@ -65,7 +67,7 @@ a { color: var(--lenke); }
 /* Toppmenyen: hvit med originallogoen øverst på siden, og det hvite glir ned i toppbildet (se .hero og .medlem-hero).
    Når man scroller ned, går den mykt over i nattblått med hvit logo og hvit tekst (klassen .dimmet settes i app.js). */
 .topp { background: #fff; position: sticky; top: 0; z-index: 10; isolation: isolate; }
-.topp::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(13, 24, 48, .96); opacity: 0; transition: opacity .35s ease; pointer-events: none; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.topp::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(16, 25, 46, .96); opacity: 0; transition: opacity .35s ease; pointer-events: none; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
 .topp .merke, .topp nav a, .topp .sprak-knapp { transition: color .35s ease, border-color .35s ease; }
 .topp.dimmet::before { opacity: 1; }
 .topp.dimmet .merke { color: #fff; }
@@ -78,12 +80,12 @@ a { color: var(--lenke); }
 .topp-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
 /* Merke: logoen i hvit utgave (G og T hvite, M oransje) og navn */
 .merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #2b5299; text-decoration: none; }  /* samme blå som logoen */
-.merke .merke-logo { height: 30px; width: auto; }
+.merke .merke-logo { height: 40px; width: auto; }  /* verktøykassen: minst 40 px på skjerm */
 nav { display: flex; gap: 18px; flex-wrap: wrap; }
-nav a { color: #3a4560; text-decoration: none; font-weight: 500; font-size: .95rem; }
+nav a { color: #10192e; text-decoration: none; font-weight: 500; font-size: .95rem; }
 nav a:hover { color: #2b5298; }
 nav { align-items: center; }
-.sprak-knapp { font: inherit; font-size: .85rem; font-weight: 600; color: #0d1830; background: none; border: 1px solid #c9d2e3; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.sprak-knapp { font: inherit; font-size: .85rem; font-weight: 600; color: #10192e; background: none; border: 1px solid #c9d2e3; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
 .sprak-knapp:hover { border-color: var(--oransje); }
 
 /* Hero: mørkeblå arbeidstegning med 3D-mikrohuset */
@@ -109,7 +111,7 @@ nav { align-items: center; }
   background:
     linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
     linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(13,24,48,.95) 0%, rgba(13,24,48,.86) 50%, rgba(21,38,74,.72) 100%);
+    linear-gradient(90deg, rgba(16, 25, 46,.95) 0%, rgba(16, 25, 46,.86) 50%, rgba(21,38,74,.72) 100%);
   background-size: auto, 96px 96px, 96px 96px, auto; }
 /* Toppbildet starter under den hvite overgangen fra toppmenyen */
 .hero { padding-top: 150px; }
@@ -327,7 +329,7 @@ a.person:hover strong { color: var(--oransje); }
   background-image: radial-gradient(ellipse at 50% 30%, rgba(42, 82, 154, .6), transparent 70%),
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: auto, 24px 24px, 24px 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, .45); }
-.takk::backdrop { background: rgba(13, 24, 48, .6); backdrop-filter: blur(3px); }
+.takk::backdrop { background: rgba(16, 25, 46, .6); backdrop-filter: blur(3px); }
 .takk img { display: block; width: 120px; height: auto; margin: 0 auto 18px; }
 .takk h2 { margin: 0 0 10px; font-size: 1.6rem; color: #fff; }
 .takk p { margin: 0 0 14px; line-height: 1.5; color: rgba(255, 255, 255, .85); }
@@ -339,12 +341,12 @@ a.person:hover strong { color: var(--oransje); }
 /* Menyknapp (vises bare på smale skjermer) */
 .skjult { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .meny-knapp { display: none; background: none; border: 1px solid #c9d2e3; border-radius: 8px; width: 44px; height: 44px; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-.meny-knapp .strek { display: block; width: 20px; height: 2px; background: #0d1830; border-radius: 2px; }
+.meny-knapp .strek { display: block; width: 20px; height: 2px; background: #10192e; border-radius: 2px; }
 
 @media (max-width: 760px) {
   .topp-inner { flex-wrap: nowrap; padding-top: 10px; padding-bottom: 10px; }
   .meny-knapp { display: flex; }
-  nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #0d1830; border-bottom: 1px solid var(--linje); padding: 8px 16px 16px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
+  nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #10192e; border-bottom: 1px solid var(--linje); padding: 8px 16px 16px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
   nav.apen { display: flex; }
   nav a { padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--linje); color: rgba(255,255,255,.85); }
   nav a:hover { color: #fff; }

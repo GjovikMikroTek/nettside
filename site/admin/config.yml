@@ -130,7 +130,7 @@ collections:
           - { name: beskrivelse, label: "Kort beskrivelse (forsiden)", widget: text }
           - { name: beskrivelse_en, label: "Kort beskrivelse (engelsk)", widget: text, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
           - { name: hovedbilde, label: "Hovedbilde (forsiden)", widget: image, required: false }
-          - { name: aksentfarge, label: "Profilfarge (hex, logoens blå er #2a529a)", widget: string }
+          - { name: aksentfarge, label: "Profilfarge (hex, logoens blå er #2b5299)", widget: string }
           - { name: epost, label: Kontakt-e-post, widget: string, required: false, hint: "Vises under Kontakt på forsiden." }
           - { name: orgnr, label: "Organisasjonsnummer", widget: string, required: false, hint: "9 siffer fra Brønnøysundregistrene. Vises under Kontakt med lenke til registeret." }
           - { name: adresse, label: "Adresse", widget: string, required: false, hint: "F.eks. Teknologivegen 22, 2815 Gjøvik" }
