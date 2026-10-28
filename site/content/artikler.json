@@ -1,15 +1,23 @@
 {
   "artikler": [
     {
-      "tittel": "Gjøvik MikroTek er stiftet",
-      "tittel_en": "Gjøvik MikroTek has been founded",
-      "dato": "2026-04-15",
       "bilde": "/images/uploads/forside-gruppebilde.jpg",
-      "ingress": "15. april 2026 ble Gjøvik MikroTek stiftet ved NTNU Gjøvik.",
-      "ingress_en": "On 15 April 2026, Gjøvik MikroTek was founded at NTNU Gjøvik.",
-      "tekst": "Stiftelsesmøtet ble holdt på NTNU Gjøvik 15. april 2026. Der ble vedtektene vedtatt og det første styret valgt:\n\n- **Styreleder:** Benjamin Danbolt\n- **Nestleder:** Paulina Andzel\n- **Økonomileder:** Kenneth Liabø\n\nGjøvik MikroTek skal bygge mikrohus og gjennomføre andre bygningsrelaterte prosjekter sammen med studentene på campus.",
+      "tittel_en": "Gjøvik MikroTek has been founded",
       "tekst_en": "The founding meeting was held at NTNU Gjøvik on 15 April 2026. The statutes were adopted and the first board was elected:\n\n- **Chair:** Benjamin Danbolt\n- **Vice chair:** Paulina Andzel\n- **Head of finance:** Kenneth Liabø\n\nGjøvik MikroTek will build micro houses and carry out other building-related projects together with the students on campus.",
-      "publisert": true
+      "publisert": true,
+      "ingress_en": "On 15 April 2026, Gjøvik MikroTek was founded at NTNU Gjøvik.",
+      "ingress": "15. april 2026 ble Gjøvik MikroTek stiftet ved NTNU Gjøvik.",
+      "dato": "2026-04-15",
+      "tekst": "Stiftelsesmøtet ble holdt på NTNU Gjøvik 15. april 2026. Der ble vedtektene vedtatt og det første styret valgt:\n\n- **Styreleder:** Benjamin Danbolt\n- **Nestleder:** Paulina Andzel\n- **Økonomileder:** Kenneth Liabø\n\nGjøvik MikroTek skal bygge mikrohus og gjennomføre andre bygningsrelaterte prosjekter sammen med studentene på campus.",
+      "tittel": "Gjøvik MikroTek er stiftet"
+    },
+    {
+      "publisert": true,
+      "tittel": "Test",
+      "bilde": "/images/uploads/skjermbilde-2026-06-01-131930.png",
+      "dato": "2026-10-28",
+      "ingress": "Dette er en test, dette blir kjempebra.",
+      "tekst": "Hei alle sammen! i dag tester vi denne funksjonen for å se hvordan den vises på nettsiden."
     }
   ]
 }
