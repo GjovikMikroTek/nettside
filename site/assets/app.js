@@ -129,6 +129,18 @@ function settOppSprak() {
   }
 }
 
+// Bilder som er lastet opp i adminpanelet, er ute på nettsiden først etter ca. ett minutt. Åpner noen siden i mellomtiden,
+// kan nettleseren huske «finnes ikke» i flere timer (Cloudflare). Feiler et opplastet bilde, prøver vi derfor én gang til
+// med en ny adresse, så nettleseren må hente det på nytt.
+document.addEventListener('error', e => {
+  const img = e.target;
+  if (!(img instanceof HTMLImageElement) || img.dataset.provdIgjen || !/\/images\/uploads\//.test(img.src)) return;
+  img.dataset.provdIgjen = '1';
+  const url = new URL(img.src);
+  url.searchParams.set('r', Date.now());
+  setTimeout(() => { img.src = url.href; }, 1500);
+}, true);
+
 // Toppmenyen går over i nattblått når man har scrollet litt ned, og blir hvit igjen øverst (se .topp.dimmet i style.css)
 function settOppToppmeny() {
   const topp = document.querySelector('.topp');
