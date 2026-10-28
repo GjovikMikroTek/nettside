@@ -516,6 +516,11 @@ async function visStyret() {
           ? `<details class="person styre-person" id="${esc(personSlug(m))}"><summary>${hode}<em class="les-mer" aria-hidden="true">${esc(t('les_mer'))}</em></summary><div class="person-om brodtekst">${md(om)}${epost}</div></details>`
           : `<div class="person styre-person" id="${esc(personSlug(m))}">${hode}${epost ? `<div class="person-om">${epost}</div>` : ''}</div>`;
       }).join('') + '</div>' : `<p class="tom">${esc(t('styret_tom'))}</p>`);
+    // Bare én person åpen om gangen: åpnes en ny, lukkes den som var åpen
+    const kort = boks.querySelectorAll('details.styre-person');
+    kort.forEach(d => d.addEventListener('toggle', () => {
+      if (d.open) kort.forEach(annen => { if (annen !== d) annen.open = false; });
+    }));
     // Kommer man fra forsiden (/styret.html#navn), åpnes den personen
     const valgt = EKTE.hash && document.getElementById(decodeURIComponent(EKTE.hash.slice(1)));
     if (valgt) {
