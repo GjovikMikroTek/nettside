@@ -16,7 +16,7 @@
   --natt-2: #15264a;
   --bla-lys: #8db1dd;
   /* Teknisk typografi: Bahnschrift SemiBold SemiCondensed (verktøykassen). Andre maskiner får Barlow Semi Condensed */
-  --mono: "Bahnschrift SemiBold SemiCondensed", "Bahnschrift SemiCondensed", "Barlow Semi Condensed", Bahnschrift, sans-serif;
+  --mono: Bahnschrift, "Barlow Semi Condensed", sans-serif;  /* brukes med font-stretch: semi-condensed, se under */
   /* Overskrifter: Bahnschrift Bold, brødtekst: Bahnschrift Regular (fra styret). Den finnes bare på Windows og kan ikke legges ut på nett,
      så andre maskiner får Barlow fra Google Fonts, som også bygger på DIN */
   --overskrift: Bahnschrift, Barlow, system-ui, sans-serif;
@@ -59,6 +59,13 @@ a { color: var(--lenke); }
 .seksjon h2::before { content: "// "; font-family: var(--mono); color: var(--oransje); font-weight: 600; }
 .medlem-banner h2::before { display: none; }
 .seksjon h2::after { content: ""; display: block; width: 44px; height: 4px; margin-top: 10px; background: var(--oransje); border-radius: 2px; }
+/* Sidetittelen på Artikler, Prosjekter og Styret i samme stil som overskriftene på forsiden: «//» foran og oransje strek under */
+#innhold > h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); margin: 0 0 28px; }
+#innhold > h1::before { content: "// "; font-family: var(--mono); color: var(--oransje); font-weight: 600; }
+#innhold > h1::after { content: ""; display: block; width: 52px; height: 4px; margin-top: 12px; background: var(--oransje); border-radius: 2px; }
+/* Teknisk typografi (verktøykassen): Bahnschrift SemiBold SemiCondensed, altså smalere bredde på samme skrift */
+.seksjon h2::before, #innhold > h1::before, .slagord, .status, .les-mer, .kontakt-spalter h3, .bunn, .insta-folg span:first-child,
+.skjema-merke, .takk-nr, .medlem-hero .slagord { font-stretch: semi-condensed; font-weight: 600; }
 .medlem-banner h2::after { display: none; }
 .seksjon-topp { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; }
 .tom { color: var(--dempet); }
