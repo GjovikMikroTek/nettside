@@ -24,7 +24,7 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
-section[id] { scroll-margin-top: 72px; }
+section[id] { scroll-margin-top: 100px; }
 body {
   margin: 0;
   font-family: var(--brodtekst);
@@ -47,16 +47,17 @@ a { color: var(--lenke); }
 .tom { color: var(--dempet); }
 
 /* Topp */
-.topp { border-bottom: 1px solid var(--linje); background: rgba(13, 24, 48, .92); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 10; }
+/* Toppmenyen er hvit, så logoen står i originalfargene. Nederst går den hvite flaten over i det blå. */
+.topp { background: linear-gradient(180deg, #ffffff 0, #ffffff 62%, #dbe4f5 72%, #6f8fcb 84%, #1d3a72 93%, #0d1830 100%); position: sticky; top: 0; z-index: 10; padding-bottom: 26px; }
 .topp-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
 /* Merke: logoen i hvit utgave (G og T hvite, M oransje) og navn */
-.merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #fff; text-decoration: none; }
+.merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #0d1830; text-decoration: none; }
 .merke .merke-logo { height: 30px; width: auto; }
 nav { display: flex; gap: 18px; flex-wrap: wrap; }
-nav a { color: rgba(255,255,255,.75); text-decoration: none; font-weight: 500; font-size: .95rem; }
-nav a:hover { color: #fff; }
+nav a { color: #3a4560; text-decoration: none; font-weight: 500; font-size: .95rem; }
+nav a:hover { color: #2b5298; }
 nav { align-items: center; }
-.sprak-knapp { font: inherit; font-size: .85rem; font-weight: 600; color: var(--tekst); background: none; border: 1px solid var(--linje); border-radius: 999px; padding: 4px 12px; cursor: pointer; }
+.sprak-knapp { font: inherit; font-size: .85rem; font-weight: 600; color: #0d1830; background: none; border: 1px solid #c9d2e3; border-radius: 999px; padding: 4px 12px; cursor: pointer; }
 .sprak-knapp:hover { border-color: var(--oransje); }
 
 /* Hero: mørkeblå arbeidstegning med 3D-mikrohuset */
@@ -288,17 +289,18 @@ a.person:hover strong { color: var(--oransje); }
 
 /* Menyknapp (vises bare på smale skjermer) */
 .skjult { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.meny-knapp { display: none; background: none; border: 1px solid var(--linje); border-radius: 8px; width: 44px; height: 44px; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
-.meny-knapp .strek { display: block; width: 20px; height: 2px; background: #fff; border-radius: 2px; }
+.meny-knapp { display: none; background: none; border: 1px solid #c9d2e3; border-radius: 8px; width: 44px; height: 44px; padding: 0; cursor: pointer; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.meny-knapp .strek { display: block; width: 20px; height: 2px; background: #0d1830; border-radius: 2px; }
 
 @media (max-width: 760px) {
   .topp-inner { flex-wrap: nowrap; padding-top: 10px; padding-bottom: 10px; }
   .meny-knapp { display: flex; }
   nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0; background: #0d1830; border-bottom: 1px solid var(--linje); padding: 8px 16px 16px; box-shadow: 0 8px 20px rgba(0,0,0,.08); }
   nav.apen { display: flex; }
-  nav a { padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--linje); }
+  nav a { padding: 12px 4px; font-size: 1.05rem; border-bottom: 1px solid var(--linje); color: rgba(255,255,255,.85); }
+  nav a:hover { color: #fff; }
   nav .nav-cta { margin-top: 12px; text-align: center; border-bottom: 0; padding: 12px; }
-  nav .sprak-knapp { margin-top: 12px; align-self: flex-start; padding: 8px 16px; }
+  nav .sprak-knapp { margin-top: 12px; align-self: flex-start; padding: 8px 16px; color: #fff; border-color: rgba(255,255,255,.3); }
   .topp { position: sticky; }
   .seksjon { padding: 40px 16px; }
   .hero { padding: 56px 0 48px; }
