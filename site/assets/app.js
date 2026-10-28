@@ -46,7 +46,7 @@ const TEKST = {
     om_tittel: 'Om oss', siste_artikler: 'Siste artikler', alle_artikler: 'Alle artikler →', tilbake: '← Alle artikler',
     artikler: 'Artikler', ingen_artikler: 'Ingen artikler ennå.', fant_ikke: 'Fant ikke artikkelen.', kunne_ikke: 'Kunne ikke laste innholdet.',
     fra_instagram: 'Fra Instagram', folg_instagram: 'Følg oss på Instagram →', instagram_alt: 'Innlegg på Instagram', insta_tekst: 'Bilder fra byggingen og arrangementene våre legges ut på Instagram.',
-    styret: 'Styret', styret_tom: 'Styret legges inn snart.',
+    styret: 'Styret', styret_tom: 'Styret legges inn snart.', mer_om_styret: 'Mer om styret →', les_mer: 'Les mer',
     sponsorer: 'Sponsorer og samarbeidspartnere', sponsor_tom: 'Vil du støtte oss? Ta kontakt!',
     Hovedsponsor: 'Hovedsponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Samarbeidspartner',
     kontakt: 'Kontakt', epost_tekst: 'Send oss en e-post på', k_organisasjon: 'Organisasjon', k_leder: 'Leder', k_kontakt: 'Ta kontakt', k_orgnr: 'Org.nr.', k_tlf: 'Telefon', k_epost: 'E-post', skjema: 'Fyll ut kontaktskjema',
@@ -64,7 +64,7 @@ const TEKST = {
     om_tittel: 'About us', siste_artikler: 'Latest news', alle_artikler: 'All news →', tilbake: '← All news',
     artikler: 'News', ingen_artikler: 'No articles yet.', fant_ikke: 'Article not found.', kunne_ikke: 'Could not load the content.',
     fra_instagram: 'From Instagram', folg_instagram: 'Follow us on Instagram →', instagram_alt: 'Instagram post', insta_tekst: 'Photos from our builds and events are posted on Instagram.',
-    styret: 'The board', styret_tom: 'Board members coming soon.',
+    styret: 'The board', styret_tom: 'Board members coming soon.', mer_om_styret: 'More about the board →', les_mer: 'Read more',
     sponsorer: 'Sponsors and partners', sponsor_tom: 'Want to support us? Get in touch!',
     Hovedsponsor: 'Main sponsor', Sponsor: 'Sponsor', Samarbeidspartner: 'Partner',
     kontakt: 'Contact', epost_tekst: 'Email us at', k_organisasjon: 'Organisation', k_leder: 'Chair', k_kontakt: 'Get in touch', k_orgnr: 'Org. no.', k_tlf: 'Phone', k_epost: 'Email', skjema: 'Fill out the contact form',
@@ -143,6 +143,15 @@ function tittelSlug(a) {
   return (a.tittel || '').toLowerCase()
     .replace(/æ/g, 'ae').replace(/ø/g, 'o').replace(/å/g, 'a')
     .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function personSlug(m) {
+  return tittelSlug({ tittel: m.navn || '' });
+}
+
+function portrett(m) {
+  return m.bilde ? `<img src="${esc(m.bilde)}" alt="${esc(m.navn)}" loading="lazy">`
+    : `<div class="initialer">${esc((m.navn || '?').split(' ').map(x => x[0]).join('').slice(0, 2))}</div>`;
 }
 
 function slug(a) {
@@ -320,13 +329,13 @@ async function visForside() {
       ? siste.map(artikkelKort).join('')
       : `<p class="tom">${esc(t('ingen_artikler'))}</p>`;
 
+    // Hver person lenker til sin plass på styresiden, der teksten om personen åpnes
     document.getElementById('styret-liste').innerHTML = (styret.medlemmer || []).map(m => `
-      <div class="person">
-        ${m.bilde ? `<img src="${esc(m.bilde)}" alt="${esc(m.navn)}" loading="lazy">` : `<div class="initialer">${esc((m.navn || '?').split(' ').map(x => x[0]).join('').slice(0, 2))}</div>`}
+      <a class="person" href="/styret.html#${esc(personSlug(m))}">
+        ${portrett(m)}
         <strong>${esc(m.navn)}</strong>
         <span>${esc(felt(m, 'rolle'))}</span>
-        ${m.epost ? `<a href="mailto:${esc(m.epost)}">${esc(m.epost)}</a>` : ''}
-      </div>`).join('') || `<p class="tom">${esc(t('styret_tom'))}</p>`;
+      </a>`).join('') || `<p class="tom">${esc(t('styret_tom'))}</p>`;
 
     const nivaer = ['Hovedsponsor', 'Sponsor', 'Samarbeidspartner'];
     const sp = sponsorer.sponsorer || [];
@@ -436,6 +445,36 @@ async function visProsjekter() {
     document.title = t('prosjekter') + ' – ' + (s.navn || 'Gjøvik MikroTek');
     boks.innerHTML = `<h1>${esc(t('prosjekter'))}</h1><div class="kort-rutenett">` +
       (alle.map(prosjektKort).join('') || `<p class="tom">${esc(t('ingen_prosjekter'))}</p>`) + '</div>';
+  } catch (e) {
+    console.error(e);
+    boks.innerHTML = `<p>${esc(t('kunne_ikke'))}</p>`;
+  }
+}
+
+// Styresiden: alle styremedlemmene. Har personen en tekst («Om personen» i adminpanelet),
+// åpnes den i et felt under navnet når man klikker på navnet eller bildet.
+async function visStyret() {
+  const boks = document.getElementById('innhold');
+  try {
+    const [s, styret] = await Promise.all([fellesInnstillinger(), hent('styret')]);
+    document.title = t('styret') + ' – ' + (s.navn || 'Gjøvik MikroTek');
+    const medl = styret.medlemmer || [];
+    boks.innerHTML = `<h1>${esc(t('styret'))}</h1>` +
+      (felt(styret, 'intro') ? `<div class="brodtekst styret-intro">${md(felt(styret, 'intro'))}</div>` : '') +
+      (medl.length ? '<div class="styre-kort">' + medl.map(m => {
+        const om = felt(m, 'om');
+        const hode = `${portrett(m)}<strong>${esc(m.navn)}</strong><span>${esc(felt(m, 'rolle'))}</span>`;
+        const epost = m.epost ? `<p><a href="mailto:${esc(m.epost)}">${esc(m.epost)}</a></p>` : '';
+        return om
+          ? `<details class="person styre-person" id="${esc(personSlug(m))}"><summary>${hode}<em class="les-mer" aria-hidden="true">${esc(t('les_mer'))}</em></summary><div class="person-om brodtekst">${md(om)}${epost}</div></details>`
+          : `<div class="person styre-person" id="${esc(personSlug(m))}">${hode}${epost ? `<div class="person-om">${epost}</div>` : ''}</div>`;
+      }).join('') + '</div>' : `<p class="tom">${esc(t('styret_tom'))}</p>`);
+    // Kommer man fra forsiden (/styret.html#navn), åpnes den personen
+    const valgt = EKTE.hash && document.getElementById(decodeURIComponent(EKTE.hash.slice(1)));
+    if (valgt) {
+      if (valgt.tagName === 'DETAILS') valgt.open = true;
+      valgt.scrollIntoView({ behavior: 'instant', block: 'center' });
+    }
   } catch (e) {
     console.error(e);
     boks.innerHTML = `<p>${esc(t('kunne_ikke'))}</p>`;

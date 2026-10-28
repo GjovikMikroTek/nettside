@@ -154,6 +154,26 @@ time { color: var(--dempet); font-size: .85rem; }
 .initialer { display: grid; place-items: center; background: var(--flate); color: var(--lenke); font-weight: 700; font-size: 1.8rem; }
 .person span { color: var(--dempet); font-size: .95rem; }
 .person a { font-size: .85rem; word-break: break-all; }
+a.person { color: inherit; text-decoration: none; }
+a.person:hover strong { color: var(--oransje); }
+/* Styresiden: kort i tre spalter; teksten om personen åpnes i et felt under navnet */
+.styret-intro { margin-bottom: 32px; }
+.styre-kort { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.styre-person { width: auto; background: var(--flate); border: 1px solid var(--linje); border-radius: var(--radius); padding: 24px 20px 20px; }
+.styre-person summary { list-style: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.styre-person summary::-webkit-details-marker { display: none; }
+.styre-person summary:hover strong { color: var(--oransje); }
+.styre-person summary:focus-visible { outline: 2px solid var(--oransje); outline-offset: 6px; border-radius: 4px; }
+.les-mer { margin-top: 10px; font-style: normal; font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--lenke); }
+.les-mer::after { content: " ▾"; }
+.styre-person[open] { border-color: var(--oransje); }
+.styre-person[open] .les-mer::after { content: " ▴"; }
+.person-om { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--linje); font-size: .95rem; }
+.person-om p { margin: 0 0 10px; }
+.styre-kort .person { width: auto; }
+.styre-person .initialer { background: var(--bakgrunn); }
+@media (max-width: 860px) { .styre-kort { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 520px) { .styre-kort { grid-template-columns: minmax(0, 1fr); } }
 
 /* Sponsorer */
 /* Sponsorene står midt på siden og fylles utover fra midten; nivåoverskriftene er også sentrert */

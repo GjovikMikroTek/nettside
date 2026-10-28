@@ -88,6 +88,8 @@ collections:
         label: Styret
         file: site/content/styret.json
         fields:
+          - { name: intro, label: "Innledning på styresiden (valgfritt)", widget: markdown, required: false, hint: "Vises øverst på siden Styret, over medlemmene." }
+          - { name: intro_en, label: "Innledning (engelsk)", widget: markdown, required: false }
           - name: medlemmer
             label: Styremedlemmer
             label_singular: Styremedlem
@@ -99,6 +101,8 @@ collections:
               - { name: rolle_en, label: "Rolle (engelsk)", widget: string, required: false, hint: "Valgfritt. Står feltet tomt, vises den norske teksten på den engelske siden." }
               - { name: bilde, label: Bilde, widget: image, required: false }
               - { name: epost, label: "E-post (valgfritt)", widget: string, required: false }
+              - { name: om, label: "Om personen (valgfritt)", widget: markdown, required: false, hint: "Litt om personen: studie, årstrinn, hva hen gjør i styret. Vises når man klikker på navnet eller bildet på siden Styret." }
+              - { name: om_en, label: "Om personen (engelsk)", widget: markdown, required: false }
 
       - name: sponsorer
         label: Sponsorer
