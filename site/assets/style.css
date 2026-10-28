@@ -109,14 +109,14 @@ nav { align-items: center; }
 .hero.med-bilde::before { content: ""; position: absolute; inset: -24px; z-index: -2; background: var(--hero-bilde) center 35% / cover no-repeat; filter: blur(3px) grayscale(.3); }
 .hero.med-bilde::after { content: ""; position: absolute; inset: 0; z-index: -1;
   background:
-    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
+    linear-gradient(rgba(255,255,255,1) 0, rgba(255,255,255,.9) 14px, rgba(255,255,255,.72) 30px, rgba(255,255,255,.52) 46px, rgba(255,255,255,.34) 62px, rgba(255,255,255,.2) 78px, rgba(255,255,255,.1) 94px, rgba(255,255,255,.04) 110px, rgba(255,255,255,.012) 124px, rgba(255,255,255,0) 136px),
     linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(16, 25, 46,.95) 0%, rgba(16, 25, 46,.86) 50%, rgba(21,38,74,.72) 100%);
-  background-size: auto, 96px 96px, 96px 96px, auto; }
+  background-size: auto, 96px 96px, 96px 96px, auto; background-position: 0 0, 0 40px, 0 0, 0 0; }
 /* Toppbildet starter under den hvite overgangen fra toppmenyen */
-.hero { padding-top: 150px; }
+.hero { padding-top: 120px; }
 .hero:not(.med-bilde), .medlem-hero { background-image:
-    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
+    linear-gradient(rgba(255,255,255,1) 0, rgba(255,255,255,.9) 14px, rgba(255,255,255,.72) 30px, rgba(255,255,255,.52) 46px, rgba(255,255,255,.34) 62px, rgba(255,255,255,.2) 78px, rgba(255,255,255,.1) 94px, rgba(255,255,255,.04) 110px, rgba(255,255,255,.012) 124px, rgba(255,255,255,0) 136px),
     radial-gradient(ellipse at 50% 55%, rgba(42, 82, 154, .6), transparent 62%),
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
   background-size: auto, auto, 96px 96px, 96px 96px; }
@@ -275,11 +275,11 @@ a.person:hover strong { color: var(--oransje); }
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
   background-size: auto, 96px 96px, 96px 96px, 24px 24px, 24px 24px; }
-.medlem-hero { padding-top: 150px; background-image:
-    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
+.medlem-hero { padding-top: 120px; background-image:
+    linear-gradient(rgba(255,255,255,1) 0, rgba(255,255,255,.9) 14px, rgba(255,255,255,.72) 30px, rgba(255,255,255,.52) 46px, rgba(255,255,255,.34) 62px, rgba(255,255,255,.2) 78px, rgba(255,255,255,.1) 94px, rgba(255,255,255,.04) 110px, rgba(255,255,255,.012) 124px, rgba(255,255,255,0) 136px),
     radial-gradient(ellipse at 50% 55%, rgba(42, 82, 154, .6), transparent 62%),
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-  background-size: auto, auto, 96px 96px, 96px 96px; }
+  background-size: auto, auto, 96px 96px, 96px 96px; background-position: 0 0, 0 0, 0 40px, 0 0; }
 .medlem-hero-bilder { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); margin-bottom: 28px; }
 .medlem-hero-logo { width: clamp(150px, 30vw, 320px); height: auto; filter: drop-shadow(0 10px 30px rgba(243, 146, 40, .25)); }
 .medlem-hero-skille { width: 2px; align-self: stretch; margin: 12px 0; background: rgba(255, 255, 255, .2); }
