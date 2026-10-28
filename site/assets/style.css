@@ -24,6 +24,21 @@
 
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
+
+/* Rolig overgang mellom sidene: den gamle siden toner ut og den nye toner inn, mens toppmenyen står stille.
+   Virker i Chrome, Edge og Safari; andre nettlesere bytter side som før. */
+@view-transition { navigation: auto; }
+.topp { view-transition-name: topp; }
+::view-transition-old(root) { animation: side-ut .28s ease both; }
+::view-transition-new(root) { animation: side-inn .42s ease .06s both; }
+@keyframes side-ut { to { opacity: 0; } }
+@keyframes side-inn { from { opacity: 0; transform: translateY(8px); } }
+/* Innholdet som hentes etter at siden er lastet, glir også rolig inn */
+main, .hero, .medlem-hero { animation: innhold-inn .5s ease both; }
+@keyframes innhold-inn { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root), main, .hero, .medlem-hero { animation: none; }
+}
 section[id] { scroll-margin-top: 100px; }
 body {
   margin: 0;
@@ -170,6 +185,9 @@ a.person:hover strong { color: var(--oransje); }
 .styre-person[open] { border-color: var(--oransje); }
 .styre-person[open] .les-mer::after { content: " ▴"; }
 .person-om { text-align: left; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--linje); font-size: .95rem; }
+.styre-person[open] .person-om { animation: om-apne .35s ease both; }
+@keyframes om-apne { from { opacity: 0; transform: translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .styre-person[open] .person-om { animation: none; } }
 .person-om p { margin: 0 0 10px; }
 .styre-kort .person { width: auto; }
 .styre-person .initialer { background: var(--bakgrunn); }
