@@ -6,7 +6,8 @@
 3. Logg inn med foreningens GitHub-konto:
    - Brukernavn: **GjovikMikroTek**
    - Passord: får du av styreleder (deles aldri på e-post eller i chat)
-4. Ber GitHub om en kode, ligger den i innboksen til **mikrotek@ivb.ntnu.no**. Skriv den inn.
+4. Ber GitHub om en kode, ligger den i innboksen til **foreningens felles e-post** (den styret har tilgang til). Skriv den inn.
+   Koden går alltid til hovedadressen på GitHub-kontoen. Byttes e-posten, gjøres det på github.com → **Settings** → **Emails** (legg til, bekreft, velg som «Primary»).
 5. Første gang: trykk **«Authorize»**.
 6. Vinduet lukker seg, og du er inne i adminpanelet.
 
