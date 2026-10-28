@@ -39,7 +39,7 @@ main, .hero, .medlem-hero { animation: innhold-inn .5s ease both; }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-old(root), ::view-transition-new(root), main, .hero, .medlem-hero { animation: none; }
 }
-section[id] { scroll-margin-top: 100px; }
+section[id] { scroll-margin-top: 76px; }
 body {
   margin: 0;
   font-family: var(--brodtekst);
@@ -62,8 +62,19 @@ a { color: var(--lenke); }
 .tom { color: var(--dempet); }
 
 /* Topp */
-/* Toppmenyen er hvit, så logoen står i originalfargene. Nederst går den hvite flaten over i det blå. */
-.topp { background: linear-gradient(180deg, #ffffff 0, #ffffff 62%, #dbe4f5 72%, #6f8fcb 84%, #1d3a72 93%, #0d1830 100%); position: sticky; top: 0; z-index: 10; padding-bottom: 26px; }
+/* Toppmenyen: hvit med originallogoen øverst på siden, og det hvite glir ned i toppbildet (se .hero og .medlem-hero).
+   Når man scroller ned, går den mykt over i nattblått med hvit logo og hvit tekst (klassen .dimmet settes i app.js). */
+.topp { background: #fff; position: sticky; top: 0; z-index: 10; isolation: isolate; }
+.topp::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(13, 24, 48, .96); opacity: 0; transition: opacity .35s ease; pointer-events: none; box-shadow: 0 6px 20px rgba(0,0,0,.25); }
+.topp .merke, .topp nav a, .topp .sprak-knapp { transition: color .35s ease, border-color .35s ease; }
+.topp.dimmet::before { opacity: 1; }
+.topp.dimmet .merke { color: #fff; }
+.topp.dimmet nav a { color: rgba(255,255,255,.8); }
+.topp.dimmet nav a:hover { color: #fff; }
+.topp.dimmet .sprak-knapp { color: #fff; border-color: rgba(255,255,255,.3); }
+.topp.dimmet .meny-knapp { border-color: rgba(255,255,255,.3); }
+.topp.dimmet .meny-knapp .strek { background: #fff; }
+.topp.dimmet .merke .merke-logo { content: url(/assets/logo-hvit.svg); }
 .topp-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
 /* Merke: logoen i hvit utgave (G og T hvite, M oransje) og navn */
 .merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #2b5299; text-decoration: none; }  /* samme blå som logoen */
@@ -96,9 +107,17 @@ nav { align-items: center; }
 .hero.med-bilde::before { content: ""; position: absolute; inset: -24px; z-index: -2; background: var(--hero-bilde) center 35% / cover no-repeat; filter: blur(3px) grayscale(.3); }
 .hero.med-bilde::after { content: ""; position: absolute; inset: 0; z-index: -1;
   background:
+    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
     linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
     linear-gradient(90deg, rgba(13,24,48,.95) 0%, rgba(13,24,48,.86) 50%, rgba(21,38,74,.72) 100%);
-  background-size: 96px 96px, 96px 96px, auto; }
+  background-size: auto, 96px 96px, 96px 96px, auto; }
+/* Toppbildet starter under den hvite overgangen fra toppmenyen */
+.hero { padding-top: 150px; }
+.hero:not(.med-bilde), .medlem-hero { background-image:
+    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
+    radial-gradient(ellipse at 50% 55%, rgba(42, 82, 154, .6), transparent 62%),
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: auto, auto, 96px 96px, 96px 96px; }
 .hero h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.1; margin: 10px 0 16px; color: #fff; letter-spacing: -.02em; }
 .slagord { font-family: var(--mono); color: var(--bla-lys); font-weight: 600; text-transform: uppercase; letter-spacing: .14em; font-size: .8rem; margin: 0; }
 .slagord::before { content: "// "; color: var(--oransje); }
@@ -247,6 +266,11 @@ a.person:hover strong { color: var(--oransje); }
     linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
     linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
   background-size: auto, 96px 96px, 96px 96px, 24px 24px, 24px 24px; }
+.medlem-hero { padding-top: 150px; background-image:
+    linear-gradient(#ffffff 0, rgba(255,255,255,.85) 40px, rgba(255,255,255,0) 170px),
+    radial-gradient(ellipse at 50% 55%, rgba(42, 82, 154, .6), transparent 62%),
+    linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: auto, auto, 96px 96px, 96px 96px; }
 .medlem-hero-bilder { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 4vw, 48px); margin-bottom: 28px; }
 .medlem-hero-logo { width: clamp(150px, 30vw, 320px); height: auto; filter: drop-shadow(0 10px 30px rgba(243, 146, 40, .25)); }
 .medlem-hero-skille { width: 2px; align-self: stretch; margin: 12px 0; background: rgba(255, 255, 255, .2); }

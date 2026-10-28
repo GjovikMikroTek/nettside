@@ -129,6 +129,15 @@ function settOppSprak() {
   }
 }
 
+// Toppmenyen går over i nattblått når man har scrollet litt ned, og blir hvit igjen øverst (se .topp.dimmet i style.css)
+function settOppToppmeny() {
+  const topp = document.querySelector('.topp');
+  if (!topp) return;
+  const sjekk = () => topp.classList.toggle('dimmet', window.scrollY > 40);
+  window.addEventListener('scroll', sjekk, { passive: true });
+  sjekk();
+}
+
 // Menyknappen på mobil
 function settOppMeny() {
   const knapp = document.getElementById('meny-knapp');
@@ -228,6 +237,7 @@ function prosjektKort(p) {
 async function fellesInnstillinger() {
   settOppSprak();
   settOppMeny();
+  settOppToppmeny();
   const s = await hent('innstillinger');
   if (s.aksentfarge) document.documentElement.style.setProperty('--aksent', s.aksentfarge);
   document.querySelectorAll('[data-felt]').forEach(el => {
