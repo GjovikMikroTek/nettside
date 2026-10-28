@@ -76,7 +76,7 @@ a { color: var(--lenke); }
 .topp.dimmet .sprak-knapp { color: #fff; border-color: rgba(255,255,255,.3); }
 .topp.dimmet .meny-knapp { border-color: rgba(255,255,255,.3); }
 .topp.dimmet .meny-knapp .strek { background: #fff; }
-.topp.dimmet .merke .merke-logo { content: url(/assets/logo-hvit.svg); }
+.topp.dimmet .merke .merke-logo { content: url(/assets/logo-original-hvit.svg?v=2026-10-28q); }  /* samme mål som originallogoen, så ingenting flytter seg */
 .topp-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
 /* Merke: logoen i hvit utgave (G og T hvite, M oransje) og navn */
 .merke { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 1.1rem; color: #2b5299; text-decoration: none; }  /* samme blå som logoen */
