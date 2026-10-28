@@ -5,39 +5,45 @@
       "rolle": "Styreleder",
       "rolle_en": "Chair",
       "bilde": "",
-      "epost": ""
+      "epost": "",
+      "om": "*Testtekst.* Her skriver Benjamin litt om seg selv: hva Benjamin studerer, hvilket årstrinn, og hva Benjamin gjør som styreleder i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     },
     {
       "navn": "Paulina Andzel",
       "rolle": "Nestleder",
       "rolle_en": "Vice chair",
       "bilde": "",
-      "epost": ""
+      "epost": "",
+      "om": "*Testtekst.* Her skriver Paulina litt om seg selv: hva Paulina studerer, hvilket årstrinn, og hva Paulina gjør som nestleder i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     },
     {
       "navn": "Mohammad Haj Hasan",
       "rolle": "Økonomileder",
       "rolle_en": "Head of finance",
       "bilde": "",
-      "epost": ""
+      "epost": "",
+      "om": "*Testtekst.* Her skriver Mohammad litt om seg selv: hva Mohammad studerer, hvilket årstrinn, og hva Mohammad gjør som økonomileder i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     },
     {
       "navn": "Nils Gåsemyr Staalesen",
       "rolle": "Sponsoransvarlig",
       "rolle_en": "Sponsorship manager",
       "bilde": "",
-      "epost": ""
+      "epost": "",
+      "om": "*Testtekst.* Her skriver Nils litt om seg selv: hva Nils studerer, hvilket årstrinn, og hva Nils gjør som sponsoransvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     },
     {
       "navn": "Thomas Brix",
       "rolle": "HR-ansvarlig",
       "rolle_en": "HR manager",
       "bilde": "",
-      "epost": ""
+      "epost": "",
+      "om": "*Testtekst.* Her skriver Thomas litt om seg selv: hva Thomas studerer, hvilket årstrinn, og hva Thomas gjør som hr-ansvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     },
     {
       "navn": "Maria Graf",
-      "rolle": "PR-ansvarlig"
+      "rolle": "PR-ansvarlig",
+      "om": "*Testtekst.* Her skriver Maria litt om seg selv: hva Maria studerer, hvilket årstrinn, og hva Maria gjør som pr-ansvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
     }
   ]
 }
