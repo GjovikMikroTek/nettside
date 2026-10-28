@@ -141,6 +141,13 @@ nav { align-items: center; }
 .kort-tekst { padding: 16px 18px 20px; }
 .kort h3 { margin: 4px 0 8px; font-size: 1.1rem; line-height: 1.3; }
 .kort p { margin: 0; color: var(--dempet); font-size: .95rem; }
+/* Alle artikkelkortene er like høye: tittel maks 2 linjer og ingress maks 3 linjer (resten med …), kortet fyller raden */
+.kort-rutenett { grid-auto-rows: 1fr; }
+.kort { display: flex; flex-direction: column; }
+.kort .kort-tekst { flex: 1; }
+.kort h3, .kort-tekst > p { display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; }
+.kort h3 { -webkit-line-clamp: 2; line-clamp: 2; min-height: calc(2 * 1.3em); }
+.kort-tekst > p { -webkit-line-clamp: 3; line-clamp: 3; min-height: calc(3 * 1.6em); }
 time { color: var(--dempet); font-size: .85rem; }
 .lenke-pil { text-decoration: none; font-weight: 600; }
 

@@ -381,7 +381,8 @@ async function visForside() {
       document.getElementById('prosjekter').hidden = false;
     }
 
-    const siste = synligeArtikler(artikler).slice(0, 2);
+    // Bare den nyeste artikkelen på forsiden; resten ligger under «Alle artikler»
+    const siste = synligeArtikler(artikler).slice(0, 1);
     document.getElementById('artikler-siste').innerHTML = siste.length
       ? siste.map(artikkelKort).join('')
       : `<p class="tom">${esc(t('ingen_artikler'))}</p>`;
