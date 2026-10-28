@@ -33,6 +33,9 @@ Prosjektene vises på siden **Prosjekter** og øverst på forsiden, i samme rekk
 
 ## Oppdatere styret
 **Sider og innhold** → **Styret**. Legg til, fjern eller dra medlemmer i den rekkefølgen de skal vises. Bilde er valgfritt. Uten bilde vises initialene.
+- **Om personen:** litt om hvert styremedlem (studie, årstrinn, hva personen gjør i styret). Teksten vises på siden **Styret** når man klikker på navnet eller bildet.
+- **Innledning på styresiden:** valgfri tekst øverst på siden Styret.
+- Styret vises både på forsiden og på en egen side. Begge oppdateres når du publiserer.
 
 ## Legge til eller fjerne sponsorer
 **Sider og innhold** → **Sponsorer**. Velg nivå (Hovedsponsor vises størst). Last opp logo (helst PNG eller SVG med gjennomsiktig bakgrunn).
@@ -42,26 +45,25 @@ Prosjektene vises på siden **Prosjekter** og øverst på forsiden, i samme rekk
 - **Innstillinger:** prosjektnavn, slagord, forsidebilde, profilfarge, kontakt-e-post, Instagram/LinkedIn og lenke til kontaktskjema.
 
 ## Medlemsregister («Bli medlem»)
-Siden **/bli-medlem.html** har et innmeldingsskjema fra Microsoft Forms. Hver innmelding blir en ny rad i en Excel-fil i Microsoft-kontoen deres. Excel-filen er medlemsregisteret som vedtektene § 3.1 krever.
+Siden **gjovikmikrotek.no/bli-medlem** har et eget innmeldingsskjema. Hver innmelding blir en ny rad i regnearket **«Gjøvik MikroTek – Medlemsregister»** i Google-kontoen til foreningen (den felles e-posten). Regnearket er medlemsregisteret som vedtektene § 3.1 krever.
 
-Oppsett, én gang (logget inn på foreningens Microsoft-konto):
-1. Gå til **forms.office.com** → «Nytt skjema». Kall det f.eks. «Innmelding Gjøvik MikroTek».
-2. Foreslåtte spørsmål:
-   - Fullt navn (tekst, påkrevd)
-   - E-post (tekst, påkrevd)
-   - Telefon (tekst, valgfritt)
-   - Studieprogram (tekst, påkrevd)
-   - Årstrinn (valg: 1, 2, 3, 4, 5)
-   - Institutt (valg: IVB, IES, annet)
-   - «Jeg samtykker til at opplysningene lagres i medlemsregisteret til Gjøvik MikroTek» (valg: Ja, påkrevd)
-3. Under **Svar** → «Åpne i Excel». Da opprettes en Excel-fil i OneDrive som fylles automatisk med nye svar.
-4. Trykk **Samle inn svar** → «Hvem som helst kan svare». Kopier lenken. Du kan også bruke «Bygg inn» og kopiere hele koden.
-5. I adminpanelet: **Sider og innhold** → **Bli medlem (medlemsregister)** → lim inn i «Microsoft Forms-skjema» → Publiser.
+**Slik går en innmelding:**
+1. Den nye fyller ut skjemaet og kommer til forsiden med en takkemelding og et medlemsnummer (MT-0001, MT-0002 …).
+2. En rad legges til i fanen **Medlemmer** med Status **Ny** (blå rad).
+3. Den felles e-posten får e-posten **«⚠ Ny innmelding venter på oppfølging»**, og den nye får en velkomst-e-post med kopi av svarene.
+4. HR tar kontakt, og setter Status til **Aktiv** når personen er tatt opp som medlem.
 
-Tips:
-- Skru på e-postvarsel for nye svar i Forms (… → Innstillinger), så styret ser nye medlemmer med en gang.
-- Utmeldinger (vedtektene § 3.2) håndteres i Excel-filen. Slett raden 30 dager etter at noen har meldt seg ut. Slett også medlemmer som er ferdige med studiene.
-- Excel-filen inneholder personopplysninger. Del den bare med styret.
+**Fanen Oversikt** viser «Venter på HR» (med navn), aktive medlemmer, nye denne måneden og i år, utmeldte, en graf over innmeldinger og styret. Navnene i styret skriver dere over i den hvite kolonnen ved styreskifte.
+
+**Utmelding (vedtektene § 3.2):** sett Status til **Utmeldt**. Datoene fylles inn av seg selv, og raden slettes automatisk 30 dager senere. Angrer personen seg før det, setter dere Status tilbake til **Aktiv**. Medlemmer som er ferdige med studiene, meldes ut på samme måte.
+
+**Testrader:** sett Status til **Test** (grå), og slett dem når dere er ferdige.
+
+**Viktig:**
+- Regnearket inneholder personopplysninger. Del det bare med styret (Del → legg til personene), aldri «alle med lenken».
+- Ikke endre kolonneoverskriftene i fanen Medlemmer. Registeret bruker dem.
+- Koden og hele oppsettet ligger i mappen `medlemsregister-google` (OPPSETT.md), hos den som har ansvaret for nettsiden.
+- Lenken til registeret står i adminpanelet under **Sider og innhold** → **Bli medlem** → «Innmeldingsskjema (Google-registeret)». Ikke endre den. Står feltet tomt, vises det gamle Microsoft Forms-skjemaet i stedet.
 
 ## Engelsk versjon av siden
 Besøkende kan bytte mellom norsk og engelsk med knappen øverst til høyre.
@@ -80,11 +82,12 @@ Oppsett, én gang:
 
 Vil dere skjule bildene, tømmer dere feltet «Instagram-bilder».
 
-## Kontaktskjema som havner i Excel
-1. Lag et skjema i **Microsoft Forms** (med Outlook-/NTNU-kontoen).
-2. Trykk «Samle inn svar» → kopier lenken.
-3. Lim den inn under **Innstillinger** → «Microsoft Forms-lenke».
-Svarene finner du i Forms under «Svar» → «Åpne i Excel».
+## Kontaktskjema (valgfritt)
+Vil dere ha en knapp «Fyll ut kontaktskjema» under Kontakt på forsiden:
+1. Logg inn på foreningens Google-konto og lag et skjema på **forms.google.com**.
+2. Trykk **Send** → lenke-ikonet → kopier lenken.
+3. Lim den inn under **Innstillinger** → «Lenke til kontaktskjema» → Publiser.
+Svarene finner du i Google Forms under **Svar** (og i et regneark hvis du trykker «Koble til Regneark»).
 
 ## Tips
 - Bilder: hold dem under ca. 1–2 MB. Mobilbilder kan gjerne forminskes først.
