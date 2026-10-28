@@ -347,9 +347,10 @@ async function visForside() {
     document.getElementById('k-org').innerHTML = [
       `<strong>${esc(s.navn || 'Gjøvik MikroTek')}</strong>`,
       orgnr && linje(t('k_orgnr'), `<a href="https://virksomhet.brreg.no/nb/oppslag/enheter/${orgnr}" target="_blank" rel="noopener">${esc(orgnr.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'))}</a>`),
-      s.adresse && esc(s.adresse)
+      s.adresse && esc(s.adresse),
+      s.epost && linje(t('k_epost'), `<a href="mailto:${esc(s.epost)}">${esc(s.epost)}</a>`)
     ].filter(Boolean).join('<br>');
-    // E-post som tekst; Instagram og LinkedIn som ikoner
+    // E-posten står under organisasjonen til venstre; Instagram og LinkedIn som ikoner til høyre
     const insta = trygLenke(s.instagram);
     const li = trygLenke(s.linkedin);
     const ikon = (url, navn, svg) => url ? `<a class="k-ikon k-ikon-${navn.toLowerCase()}" href="${esc(url)}" target="_blank" rel="noopener" aria-label="${esc(navn)}" title="${esc(navn)}">${svg}</a>` : '';
@@ -357,7 +358,6 @@ async function visForside() {
     const IKON_LI = '<svg viewBox="4.6 4.6 15.4 15.4" aria-hidden="true"><g fill="currentColor"><rect x="6.4" y="10" width="2.6" height="7.6"/><circle cx="7.7" cy="7.1" r="1.55"/><path d="M11.1 10h2.5v1.1c.4-.7 1.3-1.3 2.6-1.3 2.2 0 2.8 1.4 2.8 3.4v4.4h-2.6v-3.9c0-1-.2-1.8-1.2-1.8-1.1 0-1.5.8-1.5 1.9v3.8h-2.6z"/></g></svg>';
     const ikoner = ikon(insta, 'Instagram', IKON_INSTA) + ikon(li, 'LinkedIn', IKON_LI);
     document.getElementById('k-kanaler').innerHTML = [
-      s.epost && linje(t('k_epost'), `<a href="mailto:${esc(s.epost)}">${esc(s.epost)}</a>`),
       ikoner && `<span class="k-ikoner">${ikoner}</span>`
     ].filter(Boolean).join('<br>');
     const skjema = trygLenke(s.skjema_lenke);
