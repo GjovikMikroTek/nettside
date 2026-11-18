@@ -4,17 +4,17 @@
       "navn": "Benjamin Danbolt",
       "rolle": "Styreleder",
       "rolle_en": "Chair",
-      "bilde": "",
+      "bilde": "/images/uploads/benjamin.jpg",
       "epost": "",
-      "om": "*Testtekst.* Her skriver Benjamin litt om seg selv: hva Benjamin studerer, hvilket årstrinn, og hva Benjamin gjør som styreleder i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
+      "om": "Jeg er 21 år og studerer Geomatikkingeniør på 2. studieår. Som styreleder har jeg ansvaret for de ukentlige møtene våre, og kontakt med andre organisasjoner. Ellers hjelper jeg til der det trengs."
     },
     {
       "navn": "Paulina Andzel",
       "rolle": "Nestleder",
       "rolle_en": "Vice chair",
-      "bilde": "",
+      "bilde": "/images/uploads/paulina.jpg",
       "epost": "",
-      "om": "*Testtekst.* Her skriver Paulina litt om seg selv: hva Paulina studerer, hvilket årstrinn, og hva Paulina gjør som nestleder i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
+      "om": "Jeg er 21 år og studerer Byggingeniør på 3. studieår. Som nestleder har jeg ansvaret for å støtte lederen og bidrar til at beslutninger blir gjennomført."
     },
     {
       "navn": "Mohamed Haj Hasan",
@@ -28,22 +28,23 @@
       "navn": "Nils Gåsemyr Staalesen",
       "rolle": "Sponsoransvarlig",
       "rolle_en": "Sponsorship manager",
-      "bilde": "",
+      "bilde": "/images/uploads/nils.jpg",
       "epost": "",
-      "om": "*Testtekst.* Her skriver Nils litt om seg selv: hva Nils studerer, hvilket årstrinn, og hva Nils gjør som sponsoransvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
+      "om": "Jeg er 21 år og studerer Byggkonstruksjoner på 1. studieår. Min jobb er å være en kommunikasjonslinje mellom sponsorer og styret til GMT, i tillegg sørge for at begge parter er fornøyde med samarbeidet."
     },
     {
       "navn": "Thomas Brix",
       "rolle": "HR-ansvarlig",
       "rolle_en": "HR manager",
-      "bilde": "",
+      "bilde": "/images/uploads/thomas.jpg",
       "epost": "",
-      "om": "*Testtekst.* Her skriver Thomas litt om seg selv: hva Thomas studerer, hvilket årstrinn, og hva Thomas gjør som hr-ansvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
+      "om": "Jeg er 27 år og studerer Byggkonstruksjoner på 1. studieår. Jeg skal bidra til at GMT har menneskene, kompetansen og samarbeidet som trengs for å gjennomføre mikrohusprosjektet."
     },
     {
       "navn": "Maria Graf",
       "rolle": "PR-ansvarlig",
-      "om": "*Testtekst.* Her skriver Maria litt om seg selv: hva Maria studerer, hvilket årstrinn, og hva Maria gjør som pr-ansvarlig i styret.\n\nTeksten endres i adminpanelet under **Sider og innhold → Styret → Om personen**."
+      "om": "Jeg er 23 år og studerer Byggineniør på 3.året. Som PR-ansvarlig vil jeg bidra til promotering av projektet og GMT-teamet på sosiale medier!",
+      "bilde": "/images/uploads/maria.jpg"
     }
   ]
 }
