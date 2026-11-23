@@ -14,7 +14,7 @@
       "rolle_en": "Vice chair",
       "bilde": "/images/uploads/paulina.jpg",
       "epost": "",
-      "om": "Jeg er 21 år og studerer Byggingeniør på 3. studieår. Som nestleder har jeg ansvaret for å støtte lederen og bidrar til at beslutninger blir gjennomført."
+      "om": "<div class=\"sentrert\">\n\nJeg er 21 år og studerer Byggingeniør på 3. studieår. Som nestleder har jeg ansvaret for å støtte lederen og bidrar til at beslutninger blir gjennomført.\n\n</div>"
     },
     {
       "navn": "Mohamed Haj Hasan",
@@ -22,7 +22,7 @@
       "rolle_en": "Head of finance",
       "bilde": "/images/uploads/mohamed.jpg",
       "epost": "",
-      "om": "Jeg er 19 år og studerer Byggkonstruksjoner på 1. studieår. Som økonomiansvarlig har jeg ansvaret for innkjøp og å holde oversikt over budsjettet."
+      "om": "<div class=\"sentrert\">\n\nJeg er 19 år og studerer Byggkonstruksjoner på 1. studieår. Som økonomiansvarlig har jeg ansvaret for innkjøp og å holde oversikt over budsjettet.\n\n</div>"
     },
     {
       "navn": "Nils Gåsemyr Staalesen",
@@ -30,7 +30,7 @@
       "rolle_en": "Sponsorship manager",
       "bilde": "/images/uploads/nils.jpg",
       "epost": "",
-      "om": "Jeg er 21 år og studerer Byggkonstruksjoner på 1. studieår. Min jobb er å være en kommunikasjonslinje mellom sponsorer og styret til GMT, i tillegg sørge for at begge parter er fornøyde med samarbeidet."
+      "om": "<div class=\"sentrert\">\n\nJeg er 21 år og studerer Byggkonstruksjoner på 1. studieår. Min jobb er å være en kommunikasjonslinje mellom sponsorer og styret til GMT, i tillegg sørge for at begge parter er fornøyde med samarbeidet.\n\n</div>"
     },
     {
       "navn": "Thomas Brix",
@@ -38,12 +38,12 @@
       "rolle_en": "HR manager",
       "bilde": "/images/uploads/thomas.jpg",
       "epost": "",
-      "om": "Jeg er 27 år og studerer Byggkonstruksjoner på 1. studieår. Jeg skal bidra til at GMT har menneskene, kompetansen og samarbeidet som trengs for å gjennomføre mikrohusprosjektet."
+      "om": "<div class=\"sentrert\">\n\nJeg er 27 år og studerer Byggkonstruksjoner på 1. studieår. Jeg skal bidra til at GMT har menneskene, kompetansen og samarbeidet som trengs for å gjennomføre mikrohusprosjektet.\n\n</div>"
     },
     {
       "navn": "Maria Graf",
       "rolle": "PR-ansvarlig",
-      "om": "Jeg er 23 år og studerer Byggineniør på 3.året. Som PR-ansvarlig vil jeg bidra til promotering av projektet og GMT-teamet på sosiale medier!",
+      "om": "<div class=\"sentrert\">\n\nJeg er 23 år og studerer Byggineniør på 3.året. Som PR-ansvarlig vil jeg bidra til promotering av projektet og GMT-teamet på sosiale medier!\n\n</div>",
       "bilde": "/images/uploads/maria.jpg"
     }
   ],
