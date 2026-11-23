@@ -369,8 +369,8 @@ function visTakk() {
 async function visForside() {
   visTakk();
   try {
-    const [s, prosjekt, artikler, styret, sponsorer, prosjekter] = await Promise.all([
-      fellesInnstillinger(), hent('prosjekt'), hent('artikler'), hent('styret'), hent('sponsorer'),
+    const [s, prosjekt, styret, sponsorer, prosjekter] = await Promise.all([
+      fellesInnstillinger(), hent('prosjekt'), hent('styret'), hent('sponsorer'),
       hent('prosjekter').catch(() => ({}))
     ]);
     document.title = s.navn || 'Gjøvik MikroTek';
@@ -386,18 +386,13 @@ async function visForside() {
     document.getElementById('om-tittel').textContent = felt(prosjekt, 'tittel') || t('om_tittel');
     document.getElementById('om-tekst').innerHTML = md(felt(prosjekt, 'tekst'));
 
-    // To av hver side ved side (se .forside-par i style.css). Resten ligger under «Alle prosjekter/artikler».
-    const pr = synligeProsjekter(prosjekter).slice(0, 2);
+    // De tre første prosjektene på forsiden; resten ligger under «Alle prosjekter»
+    const pr = synligeProsjekter(prosjekter).slice(0, 3);
     if (pr.length) {
       document.getElementById('prosjekter-liste').innerHTML = pr.map(prosjektKort).join('');
       document.getElementById('prosjekter').hidden = false;
     }
 
-    // Bare den nyeste artikkelen på forsiden; resten ligger under «Alle artikler»
-    const siste = synligeArtikler(artikler).slice(0, 1);
-    document.getElementById('artikler-siste').innerHTML = siste.length
-      ? siste.map(artikkelKort).join('')
-      : `<p class="tom">${esc(t('ingen_artikler'))}</p>`;
 
     // Hver person lenker til sin plass på styresiden, der teksten om personen åpnes
     document.getElementById('styret-liste').innerHTML = (styret.medlemmer || []).map(m => `
