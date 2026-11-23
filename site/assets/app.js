@@ -485,6 +485,13 @@ async function visArtikler() {
   }
 }
 
+// Undersidene har et felles toppfelt (logo + hus med hammer). Sidetittelen flyttes dit fra innholdet.
+function flyttTittel(boks) {
+  const mål = document.getElementById('side-tittel'), h1 = boks.querySelector('h1');
+  if (!mål || !h1) return;
+  mål.textContent = h1.textContent; h1.remove();
+}
+
 async function visProsjekter() {
   const boks = document.getElementById('innhold');
   try {
@@ -504,12 +511,14 @@ async function visProsjekter() {
         ${p.bilde ? `<img src="${esc(p.bilde)}" alt="" class="artikkel-bilde">` : ''}
         <div class="brodtekst">${md(felt(p, 'tekst'))}</div>
       </article>`;
+      flyttTittel(boks);
       return;
     }
 
     document.title = t('prosjekter') + ' – ' + (s.navn || 'Gjøvik MikroTek');
     boks.innerHTML = `<h1>${esc(t('prosjekter'))}</h1><div class="kort-rutenett">` +
       (alle.map(prosjektKort).join('') || `<p class="tom">${esc(t('ingen_prosjekter'))}</p>`) + '</div>';
+    flyttTittel(boks);
   } catch (e) {
     console.error(e);
     boks.innerHTML = `<p>${esc(t('kunne_ikke'))}</p>`;
@@ -534,6 +543,7 @@ async function visStyret() {
           ? `<details class="person styre-person" id="${esc(personSlug(m))}"><summary>${hode}<em class="les-mer" aria-hidden="true">${esc(t('les_mer'))}</em></summary><div class="person-om brodtekst">${md(om)}${epost}</div></details>`
           : `<div class="person styre-person" id="${esc(personSlug(m))}">${hode}${epost ? `<div class="person-om">${epost}</div>` : ''}</div>`;
       }).join('') + '</div>' : `<p class="tom">${esc(t('styret_tom'))}</p>`);
+    flyttTittel(boks);
     // Bare én person åpen om gangen: åpnes en ny, lukkes den som var åpen
     const kort = boks.querySelectorAll('details.styre-person');
     kort.forEach(d => d.addEventListener('toggle', () => {
