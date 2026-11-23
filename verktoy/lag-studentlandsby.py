@@ -714,6 +714,108 @@ def forslag_10():
     nordpil(47, 31); maalestokk(36, 31)
     legende([('1', 'Terrasse 1 · 3 enheter · ferdig'), ('2', 'Terrasse 2 · 2 av 3 ferdig'), ('3', 'Terrasse 3 · under bygging')])
 
+
+# ---------- Symbol med hus og hammer (flate piktogrammer i skjermkoordinater) ----------
+LINJE = '#8db1dd'
+def _g(innhold, cx, cy, skala=1.0, vinkel=0):
+    ut.append(f'<g transform="translate({cx:.1f},{cy:.1f}) rotate({vinkel}) scale({skala})">{innhold}</g>')
+
+def _hammer(farge_hode='#d2dcf0'):
+    """Hammer sett fra siden, hodet øverst. Skaftet er ca. 100 enheter langt."""
+    return (f'<rect x="-6" y="-14" width="12" height="104" rx="5" fill="{TRE}" stroke="#f3cf98" stroke-width="1.5"/>'
+            '<line x1="-6" y1="60" x2="6" y2="60" stroke="#c98d5b" stroke-width="1.5"/><line x1="-6" y1="70" x2="6" y2="70" stroke="#c98d5b" stroke-width="1.5"/>'
+            '<line x1="-6" y1="80" x2="6" y2="80" stroke="#c98d5b" stroke-width="1.5"/>'
+            f'<rect x="-40" y="-36" width="30" height="24" rx="3" fill="{farge_hode}" stroke="#ffffff" stroke-width="1.5"/>'
+            f'<rect x="-12" y="-34" width="24" height="20" fill="{farge_hode}" stroke="#ffffff" stroke-width="1.5"/>'
+            f'<path d="M12,-34 L24,-34 Q40,-32 46,-16 L39,-13 Q34,-25 23,-24 L12,-24 Z" fill="{farge_hode}" stroke="#ffffff" stroke-width="1.5"/>'
+            f'<path d="M12,-22 L22,-22 Q34,-20 38,-6 L31,-4 Q28,-14 21,-13 L12,-13 Z" fill="{farge_hode}" stroke="#ffffff" stroke-width="1.5"/>')
+
+def _hus(b=120, h=78, tak=58, fyll='rgba(16,25,46,.88)', strek=LINJE, sw=3):
+    """Hus sett forfra: vegger, saltak, dør og to vinduer. Midt på bunnen er (0, 0)."""
+    x0 = -b / 2
+    return (f'<path d="M{x0 - 10},{-h} L0,{-h - tak} L{-x0 + 10},{-h}" fill="none" stroke="{strek}" stroke-width="{sw}" stroke-linejoin="round" stroke-linecap="round"/>'
+            f'<rect x="{x0}" y="{-h}" width="{b}" height="{h}" fill="{fyll}" stroke="{strek}" stroke-width="{sw}" stroke-linejoin="round"/>'
+            f'<path d="M{x0},{-h} L0,{-h - tak + 10} L{-x0},{-h} Z" fill="{fyll}" stroke="none"/>'
+            f'<rect x="-11" y="-38" width="22" height="38" fill="{ORANSJE}"/>'
+            f'<rect x="{x0 + 14}" y="{-h + 18}" width="24" height="22" fill="none" stroke="{strek}" stroke-width="2"/>'
+            f'<line x1="{x0 + 26}" y1="{-h + 18}" x2="{x0 + 26}" y2="{-h + 40}" stroke="{strek}" stroke-width="1.5"/>'
+            f'<rect x="{-x0 - 38}" y="{-h + 18}" width="24" height="22" fill="none" stroke="{strek}" stroke-width="2"/>'
+            f'<line x1="{-x0 - 26}" y1="{-h + 18}" x2="{-x0 - 26}" y2="{-h + 40}" stroke="{strek}" stroke-width="1.5"/>'
+            f'<line x1="{x0 - 18}" y1="0" x2="{-x0 + 18}" y2="0" stroke="{strek}" stroke-width="{sw}" stroke-linecap="round"/>')
+
+
+def symbol_e(cx, cy):
+    """E: Isometrisk hus med hammer, etter styrets bilde «Isometrisk hus med hammer_Blueprint» (lyse streker,
+    oransje på takkanter og skaft, stiplede hjelpelinjer på bakken). Tegnet i bildets koordinater, sentrert om (640, 640)."""
+    H = '#e8eef8'; O = ORANSJE; F = 'rgba(16,25,46,.92)'; D = 'stroke-dasharray="7 6" opacity=".7"'
+    deler = [
+        # hjelpelinjer på bakken
+        f'<path d="M238,718 L548,835 M260,700 L362,652 M800,592 L975,668 M890,690 L968,650 M465,852 L640,770" stroke="{H}" stroke-width="2" fill="none" {D}/>',
+        # vegger
+        f'<path d="M362,540 L466,442 L606,583 L606,770 L362,700 Z" fill="{F}" stroke="{H}" stroke-width="5" stroke-linejoin="round"/>',
+        f'<path d="M606,583 L800,490 L800,642 L606,770 Z" fill="{F}" stroke="{H}" stroke-width="5" stroke-linejoin="round"/>',
+        # tak: takflaten, så oransje takkanter og møne
+        f'<path d="M466,407 L668,322 L818,483 L625,575 Z" fill="#141f3a" stroke="none"/>',
+        f'<path d="M668,322 L818,483" stroke="{H}" stroke-width="5" fill="none" stroke-linecap="round"/>',
+        f'<path d="M325,540 L466,407 L625,575 L818,483 M466,407 L668,322 M325,540 L350,550" stroke="{O}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>',
+        f'<path d="M362,540 L466,442 L606,583" stroke="{H}" stroke-width="5" fill="none" stroke-linejoin="round"/>',
+        # dør og vindu
+        f'<path d="M410,712 L410,598 L468,610 L468,730" stroke="{H}" stroke-width="5" fill="none" stroke-linejoin="round"/>',
+        f'<path d="M510,600 L575,615 L575,690 L510,673 Z M542,607 L542,682 M510,637 L575,652" stroke="{H}" stroke-width="5" fill="none" stroke-linejoin="round"/>',
+        # hammer: hode med klo og slagflate, hals, skaft i oransje
+        f'<path d="M690,668 Q700,640 760,648 Q815,660 815,720 L860,738 Q905,725 935,748 L905,812 Q870,800 840,780 L805,752 L760,705 Q735,680 690,668 Z" fill="{F}" stroke="{H}" stroke-width="5" stroke-linejoin="round"/>',
+        f'<ellipse cx="930" cy="782" rx="30" ry="40" transform="rotate(30 930 782)" fill="{F}" stroke="{H}" stroke-width="5"/>',
+        f'<path d="M720,778 L805,735 L805,775 L722,826 Z" fill="{F}" stroke="{H}" stroke-width="5" stroke-linejoin="round"/>',
+        f'<path d="M480,885 L690,773 L722,826 L520,945 Q470,948 470,905 Z" fill="{F}" stroke="{O}" stroke-width="5" stroke-linejoin="round"/>',
+        f'<path d="M690,773 L722,826" stroke="{H}" stroke-width="4"/>',
+    ]
+    _g(''.join(deler), cx + 25 - 0.33 * 640, cy - 10 - 0.33 * 640, 0.33)
+
+
+def symbol_f(cx, cy):
+    """F: Styrets bilde «Isometrisk hus med hammer_Blueprint», med gjennomsiktig bakgrunn (site/assets/hus-med-hammer.png)."""
+    # Et SVG som vises med <img> kan ikke hente andre filer, så bildet bygges inn
+    import base64, pathlib
+    data = base64.b64encode((pathlib.Path(__file__).parent.parent / 'site/assets/hus-med-hammer.png').read_bytes()).decode()
+    # Mørk, myk flekk bak bildet, så veien og lyktene under ikke skinner gjennom huset
+    ut.append('<defs><radialGradient id="symbol-bak"><stop offset="0" stop-color="#10192e" stop-opacity=".97"/><stop offset=".62" stop-color="#10192e" stop-opacity=".9"/><stop offset="1" stop-color="#10192e" stop-opacity="0"/></radialGradient></defs>')
+    ut.append(f'<ellipse cx="{cx:.1f}" cy="{cy + 4:.1f}" rx="170" ry="135" fill="url(#symbol-bak)"/>')
+    ut.append(f'<image href="data:image/png;base64,{data}" x="{cx - 150:.1f}" y="{cy - 128:.1f}" width="300" height="256"/>')
+
+def symbol_a(cx, cy):
+    """A: Hus med hammeren lent mot høyre vegg."""
+    _g(_hus(), cx, cy + 60)
+    _g(_hammer(), cx + 82, cy + 18, 0.78, 20)
+
+def symbol_b(cx, cy):
+    """B: Emblem: hus og hammer i en sirkel med «// BYGG SAMMEN» under."""
+    ut.append(f'<circle cx="{cx:.1f}" cy="{cy + 10:.1f}" r="112" fill="rgba(16,25,46,.82)" stroke="{LINJE}" stroke-width="2.5"/>')
+    ut.append(f'<circle cx="{cx:.1f}" cy="{cy + 10:.1f}" r="102" fill="none" stroke="{LINJE}" stroke-width="1" stroke-dasharray="3 5" opacity=".6"/>')
+    _g(_hus(b=104, h=66, tak=48), cx - 12, cy + 52)
+    _g(_hammer(), cx + 52, cy + 4, 0.62, 35)
+    ut.append(f'<text x="{cx:.1f}" y="{cy + 92:.1f}" font-family="Bahnschrift, Barlow Semi Condensed, sans-serif" font-stretch="semi-condensed" font-size="13" font-weight="600" letter-spacing="2.5" fill="{ORANSJE}" text-anchor="middle">// BYGG SAMMEN</text>')
+
+def symbol_c(cx, cy):
+    """C: Arbeidstegning: hus med mållinjer og hammeren skrått over taket."""
+    _g(_hus(b=130, h=80, tak=60, fyll='rgba(16,25,46,.7)', sw=2.2), cx, cy + 70)
+    m = f'stroke="{ORANSJE}" stroke-width="1.2"'
+    ut.append(f'<line x1="{cx - 65:.1f}" y1="{cy + 92:.1f}" x2="{cx + 65:.1f}" y2="{cy + 92:.1f}" {m}/><line x1="{cx - 65:.1f}" y1="{cy + 86:.1f}" x2="{cx - 65:.1f}" y2="{cy + 98:.1f}" {m}/><line x1="{cx + 65:.1f}" y1="{cy + 86:.1f}" x2="{cx + 65:.1f}" y2="{cy + 98:.1f}" {m}/>')
+    ut.append(f'<text x="{cx:.1f}" y="{cy + 108:.1f}" font-family="Bahnschrift, Barlow Semi Condensed, sans-serif" font-stretch="semi-condensed" font-size="10" font-weight="600" fill="{ORANSJE}" text-anchor="middle">7 500</text>')
+    ut.append(f'<line x1="{cx + 92:.1f}" y1="{cy + 70:.1f}" x2="{cx + 92:.1f}" y2="{cy - 70:.1f}" {m}/><line x1="{cx + 86:.1f}" y1="{cy + 70:.1f}" x2="{cx + 98:.1f}" y2="{cy + 70:.1f}" {m}/><line x1="{cx + 86:.1f}" y1="{cy - 70:.1f}" x2="{cx + 98:.1f}" y2="{cy - 70:.1f}" {m}/>')
+    ut.append(f'<text x="{cx + 100:.1f}" y="{cy + 4:.1f}" font-family="Bahnschrift, Barlow Semi Condensed, sans-serif" font-stretch="semi-condensed" font-size="10" font-weight="600" fill="{ORANSJE}">4 400</text>')
+    _g(_hammer(), cx - 8, cy - 58, 0.72, -52)
+
+def symbol_d(cx, cy):
+    """D: Husformen fra GMT-logoen (M-en med døra) i oransje, med hammeren foran."""
+    m = ('<polygon points="0 0 0 78.73 13.37 78.73 13.37 49.02 34.27 34.71 19.39 0" fill="#f29228"/>'
+         '<polygon points="68.54 0 68.54 78.73 55.17 78.73 55.17 49.03 34.27 34.71 49.15 0" fill="#f29228"/>'
+         '<rect x="28.51" y="57.83" width="11.53" height="20.9" fill="#8db1dd"/>')
+    _g(m, cx - 68, cy - 40, 2.0)
+    _g(_hammer('#8db1dd'), cx + 70, cy + 20, 0.8, 25)
+    ut.append(f'<line x1="{cx - 96:.1f}" y1="{cy + 118:.1f}" x2="{cx + 110:.1f}" y2="{cy + 118:.1f}" stroke="{LINJE}" stroke-width="2.5" stroke-linecap="round"/>')
+
+SYMBOL = None   # None | 'a' | 'b' | 'c' | 'd' | 'e': symbol med hus og hammer i stedet for de stiplede husene
+
 def forslag_11():
     """Kvartal i tre faser: vei inn nederst til venstre og en sløyfe rundt tunet.
     Rettet etter styret 21.10.2026: uten tegnforklaring og fasemerker, sideveien går under hovedveien,
@@ -731,15 +833,22 @@ def forslag_11():
     bindingsverk(1, 20.3); fundament(1.5, 28.8)
     kran(7.6, 25.3, mast=12.0, utligger=9.0, kontra=4.0, katt=4.5, last_z=4.8, retning='y+')
     gravemaskin(17, 21); stabel(17.5, 29)
-    MODUS = 'stiplet'; hus_b(29, 1.0); mikrohus(39, 1.5); hus_c(29, 8.0); hus_d(38.5, 8.6, solceller=False, benk=False); MODUS = 'kontur'
-    MODUS = 'stiplet'; hus_c(31, 20); mikrohus(40.5, 20.5); MODUS = 'kontur'
-    nordpil(49, 33); maalestokk(30, 32)
+    if SYMBOL is None:
+        MODUS = 'stiplet'; hus_b(29, 1.0); mikrohus(39, 1.5); hus_c(29, 8.0); hus_d(38.5, 8.6, solceller=False, benk=False); MODUS = 'kontur'
+        MODUS = 'stiplet'; hus_c(31, 20); mikrohus(40.5, 20.5); MODUS = 'kontur'
+        nordpil(49, 33); maalestokk(30, 32)
+    else:
+        # Symbolet står nederst til venstre, der de stiplede husene var, litt mindre så det ikke dekker de ferdige husene
+        ut.append('<g transform="translate(175,265) scale(.82)">')
+        {'a': symbol_a, 'b': symbol_b, 'c': symbol_c, 'd': symbol_d, 'e': symbol_e, 'f': symbol_f}[SYMBOL](0, 0)
+        ut.append('</g>')
 
 FORSLAG = {1: forslag_1, 2: forslag_2, 3: forslag_3, 4: forslag_4, 5: forslag_5, 6: forslag_6, 7: forslag_7,
            8: forslag_8, 9: forslag_9, 10: forslag_10, 11: forslag_11}
 
 if __name__ == '__main__':
     nr, utfil = int(sys.argv[1]), sys.argv[2]
+    if len(sys.argv) > 3: SYMBOL = sys.argv[3]
     FORSLAG[nr]()
     svg = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">'
            f'<title>Studentlandsby – forslag {nr}</title>' + ''.join(ut) + '</svg>')
