@@ -135,6 +135,10 @@ nav { align-items: center; }
 @media (max-width: 760px) { .hero-innhold { grid-template-columns: 1fr; } .hero-hus { display: none; } }
 
 .brodtekst { max-width: 720px; }
+/* Sentrert tekst fra adminpanelet (knappen «Sentrert tekst») */
+.sentrert { text-align: center; }
+.sentrert ul, .sentrert ol { list-style-position: inside; padding-left: 0; }
+.sentrert img { margin-left: auto; margin-right: auto; }
 .brodtekst img { border-radius: var(--radius); margin: 16px 0; }
 
 /* Artikler */

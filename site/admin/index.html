@@ -18,6 +18,18 @@
   <script>
     // Forhåndsvisningen i redigeringen bruker nettsidens eget stilark
     CMS.registerPreviewStyle('/assets/style.css');
+
+    // Knappen «Sentrert tekst» i alle tekstfelt (+-menyen i verktøylinjen). Teksten lagres mellom
+    // <div class="sentrert"> og </div>, og nettsiden viser den midtstilt (se .sentrert i style.css).
+    CMS.registerEditorComponent({
+      id: 'sentrert',
+      label: 'Sentrert tekst',
+      fields: [{ name: 'tekst', label: 'Tekst som skal stå midt på', widget: 'markdown' }],
+      pattern: /^<div class="sentrert">\n\n([\s\S]*?)\n\n<\/div>$/m,
+      fromBlock: m => ({ tekst: m[1] }),
+      toBlock: d => '<div class="sentrert">\n\n' + (d.tekst || '') + '\n\n</div>',
+      toPreview: d => '<div class="sentrert">' + (d.tekst || '') + '</div>',
+    });
   </script>
 </body>
 </html>
